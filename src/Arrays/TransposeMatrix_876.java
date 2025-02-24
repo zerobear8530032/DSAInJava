@@ -87,7 +87,12 @@ public class TransposeMatrix_876 {
 			  return false;
 		  }
 		  for(int i =0;i<ans.length;i++) {
+			  if(ans[i].length!=output[i].length) {
+				  return false;
+			  }
+			  
 			  for(int j =0;j<ans[i].length;j++) {
+				  
 				  if(ans[i][j]!=output[i][j]) {
 					  return false;
 				  }
