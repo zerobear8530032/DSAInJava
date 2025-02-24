@@ -46,7 +46,10 @@ import java.util.List;
 public class SetMatrixZeroes_73 {
 	
 //	brute force approch :
-//	create alist of rows , cols we need to set 0 and simiulate it 
+//	create alist of rows , cols we need to set at 0
+//	then create function to set at 0 :
+//	time complexity :O(m*n)
+//	space complexity :O(m+n)
 	
     public static void setZeroesBruteForce(int[][] matrix) {
     	HashSet<Integer> rows = new HashSet();
@@ -80,6 +83,79 @@ public class SetMatrixZeroes_73 {
     	}
     }
     
+//	better approch :
+//	create alist of rows , cols we need to set at 0
+//	then create function to set at 0 :
+//  we can reduce the time complexity of changing row of O(N) to O(1) 
+//  by creating a new array and assigning the new array as row :
+//	time complexity :O(m*n)
+//	space complexity :O(m+n)
+    
+    public static void setZeroesBetter(int[][] matrix) {
+    	HashSet<Integer> rows = new HashSet();
+    	HashSet<Integer> cols = new HashSet();
+    	
+    	for(int i =0;i<matrix.length;i++) {
+    		for(int j =0;j<matrix[i].length;j++) {
+    			if(matrix[i][j]==0) {
+    				rows.add(i);
+    				cols.add(j);
+    			}
+    		}
+    	}
+    	for(int r:rows) {
+    		setRowsToZeroBetter(r, matrix);
+    	}
+    	for(int c:cols) {
+    		setColsToZeroBetter(c, matrix);
+    	}
+    	
+    	
+    }
+    public static void setColsToZeroBetter(int col,int [][] matrix) {
+    	for(int i =0;i<matrix.length;i++) {
+    		matrix[i][col]=0;
+    	}
+    }
+    public static void setRowsToZeroBetter(int row,int [][] matrix) {
+    	matrix[row]= new int [matrix[0].length];
+    }
+    
+    
+
+//	better approch :
+//	create alist of rows , cols we need to set at 0
+//	then create function to set at 0 :
+//  we can reduce the time complexity of changing row of O(N) to O(1) 
+//  by creating a new array and assigning the new array as row :
+//	time complexity :O(m*n)
+//	space complexity :O(m+n)
+    
+    public static void setZeroesBest(int[][] matrix) {
+    	ArrayList<int [] > list = new ArrayList();
+    	for(int i =0;i<matrix.length;i++) {
+    		for(int j=0;j<matrix[0].length;j++) {
+    			if(matrix[i][j]==0) {
+    				list.add(new int [] {i,j});    				
+    			}
+    		}
+    	}
+    	
+    	for(int [] rc:list ) {
+    		setRowColsZero(matrix, rc[0],rc[1]);
+    	}
+    }
+    public static void setRowColsZero(int [][]matrix,int r,int c) {
+    	matrix[r]= new int [matrix[r].length];// set the entire row to 0 ;
+//    	set cols to 0:
+    	for(int i =0;i<matrix.length;i++) {
+    		matrix[i][c]=0;
+    	}
+    	
+    }
+    
+    
+    
     
 
 	  public static boolean check (int ans[][], int output[][]) {
@@ -105,8 +181,7 @@ public class SetMatrixZeroes_73 {
 	  
 	  public static String printMatrix(int [][]img) {
 	    	
-	    	StringBuilder str = new StringBuilder("{");
-	    	System.out.print("[");
+	    	StringBuilder str = new StringBuilder("[");
 	    	for(int i =0;i<img.length;i++) {
 	    		str.append(Arrays.toString(img[i]));
 	    	}
@@ -129,6 +204,7 @@ public class SetMatrixZeroes_73 {
     		setZeroesBruteForce(matrix1);
 			setZeroesBruteForce(matrix2);
 			
+			System.out.println("Brute Force Approch :");
 			
 			if(check(output1, matrix1)) {
 				System.out.println("Case 1 Passed");
@@ -145,7 +221,68 @@ public class SetMatrixZeroes_73 {
 				System.out.println("Your Answer :"+printMatrix(matrix2) );
 			}
 			
+
+//    		Example 1:
+
+    		matrix1 = new  int[][] {{1,1,1},{1,0,1},{1,1,1}};
+    		output1= new int[][]{{1,0,1},{0,0,0},{1,0,1}};
     		
+//    		Example 2:
+
+    		matrix2 = new int[][]{{0,1,2,0},{3,4,5,2},{1,3,1,5}};
+    		output2= new int[][]{{0,0,0,0},{0,4,5,0},{0,3,1,0}};
+    		
+    		setZeroesBetter(matrix1);
+			setZeroesBetter(matrix2);
+			
+			System.out.println("Better Approch :");
+			
+			if(check(output1, matrix1)) {
+				System.out.println("Case 1 Passed");
+			}else {
+				System.out.println("Case 1 Failed");
+				System.out.println("Expected Ouput :"+ printMatrix(output1));
+				System.out.println("Your Answer :"+ printMatrix(matrix1));
+			}
+			if(check(output2, matrix2)) {
+				System.out.println("Case 2 Passed");
+			}else {
+				System.out.println("Case 2 Failed");
+				System.out.println("Expected Ouput :"+ printMatrix(output2));
+				System.out.println("Your Answer :"+printMatrix(matrix2) );
+			}
+			
+//    		Example 1:
+
+    		matrix1 = new  int[][] {{1,1,1},{1,0,1},{1,1,1}};
+    		output1= new int[][]{{1,0,1},{0,0,0},{1,0,1}};
+    		
+//    		Example 2:
+
+    		matrix2 = new int[][]{{0,1,2,0},{3,4,5,2},{1,3,1,5}};
+    		output2= new int[][]{{0,0,0,0},{0,4,5,0},{0,3,1,0}};
+    		
+			setZeroesBest(matrix1);
+			setZeroesBest(matrix2);
+			
+			System.out.println("Best Approch :");
+			
+			if(check(output1, matrix1)) {
+				System.out.println("Case 1 Passed");
+			}else {
+				System.out.println("Case 1 Failed");
+				System.out.println("Expected Ouput :"+ printMatrix(output1));
+				System.out.println("Your Answer :"+ printMatrix(matrix1));
+			}
+			if(check(output2, matrix2)) {
+				System.out.println("Case 2 Passed");
+			}else {
+				System.out.println("Case 2 Failed");
+				System.out.println("Expected Ouput :"+ printMatrix(output2));
+				System.out.println("Your Answer :"+printMatrix(matrix2) );
+			}
+			
+			
     		
 	}
 }
