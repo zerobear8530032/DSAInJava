@@ -91,7 +91,7 @@ public class RotateArray_189 {
 //	 now we just need to reverse the remaining part : k%n till n-1 (length of array): 
 //	 [4,3,2,1]: reverse this :
 //	 [5,6,7,1,2,3,4]: this is our output 
-//	 time complexity O(n* K%n);
+//	 time complexity O(n);
 //	 space complexity O(1);
 	 
 	 public static void rotateBest(int[] nums, int k) {
