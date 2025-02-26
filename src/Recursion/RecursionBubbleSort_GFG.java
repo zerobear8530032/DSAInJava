@@ -41,24 +41,24 @@ public class RecursionBubbleSort_GFG {
 	}
 	
 	public static void bubblesort_Recursion(int [] nums) {
-		bubblesorthelper1(nums,0);
+		bubblesorthelpiteration(nums,0);
 	}
-	public static void bubblesorthelper1(int [] nums,int i) {
+	public static void bubblesorthelpiteration(int [] nums,int i) {
 		if(i>=nums.length-1) {
 			return;
 		}
-		bubblesorthelper2(1, i,nums);
-		bubblesorthelper1(nums,i+1);
+		bubblesorthelperpass(1, i,nums);
+		bubblesorthelpiteration(nums,i+1);
 	}
 	
-	public static void bubblesorthelper2(int j,int i , int [] nums) {
+	public static void bubblesorthelperpass(int j,int i , int [] nums) {
 		if(j>=nums.length-i) {
 			return ;
 		}
 		if(nums[j]<nums[j-1]) {
 			swap(nums, j, j-1);
 		}
-		bubblesorthelper2(j+1,i,nums);
+		bubblesorthelperpass(j+1,i,nums);
 		
 	}
 	
