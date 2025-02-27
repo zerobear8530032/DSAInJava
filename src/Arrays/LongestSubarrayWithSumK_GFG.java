@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class LongestSubarrayWithSumK {
+public class LongestSubarrayWithSumK_GFG {
 	
 	
 //	brute Force Approch :
