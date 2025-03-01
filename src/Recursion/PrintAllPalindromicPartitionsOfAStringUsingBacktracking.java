@@ -21,7 +21,7 @@
 
 package Recursion;
 import java.util.ArrayList;
-
+import java.util.List;
 public class PrintAllPalindromicPartitionsOfAStringUsingBacktracking {
 
 // Iterative Approch :
@@ -55,8 +55,7 @@ public class PrintAllPalindromicPartitionsOfAStringUsingBacktracking {
 				if(palindrome(strb.toString())) {
 					ans.add(strb.toString());
 				}	
-			}
-			
+			}			
 		}
 		System.out.println(ans);
 	}
@@ -66,27 +65,30 @@ public class PrintAllPalindromicPartitionsOfAStringUsingBacktracking {
 //	space complexity :O(N)
 	
 	public static void printAllPalindromSubStringRec(String str) {
-		ArrayList <String> ans = new ArrayList();
-		printAllPalindromSubStringHelper(str,ans);
+		List<String> ans= new ArrayList();
+		helper(ans,str,str.length());
 		System.out.println(ans);
 	}
 	
-	public static void printAllPalindromSubStringHelper(String str,ArrayList <String> ans) {
-		if(str.length()==1) {
-			if(palindrome(str)) {
-				ans.add(str);
-			}
+	public static void helper(List<String> ans,String str,int i) {
+		if(i==-1) {
 			return ;
 		}
-		if(palindrome(str)) {
-			ans.add(str);
-		}
-		String str1=str.substring(0,1);
-		String strrest=str.substring(1);
 		
-		printAllPalindromSubStringHelper(str1,ans);
-		printAllPalindromSubStringHelper(strrest,ans);
+		StringBuilder strb= new StringBuilder();
+		
+		for(int j=i;j<str.length();j++) {
+			strb.insert(0,str.charAt(j));
+			if(palindrome(strb.toString())) {
+				ans.add(strb.toString());
+			}	
+		}	
+		
+		helper(ans,str,i-1);
 	}
+	
+	
+	
 	
 	
 	
