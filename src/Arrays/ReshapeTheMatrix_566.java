@@ -111,6 +111,7 @@ public class ReshapeTheMatrix_566 {
 	    		return false;
 	    	}
 	    	for(int i =0;i<ans.length;i++) {
+	    		if(ans[i].length!=output[i].length) return false;
 	    		for(int j=0;j<ans[i].length;j++) {
 	    			if(ans[i][j]!=output[i][j]) {
 	    				return false;
@@ -123,11 +124,10 @@ public class ReshapeTheMatrix_566 {
 	  public static String printImage(int [][]img) {
 	    	
 	    	StringBuilder str = new StringBuilder("{");
-	    	System.out.print("[");
 	    	for(int i =0;i<img.length;i++) {
 	    		str.append(Arrays.toString(img[i]));
 	    	}
-	    	str.append("]");
+	    	str.append("}");
 	    	return str.toString();
 	    }
 		
