@@ -107,8 +107,10 @@ public class PartitionArrayAccordingToGivenPivot_2161 {
 //	Best :
 //	use 2 pointers similar to the better one but here we use 2 pointer which will 
 //	work on both sides at once :
+//	by using 2 pointers we can put smaller and greater element at both side this is more efficient then previous
 //	time complexity :O(n)
 //	space complexity :O(1)
+	
 	public static int[] pivotArrayOptimize(int[] nums, int pivot) {
 		int n=nums.length;
 		int s=0;
