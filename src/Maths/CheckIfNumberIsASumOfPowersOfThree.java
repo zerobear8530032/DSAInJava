@@ -59,7 +59,8 @@ public class CheckIfNumberIsASumOfPowersOfThree {
 //	willl  it become zero if yes then return true other 
 //	wise substract the current 3^x from n and decrease the power 
 //	and check again do it till power reaches 0 and it substrac
-	
+//	Time complexity : O(n) or O(1)
+//	Space complexity : O(1)
 	 public static boolean checkPowersOfThree(int n) {
 		 int x=3;
 		 for(int i =15;i>=0;i--) {
