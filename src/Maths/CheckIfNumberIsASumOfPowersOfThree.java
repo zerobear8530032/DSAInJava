@@ -69,8 +69,11 @@ public class CheckIfNumberIsASumOfPowersOfThree {
 			 if(sub>=0) {
 				 n=n-pow;
 			 }
+			 if(n==0) {
+				 return true;
+			 }
 		 }
-		 return n==0;
+		 return false;
 		 
 	    }
 	 
