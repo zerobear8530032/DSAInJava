@@ -38,16 +38,17 @@ class CountTotalNumberOfColoredCells_2579{
     }
 //	here we first find the pattern whichs :
 //  we are just suming odd numbers from 
-//    so we just need a sum of odd number from 1 till n-2
-//    + n-1 th odd number + 1 till n-2
+//  we can find sum of n odd number using formula n*n 
+//    we can use this to get our answer
 //	time complexity :O(1)
 //	space complexity :O(1)
     public static long coloredCellsBest(int n) {
 
 //    	return n*n+ (n-1)*(n-1); this one liner is the answer but it can over flow the integer
-    	 long ans =(long) n*(long)n;
-         ans= ans+ (long)(n-1)*(long)(n-1);
+    	 long ans =(long) n*(long)n;// sum of n odd numbers
+         ans= ans+ (long)(n-1)*(long)(n-1); // sum n-1 odd numbers
            return ans; 
+           
     }
     
     public static void main(String[] args) {
