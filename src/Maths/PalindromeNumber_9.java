@@ -33,7 +33,7 @@
 //Follow up: Could you solve it without converting the integer to a string?
 
 package Maths;
-class Solution {
+class PalindromeNumber_9 {
     public static boolean isPalindrome(int x) {
         String strx= Integer.toString(x);
         String reversex= reverse(strx);
