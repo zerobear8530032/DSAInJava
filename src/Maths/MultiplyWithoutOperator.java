@@ -19,8 +19,10 @@ public class MultiplyWithoutOperator {
 	        }
 	    }
 	    public static int factorial(int x) {
-	        int prod=x;
-		    for(int i=1;i<x;i++){
+	        if (x==0) return 1;
+	    	int prod=x;
+		    
+	        for(int i=1;i<x;i++){
 		    	prod=multiply(prod, i);
 		    }
 		    return prod;
