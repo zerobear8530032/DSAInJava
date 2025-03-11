@@ -46,7 +46,8 @@ public class EqulibriumIndexOfArray {
 	}
 //	better approch:
 //	check at each index calculate the left and right side sum and check if its equal:
- 	
+// 	here we can caclulat the total sum of array and substracting it by current right sum and adding it to next 
+//	
 	public static  int equalibriumIndexBetter(int [] nums) {
 		int leftsum=0;
 		int rightsum=0;
