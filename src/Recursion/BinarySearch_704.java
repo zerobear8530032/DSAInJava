@@ -54,25 +54,28 @@ public class BinarySearch_704 {
 	public static int searchRec(int[] nums, int target) {
 		int start =0;
 		int end = nums.length-1;
-		int mid = start+(end-start)/2;
 		
-		return binarySearchHelper(nums,target,start,end,mid);	
+		return binarySearchHelper(nums,target,start,end);	
 	}
 	
 	
-	private  static int binarySearchHelper(int[] nums, int target, int start, int end, int mid) {
+	private  static int binarySearchHelper(int[] nums, int target, int start, int end) {
 //		if(start<end){}// this condition will not let the search proceed because the search will exit initally 
-		if(start>end) {// this is important here the condition is reversed because the condition to exits the search 
+		if (start>end) {
 			return -1;
 		}
-		mid = start+(end-start)/2;
-		if(target<nums[mid]) {
-			return binarySearchHelper(nums,target,start,mid-1,mid);
-		}else if(target>nums[mid]) {
-			return binarySearchHelper(nums,target,mid+1,end,mid);			
-		}else {
+		int mid = start+(end-start)/2;
+		if(target==nums[mid]) {
 			return mid;
+		}else if(target<nums[mid]) {
+			return binarySearchHelper(nums, target, start, mid-1);
 		}
+		else {
+			return binarySearchHelper(nums, target,mid+1, end);
+		}
+		
+		
+		
 	}
 
 	public static void main(String[] args) {
