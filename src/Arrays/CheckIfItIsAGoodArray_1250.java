@@ -50,9 +50,20 @@ public class CheckIfItIsAGoodArray_1250 {
         }
         return a;
 	}
+//	The problem asks if we can form 1 as a linear combination of elements in nums using integer multipliers.
+//
+//	Key Mathematical Insight: Bézout's Identity
+//	Bézout's Identity states that for any two integers a and b:
+//	gcd(a,b)=d
+//	Then, there exist integers x and y such that:
+//	a⋅x+b⋅y=d
+//	If gcd(a, b) = 1, then we can express 1 as a * x + b * y.
+//	This means we can always form 1 using a linear combination of a and b with integer coefficients.
+//  so we found gcd of entire array 
 	public static boolean isGoodArray(int[] nums) {
 
 		int res= nums[0];
+//		here gcd ((gcd(a,b),gcd(c)))= gcd(a,b,c)
 		for(int i =1;i<nums.length;i++) {
 			res= gcd(res,nums[i]);
 			if(res==1) return true;
