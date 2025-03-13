@@ -128,6 +128,12 @@ public class ZeroArrayTransformationII_3356 {
 //	and difference array techinque which allow us to take a range opration on array in O(1) time and O(n) space
 //	find mid and apply all query from 0 till mid  and check it satisfy the condition 
 //	if yes then check left hand side other wise right hand side 
+//	to reduce the update range time we can  use difference arrayy 
+//	where if index l=1, r=3
+//	we will create a diff array and update index l of diff[l]-= val
+//	and also update diff[r+1] +=val;
+//	now once all query maps on that make the diff as prefix  sum array
+//	now just add both diff array and nums with each other element by elements
 //	space complexity : O((Q + n) log Q)
 //	time complexity : O(n)	
 	
