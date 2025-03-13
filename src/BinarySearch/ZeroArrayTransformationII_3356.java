@@ -138,17 +138,17 @@ public class ZeroArrayTransformationII_3356 {
 //	time complexity : O(n)	
 	
 	public static int minZeroArrayBest(int[] nums, int[][] queries) {
-//		if(checkZeroArray(nums)) return 0;// check if inital array is zero
+		if(checkZeroArray(nums)) return 0;// check if inital array is zero
 		
 		int start=0;
 		int end= queries.length-1;
 		int res=-1;
-		while(start<=end) {
-			int mid = start+(end-start)/2;
-			if(applyQueryDiffSum(nums.clone(), queries, mid)) {
-				end=mid-1;
+		while(start<=end) {// binary search 
+			int mid = start+(end-start)/2;//mid
+			if(applyQueryDiffSum(nums.clone(), queries, mid)) {// check if k query will make array 0
+				end=mid-1;// if yes we will store current res and check left side
 				res=mid+1;
-			}else {
+			}else {// if no we will check right side
 				start=mid+1;
 			}
 		}
@@ -158,7 +158,7 @@ public class ZeroArrayTransformationII_3356 {
 	public static boolean applyQueryDiffSum(int [] nums, int [][] queries,int mid) {
 		
 		int [] diff = new int [nums.length];
-		for(int i =0;i<=mid;i++) {
+		for(int i =0;i<=mid;i++) {// using diff array to apply query
 			int l=queries[i][0];
 			int r=queries[i][1];
 			int val=queries[i][2];
@@ -166,11 +166,11 @@ public class ZeroArrayTransformationII_3356 {
 			if(r+1<diff.length) {diff[r+1]+=val;}
 		}
 		int cf=0;
-		for(int i =0;i<diff.length;i++) {
+		for(int i =0;i<diff.length;i++) {//find prefix sum of diff 
 			cf=cf+diff[i];
 			diff[i]=cf;
 		}
-		for(int i =0;i<diff.length;i++) {
+		for(int i =0;i<diff.length;i++) {//apply the operation of prefix sum on nums element by element
 			nums[i]=nums[i]+diff[i];
 		}
 		
