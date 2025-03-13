@@ -138,7 +138,7 @@ public class ZeroArrayTransformationII_3356 {
 //	time complexity : O(n)	
 	
 	public static int minZeroArrayBest(int[] nums, int[][] queries) {
-		if(checkZeroArray(nums)) return 0;
+//		if(checkZeroArray(nums)) return 0;// check if inital array is zero
 		
 		int start=0;
 		int end= queries.length-1;
@@ -295,10 +295,6 @@ public class ZeroArrayTransformationII_3356 {
 			System.out.println("Expected Ouput :"+ (output3));
 			System.out.println("Your Answer :"+ (ans3));
 		}
-
-		
-
-
 	}
 
 }
