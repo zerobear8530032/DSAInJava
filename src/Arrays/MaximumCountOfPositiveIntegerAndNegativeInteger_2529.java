@@ -111,7 +111,7 @@ public class MaximumCountOfPositiveIntegerAndNegativeInteger_2529 {
 		//
 		int []nums1 = {-2,-1,-1,1,2,3};
 		int output1=3;
-		
+		 
 		//Example 2:
 		
 		int [] nums2 = {-3,-2,-1,0,0,1,2};
