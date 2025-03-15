@@ -53,6 +53,10 @@ package Arrays;
 import java.util.HashSet;
 
 class ValidSuduko_NEETCODE {
+//	approch : iterate over entire board
+//	check which cell have a value and check if that repeat in there row and cols 
+//	once done check all 3x3 small matrix that there any repeating number
+//	time complexity :O(n*m)^2;
 	
     public static boolean isValidSudoku(char[][] board) {
         for(int i =0;i<board.length;i++){
@@ -79,20 +83,20 @@ class ValidSuduko_NEETCODE {
     }
     public static boolean checkmatrix(char [][] board,int row,int col){
         HashSet<Character> set = new HashSet();
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                if(board[i][j]=='.') continue;
-                if(set.contains(board[i][j])){
-                    return false;
-                }else{
-                    set.add(board[i][j]);
-                }
-            col++;
-            }
-            row++;
+        int r =row;
+        for(int i =0;i<3;i++) {
+        	int c = col;
+        	for(int j =0;j<3;j++) {
+        		char  ch = board[r][c];
+        		if(ch=='.') {c++; 
+        			continue;}
+        		if(set.contains(ch)) return false;
+        		else set.add(ch);
+        		c++;
+        	}	
+        	r++;
         }
         return true;
-
     }
 
 
@@ -139,7 +143,7 @@ class ValidSuduko_NEETCODE {
     	char [][] board2= 
     		     {{'1','2','.','.','3','.','.','.','.'},
     			 {'4','.','.','5','.','.','.','.','.'},
-    			 {'.','9','8','.','.','.','.','.','3'},
+    			 {'.','9','1','.','.','.','.','.','3'},
     			 {'5','.','.','.','6','.','.','.','4'},
     			 {'.','.','.','8','.','3','.','.','5'},
     			 {'7','.','.','.','2','.','.','.','6'},
@@ -148,11 +152,45 @@ class ValidSuduko_NEETCODE {
     			 {'.','.','.','.','8','.','.','7','9'}};
     	boolean output2= false;
     	
+    	char [][] board3= 
+    		{{'.','.','.','.','5','.','.','1','.'},
+    		{'.','4','.','3','.','.','.','.','.'},
+			{'.','.','.','.','.','3','.','.','1'},
+			{'8','.','.','.','.','.','.','2','.'},
+			{'.','.','2','.','7','.','.','.','.'},
+			{'.','1','5','.','.','.','.','.','.'},
+			{'.','.','.','.','.','2','.','.','.'},
+			{'.','2','.','9','.','.','.','.','.'},
+			{'.','.','4','.','.','.','.','.','.'}};
+    	boolean output3= false;                      
     	
-    	System.out.println(isValidSudoku(board1));
-    	System.out.println(isValidSudoku(board2));
-    	
-    	
+    	boolean ans1=isValidSudoku(board1);
+    	boolean ans2=isValidSudoku(board2);
+    	boolean ans3=isValidSudoku(board3);
+		
+		System.out.println("Brute Force Approch :");
+		
+		if(output1==ans1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2==ans2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
+		}
+		if(output3==ans3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Actual Output :"+output3);
+			System.out.println("Your Output :"+ans3);
+		}
 	}
     
 }
