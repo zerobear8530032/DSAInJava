@@ -97,8 +97,7 @@ public class MinimumTimeToRepairCars_2594 {
 
 		
 		//Example 1:
-		//
-		//Input: ranks = [4,2,3,1], cars = 10
+
 		int [] ranks1= {4,2,3,1};
 		int cars1=10;
 		int output1=16;
