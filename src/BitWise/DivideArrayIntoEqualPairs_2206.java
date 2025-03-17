@@ -45,6 +45,9 @@ public class DivideArrayIntoEqualPairs_2206 {
 //	Brute Force approch :
 //	create a frequency hashmap
 //	and check  any value is odd if it is return true else false
+//	time complexity :O(n)
+//	space complexity :O(n)
+
 	public static boolean divideArrayBruteForce(int[] nums) {
 	       HashMap<Integer,Integer> map = new HashMap();
 	       for(int i=0;i<nums.length;i++){
@@ -62,6 +65,8 @@ public class DivideArrayIntoEqualPairs_2206 {
 	
 //	better Force approch :
 //  we can create a max size array and map number frequency there
+//	time complexity :O(n)
+//	space complexity :O(1)
 	public static boolean divideArrayBetter(int[] nums) {
 		int [] temp= new int [500];
 		for(int x:nums) {
@@ -77,6 +82,10 @@ public class DivideArrayIntoEqualPairs_2206 {
 //	best approch :
 //	here we can use a long integer which can map all the bits on that long and return true if bitmask ==0
 //	other wise false
+//	note we cannot use int because it does not have enough bits to map every single number
+//	time complexity :O(n)
+//	space complexity :O(1)
+
 	public static boolean divideArrayBest(int[] nums) {
         long bitmask=0;
         for (long x : nums) {

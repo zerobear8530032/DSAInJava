@@ -18,17 +18,23 @@
 package BitWise;
 
 public class FindNthMagicNumber_GFG {
+//	approch :
+//	we can use n&1 ==1 : if its true means the current bit is 1 
+//	if not means the current bit is 0
+//	so we can get see each current bit which is 1 
+//	and use right shift operator to shift the Least significant bit each iteration
+//	we can do this each iteration and apply the formula  bit*5^nth bit
+//	after summing all we get our answer
 	
+//	note : the integer can over flow easily
 	public static int findNthMagicNumber(int x) {
 		int ans =0;
-		int power=1;
-		while(x!=0) {
-			if((x&1)==1) {
-				ans+= (int)Math.pow(5, power);
-			}
-
-			x=x>>1;
-			power++;
+		int power=1;// power initaly is 1
+		while(x!=0) {// loop run untill x is not 0
+			int currentbit= x&1;// this will get us last bit or lSB
+			ans+= currentbit*Math.pow(5, power);// this is applying formula 
+			x=x>>1;// right shift operator discard bit
+			power++;// each bit remove increase power by 1
 		}
 		
 		return ans;
