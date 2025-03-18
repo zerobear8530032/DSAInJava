@@ -61,35 +61,37 @@ public class ThreeSum_NEETCODE {
 //	space complexity: space n*3; 
 	public static List<List<Integer>> threeSumBest(int[] nums) {
 		Arrays.sort(nums);
-		List<List<Integer>> ans = new ArrayList();
-		for(int i =0;i<nums.length;i++){
-			int k= nums.length-1;
-			int j= i+1;
+		List<List<Integer>> ans = new ArrayList<List<Integer>>();
+		int n = nums.length;
+		int i =0;
+		while(i<n-2) {// initial 2 sum
+			int k = n-1;
+			int j = i+1;
 			while(j<k) {
-				int sum = nums[i]+nums[j]+nums[k];
-				if(sum<0) {
+				int sum = nums[i]+nums[j]+nums[k];// sum
+				if(sum==0) {// add the triplets
+					List<Integer> t= new ArrayList<Integer>(Arrays.asList(nums[i],nums[j],nums[k]));
+					ans.add(t);
+					int currj= nums[j];
+					while(j+1<n && currj==nums[j]) {// once we used the triplets we can skip all duplicates at index j
+						j++;
+					}
+					int currk= nums[k];
+					while(k-1>=0 && currk==nums[k]) {// once we used the triplets we can skip all duplicates at index k
+						k--;
+					}
+				}else if(sum<0) {// if we need bigger sum  we increase j 
 					j++;
-				}
-				if(j==k) {
-					break;
-				}
-				sum = nums[i]+nums[j]+nums[k];
-				if(sum>0) {
-					k--;
-				}
-				
-				if(j==k) {
-					break;
-				}
-				sum = nums[i]+nums[j]+nums[k];
-				if(sum==0) {
-					List<Integer> temp = new ArrayList<Integer>(Arrays.asList(nums[i],nums[j],nums[k]));
-					ans.add(temp);
-					break;
+				}else {
+					k--;// if we need smaller sum we can decrease k
 				}
 			}
-		
+			int curri=nums[i];
+			while(i<n && nums[i]==curri ) {// here we skip all duplicate i because we  have already used it above
+				i++;
+			}
 		}
+		
 		return ans;
 	}
 	public static int search(int [] nums, int start ,int end, int target) {
@@ -105,6 +107,25 @@ public class ThreeSum_NEETCODE {
 		}
 		return -1;
 	}
+	
+	public static boolean check(List<List<Integer>> ans, List<List<Integer>> output) {
+		if(output.size()!=ans.size()) {
+			return false;
+		}
+		for(int i =0;i<ans.size();i++) {
+			if(output.get(i).size()!= ans.get(i).size()) {
+				return false;
+			}
+			Collections.sort(ans.get(i));
+			Collections.sort(output.get(i));
+			for(int j=0;j<output.get(i).size();j++) {
+				if(ans.get(i).get(j)!= output.get(i).get(j)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	
 	public static void main(String[] args) {
@@ -114,10 +135,71 @@ public class ThreeSum_NEETCODE {
 		int []nums2 = {0,1,1};
 		List<List<Integer>> output2 = new ArrayList<>();
 		
-		System.out.println(threeSumBest(nums1));
-
+System.out.println("Brute Force Approch ");
 		
-						
+		
+		List<List<Integer>> ans1 = threeSumBruteForce(nums1);
+		List<List<Integer>> ans2 = threeSumBruteForce(nums2);
+	
+		
+		if(check(ans1, output1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+(output1));
+			System.out.println("Your Answer :"+(ans1));
+		}
+		if(check(ans2, output2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		
+		
+		System.out.println("Optimize Approch :");
+		
+		ans1 = threeSumBetter(nums1);
+		ans2 = threeSumBetter(nums2);
+		
+		if(check(ans1, output1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+(output1));
+			System.out.println("Your Answer :"+(ans1));
+		}
+		if(check(ans2, output2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		
+		System.out.println("Best Approch :");
+		
+		ans1 = threeSumBest(nums1);
+		ans2 = threeSumBest(nums2);
+		
+		if(check(ans1, output1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+(output1));
+			System.out.println("Your Answer :"+(ans1));
+		}
+		if(check(ans2, output2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		
+		
+		
 	}
 
 }
