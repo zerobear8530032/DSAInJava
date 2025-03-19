@@ -39,28 +39,30 @@ package BitWise;
 
 
 public class MinimumOperationsToMakeBinaryArrayElementsEqualToOneI_3191 {
-    
+
+//	approch :
+//	we can just iterate  over the entire array and check is there any 0  if it have we will
+//	flip the next 3 elements 
+//	and repeat this until we does notreach at the end -3 
+//	at last we can check there is any 0 left means we cannot possibly make all 0 1 
+//	other wise we will return count
     public static int minOperations(int[] nums) {
-        int n = nums.length;
-        int operations = 0;
+    	int n =  nums.length;
+    	int operation=0;
+    	for(int i =0;i<=n-3;i++) {
+    		if(nums[i]==0) {
+    			for(int j=0;j<3;j++) {
+    				nums[i+j]^=1;
+    			}
+    			operation++;
+    		}  		
+    	}
+    	for(int x:nums) {
+    		if(x==0) return -1;
+    	}
+    	return operation;
 
-        for (int i = 0; i <= n - 3; i++) {
-            if (nums[i] == 0) {
-                // Flip the three consecutive elements
-                for (int j = i; j < i + 3; j++) {
-                    nums[j] ^= 1;  // Toggle the bits
-                }
-                operations++;
-            }
-        }
-
-        // Check if all elements are 1 after flipping
-        for (int num : nums) {
-            if (num == 0) return -1;
-        }
-
-        return operations;
-    }
+  }
 
     public static void main(String[] args) {
         
