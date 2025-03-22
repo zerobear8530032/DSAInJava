@@ -30,7 +30,11 @@ class Solution {
                 int idx= isADish(ingredients.get(i).get(j),recipes);
                 if(idx!=-1){
                     for(int k=0;k<ingredients.get(idx).size();k++){
-                    mat.add(ingredients.get(idx).get(k));
+                    	if(isADish(ingredients.get(idx).get(k), recipes)!=-1) {
+                    		mat.addAll(recipiesMap.get(recipes[k]));
+                    	}else {
+                    		mat.add(ingredients.get(idx).get(k));                    		
+                    	}
                     }
                 }else{
                     mat.add(ingredients.get(i).get(j));
@@ -67,9 +71,13 @@ class Solution {
     	String [] recipes2= {"bread","sandwich"};
         List<List<String>> ingredients2 = new ArrayList<>(Arrays.asList(Arrays.asList("yeast", "flour"),Arrays.asList("bread", "meat")));
         String [] supply2= {"yeast","flour","meat"};
+        
+        String [] recipes3= {"bread","sandwich","burger"};
+        List<List<String>> ingredients3 = new ArrayList<>(Arrays.asList(Arrays.asList("yeast", "flour"),Arrays.asList("bread", "meat"),Arrays.asList("sandwich","meat","bread")));
+        String [] supply3= {"yeast","flour","meat"};
 
     	
-    	System.out.println(findAllRecipes(recipes2, ingredients2, supply2));
+    	System.out.println(findAllRecipesBruteForce(recipes3, ingredients3, supply3));
     	
 	}
 }
