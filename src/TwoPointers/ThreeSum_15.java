@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-public class ThreeSum_NEETCODE {
+public class ThreeSum_15 {
 	    
 //	brute force approch :
 //	here we take every single pair by nested loop
@@ -127,6 +127,8 @@ public class ThreeSum_NEETCODE {
 		return true;
 	}
 
+	 
+	
 	
 	public static void main(String[] args) {
 		
