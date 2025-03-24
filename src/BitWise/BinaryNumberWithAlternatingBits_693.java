@@ -88,7 +88,60 @@ class BinaryNumberWithAlternatingBits_693 {
     	int n3 =11;
     	boolean output3=false;
 
-    	System.out.println(hasAlternatingBitsBest(n3));
+    	System.out.println("Brute Force Approch ");
+    	
+    	boolean ans1=hasAlternatingBitsBruteForce(n1);
+    	boolean ans2=hasAlternatingBitsBruteForce(n2);
+    	boolean ans3=hasAlternatingBitsBruteForce(n3);
+
+    	if(ans1==output1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ (output1));
+			System.out.println("Your Answer :"+ (ans1));
+		}
+		if(ans2==output2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		if(ans3==output3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Expected Ouput :"+ (output3));
+			System.out.println("Your Answer :"+ (ans3));
+		}		
+		System.out.println("Best Approch ");
+		
+		ans1=hasAlternatingBitsBest(n1);
+		ans2=hasAlternatingBitsBest(n2);
+		ans3=hasAlternatingBitsBest(n3);
+		
+		if(ans1==output1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ (output1));
+			System.out.println("Your Answer :"+ (ans1));
+		}
+		if(ans2==output2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		if(ans3==output3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Expected Ouput :"+ (output3));
+			System.out.println("Your Answer :"+ (ans3));
+		}
 		
 	}
 }

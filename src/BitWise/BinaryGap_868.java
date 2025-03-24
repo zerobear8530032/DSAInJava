@@ -37,12 +37,60 @@
 
 package BitWise;
 class BinaryGap_868 {
-    public static int binaryGap(int n) {
+//	brute force approch :
+//	conver the number to binary string 
+//	if bit count < 2 we can always return 0
+//	thenw e can iterate over binary string 
+//	in reversein a while loop
+//	time complexity : O(n)
+//	space complexity : O(n): thic can be said as contant because even in worst case it will not exceed 32 
+    public static int binaryGapBruteForce(int n) {
+    	if(Integer.bitCount(n)<2) return 0;
         String binary = Integer.toBinaryString(n);
-        int i =0;
         int l = binary.length();
+        int i =l-1;
         int ans =0;
-        
+        while(binary.charAt(i)=='0') {
+        	i--;
+        }
+        while(i>=0) {
+        	int count=1;
+        	char bit= binary.charAt(i);
+        	i--;
+        	while(i>=0 && bit != binary.charAt(i)) {
+        		i--;
+        		count++;
+        	}
+        	ans= Math.max(ans, count);
+        }
+        return ans;
+    }
+    
+//	better approch :
+//	conver the number to binary string 
+//	if bit count < 2 we can always return 0
+//	thenw e can iterate over binary string 
+//	in reversein a while loop
+//	time complexity : O(log n)
+//	space complexity : O(1): thic can be said as contant because even in worst case it will not exceed 32 
+    public static int binaryGapBetter(int n) {
+    	int ans =0;// ans
+    	while(n!=0) {// iterate untill n !=0
+    		int bit1= n&(-n);//  get first set bit
+    		n=n-bit1;// remove the first bit
+    		int bit2= n&(-n);// get the second set bit 
+    		if(bit2==0) break;// if the bit2 is 0 means we get all the bits 
+    		// the bit is a power of 2  but we need position of it so we use log 2 of bit
+//    		to get pos of both bits
+    		int bit1pos=(int) (Math.log(bit1)/Math.log(2));
+    		int bit2pos=(int) (Math.log(bit2)/Math.log(2));
+//    		to get the position we can take differences
+    		int diff = bit2pos-bit1pos;
+    		ans=Math.max(ans,diff );// get max difference;
+    	}
+    	return ans;
+    	
+    	
     }
     public static void main(String[] args) {
 		
@@ -60,7 +108,63 @@ class BinaryGap_868 {
   
     	int n3=5;
     	int output3=2;
+    	
+System.out.println("Brute Force Approch ");
+    	
+		int ans1= binaryGapBruteForce(n1);	
+		int ans2= binaryGapBruteForce(n2);	
+		int ans3= binaryGapBruteForce(n3);	
+		
+		if(ans1==output1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ (output1));
+			System.out.println("Your Answer :"+ (ans1));
+		}
+		if(ans2==output2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		if(ans3==output3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Expected Ouput :"+ (output3));
+			System.out.println("Your Answer :"+ (ans3));
+		}
+		
+		
+		System.out.println("Best Approch ");
+		ans1= binaryGapBetter(n1);	
+		ans2= binaryGapBetter(n2);	
+		ans3= binaryGapBetter(n3);	
+		if(ans1==output1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ (output1));
+			System.out.println("Your Answer :"+ (ans1));
+		}
+		if(ans2==output2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		if(ans3==output3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Expected Ouput :"+ (output3));
+			System.out.println("Your Answer :"+ (ans3));
+		}
+		
+		
     
-    	System.out.println(binaryGap(n1));
 	}
 }
