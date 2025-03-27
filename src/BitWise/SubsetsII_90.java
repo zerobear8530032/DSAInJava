@@ -28,8 +28,9 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Arrays;
-class Solution {
+class SubsetsII_90 {
     public static List<List<Integer>> subsetsWithDup(int[] nums) {
+    	Arrays.sort(nums);
         double end = Math.pow(2,nums.length);
         HashSet<List<Integer>> set= new HashSet();
         int n=nums.length;
