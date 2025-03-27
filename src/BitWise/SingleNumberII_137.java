@@ -111,6 +111,8 @@ class SingleNumberII_137 {
 //	every thing will remain same just we will use bit wise opertions to find
 //	bits
 //	setbits instead  of using the string method
+//	here are some edge cases 1 :  the number we need to convert could be a negative number also
+//	so we need to use 2 s complemennt of a number 
 //	time complexity : O(n)
 //	space complexity : O(1)
 	public static int singleNumberBest(int[] nums) {
@@ -130,7 +132,7 @@ class SingleNumberII_137 {
 		}
 		int ans =0;
 		int p=0;
-		if(map[0]!=1) {	
+		if(map[0]!=1) {	// cheking number is a positive or negative
 			for(int i =31;i>=0;i--) {
 				if(map[i]!=0) {
 					ans+= Math.pow(2, p);
@@ -138,12 +140,14 @@ class SingleNumberII_137 {
 				p++;
 			}
 		}else {
+//			taking 2 s complemet 
 			for(int i =31;i>=0;i--) {
 				if(map[i]==0) {
 					ans+= Math.pow(2, p);
 				}
 				p++;
 			}			
+//			here we reverse the 2 s complement
 			return -(ans+1);
 		}
 		
