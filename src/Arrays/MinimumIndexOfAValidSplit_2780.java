@@ -184,7 +184,7 @@ class MinimumIndexOfAValidSplit_2780 {
 //    and decrease the dom count at right side by 1 
 //    and exit if both have satisfying the condition
 //    time complexity : O(n)
-//    space complexity : O(1)
+//    space complexity : O(n)
     public static int minimumIndexBest(List<Integer> nums) {
     	
         HashMap<Integer,Integer> map = new HashMap();
