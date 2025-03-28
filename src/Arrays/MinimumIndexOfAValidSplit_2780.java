@@ -110,7 +110,7 @@ class MinimumIndexOfAValidSplit_2780 {
 //    and get prefix max and suffix max to get find frequency in O(1)
 //    this reduce time and remove the nestewd loops
 //    time complexity : O(n)
-//    space complexity : O(1)
+//    space complexity : O(n)
     public static int minimumIndexBetter(List<Integer> nums) {
     	HashMap<Integer,Integer> map = new HashMap();
     	for(int x: nums){
@@ -165,6 +165,70 @@ class MinimumIndexOfAValidSplit_2780 {
     	}
     	return -1;
     }
+//	Best force approch :
+//	approch :
+//    from better approch we can make one observation
+//    the dominating term is what we want to track 
+//    if the input=[1,2,2,2]
+//    so inital if at split 0 :[1] ,[2,2,2]
+//    the dominating terms 0, 3
+//    if it split 1 : [1,2] ,[2,2]
+//    the dominating terns = 1,2
+//    if it split 2 : [1,2,2] ,[2]
+//    the dominating terns = 2,1
+//    so do i need prefix sum or suffix sum
+//    i can find the frequency of dominating term 
+//    and say left hand side array have 0 dominating term and right have frequency of dominating term
+//    with that each time i move i +1 if the current number is
+//    a dominating term i will increase domcount at left side by 1
+//    and decrease the dom count at right side by 1 
+//    and exit if both have satisfying the condition
+//    time complexity : O(n)
+//    space complexity : O(1)
+    public static int minimumIndexBest(List<Integer> nums) {
+    	
+        HashMap<Integer,Integer> map = new HashMap();
+    	for(int x: nums){
+    		if(map.containsKey(x)){
+    			map.put(x,map.get(x)+1);
+    		}else{
+    			map.put(x,1);
+    		}
+    	}
+    	int dominating =0;
+    	int freq=0;
+    	for(Map.Entry<Integer,Integer> e:map.entrySet()){
+    		if(e.getValue()>freq){
+    			freq=e.getValue();
+    			dominating=e.getKey();
+    		}
+    	} 
+    	
+    	int n = nums.size();    	
+    	int fhalf=0 ;
+        int shalf=freq;
+     	for(int i =0;i<n;i++){
+            if(nums.get(i)==dominating){
+                fhalf++;
+                shalf--;
+            }
+    		int subarraysize= (i+1);
+    		if( fhalf <= subarraysize / 2 ) {
+    			continue;
+    		}
+    		
+    		subarraysize=n-(i+1);
+    		if( shalf <= subarraysize / 2) {
+    			continue;
+    		}else {
+    			return i;
+    		}
+    		
+    	}
+    	return -1;
+    }
+    
+    
     
     
     public static void main(String[] args) {
@@ -217,6 +281,33 @@ System.out.println("Brute Force Approch :");
 		ans1= minimumIndexBetter(nums1);
 		ans2= minimumIndexBetter(nums2);
 		ans3= minimumIndexBetter(nums3);
+		
+		if(ans1==output1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ (output1));
+			System.out.println("Your Answer :"+ (ans1));
+		}
+		if(ans2==output2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		if(ans3==output3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Expected Ouput :"+ (output3));
+			System.out.println("Your Answer :"+ (ans3));
+		}
+		
+		System.out.println("Best Approch :");
+		ans1= minimumIndexBest(nums1);
+		ans2= minimumIndexBest(nums2);
+		ans3= minimumIndexBest(nums3);
 		
 		if(ans1==output1) {
 			System.out.println("Case 1 Passed");
