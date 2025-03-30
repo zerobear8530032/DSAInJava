@@ -42,6 +42,7 @@
 
 package Stacks;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class NextGreaterElementI_496 {
@@ -105,15 +106,15 @@ public class NextGreaterElementI_496 {
 			System.out.println("Case 1 Passed ");
 		}else {
 			System.out.println("Case 1 Failed");
-			System.out.println("Excepted Output : "+ output1);
-			System.out.println("Your Output : "+ ans1);
+			System.out.println("Excepted Output : "+ Arrays.toString(output1));
+			System.out.println("Your Output : "+ Arrays.toString(ans1));
 		}
 		if(check(ans2,output2)) {
 			System.out.println("Case 2 Passed ");
 		}else {
 			System.out.println("Case 2 Failed");
-			System.out.println("Excepted Output : "+ output2);
-			System.out.println("Your Output : "+ ans2);
+			System.out.println("Excepted Output : "+ Arrays.toString(output2));
+			System.out.println("Your Output : "+ Arrays.toString(ans2));
 		}
 		
 
