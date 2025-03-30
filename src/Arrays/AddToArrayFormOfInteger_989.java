@@ -78,12 +78,7 @@ public class AddToArrayFormOfInteger_989 {
 					return false;
 				}
 			}
-			
-			for(int i =0;i<arr1.size();i++) {
-				if(arr1.get(i)!=arr2.get(i)) {
-					return false;
-				}
-			}
+		
 			
 			return true;
 		}
