@@ -1,6 +1,6 @@
-//2873. Maximum Value of an Ordered Triplet I
+//2874. Maximum Value of an Ordered Triplet II
 //Solved
-//Easy
+//Medium
 //Topics
 //Companies
 //Hint
@@ -33,12 +33,11 @@
 //
 //Constraints:
 //
-//3 <= nums.length <= 100
+//3 <= nums.length <= 105
 //1 <= nums[i] <= 106
 
-
 package Arrays;
-class MaximumValueOfAnOrderedTripletI_2873 {
+class MaximumValueOfAnOrderedTripletII_2874 {
 //	brute force approch :
 //	here we check every single triplets
 //	time complexity :O(n^3)
@@ -88,25 +87,46 @@ class MaximumValueOfAnOrderedTripletI_2873 {
 //	time complexity :O(n)
 //	space complexity :O(n)
     public static long maximumTripletValueOptimize(int[] nums) {
-    	long ans=0;
-    	int n = nums.length;
-    	int left=nums[0];
-    	int [] suffixMax= new int [n];
-    	int currMax=0;
-    	for(int k=n-1;k>=0;k--) {
-    		currMax=Math.max(currMax,nums[k]);
-    		suffixMax[k]=currMax;
-    	}
-    	for(int j=1;j<n-1;j++) {
-    		if(left<nums[j]) {
-    			left=nums[j];
-    		}
-    		long eq= (long)(left-nums[j])*(long)suffixMax[j+1];
-    		ans=Math.max(eq, ans);
-    	}
-    	return ans;
+        int n = nums.length;
+        int [] prefix= new int[n];
+        int [] suffix= new int[n];
+        int currPrefixMax=0;
+        int currSuffixMax=0;
+        for(int i =0;i<n;i++){
+            currPrefixMax=Math.max(currPrefixMax,nums[i]);
+            currSuffixMax=Math.max(currSuffixMax,nums[n-i-1]);
+            prefix[i]=currPrefixMax;
+            suffix[n-i-1]=currSuffixMax;
+        }
+        long ans=0;
+        for(int j =1;j<n-1;j++){
+            long currAns = (long)(prefix[j-1]-nums[j])*(long)suffix[j+1];
+            ans= Math.max(currAns,ans);
+        }
+        return ans;
     }
     
+    
+//	Best approch :
+//   we can try greedy approch where we 
+//   find minI the i th pointer 
+//   find maxDiff which is just nums[i]-nums[j]
+//	time complexity :O(n)
+//	space complexity :O(1)
+    public static long maximumTripletValueBest(int[] nums) {
+    	long maxI=0;
+    	long maxDiff=0;
+    	long ans=0;
+
+    	for(int k=0;k<nums.length;k++) {
+    		ans=Math.max(ans, maxDiff*nums[k]);
+    		maxDiff=Math.max(maxDiff,maxI-nums[k]);
+    		maxI= Math.max(maxI,nums[k] );
+    	}
+    	return ans;
+    	
+    	
+    }
     
     public static void main(String[] args) {
     	
@@ -126,7 +146,7 @@ class MaximumValueOfAnOrderedTripletI_2873 {
     	//Input: nums = [1,2,3]
     	int [] nums3 = {1,2,3};
     	long output3=0;
-    	
+
     	
     	System.out.println("Brute Force :");
     	
@@ -184,11 +204,38 @@ class MaximumValueOfAnOrderedTripletI_2873 {
     		System.out.println("Your Answer :"+ ans3);  		
     	}
     	
-    	System.out.println("Best Approch ");
+    	System.out.println("Optimize Approch ");
     	
     	ans1=maximumTripletValueOptimize(nums1);
     	ans2=maximumTripletValueOptimize(nums2);
     	ans3=maximumTripletValueOptimize(nums3);
+    	
+    	if(output1==ans1) {
+    		System.out.println("Case 1 Passed");
+    	}else {
+    		System.out.println("Case 1 Failed");
+    		System.out.println("Expected Ouput :"+ output1);
+    		System.out.println("Your Answer :"+ ans1);  		
+    	}
+    	if(output2==ans2) {
+    		System.out.println("Case 2 Passed");
+    	}else {
+    		System.out.println("Case 2 Failed");
+    		System.out.println("Expected Ouput :"+ output2);
+    		System.out.println("Your Answer :"+ ans2);  		
+    	}
+    	if(output3==ans3) {
+    		System.out.println("Case 3 Passed");
+    	}else {
+    		System.out.println("Case 3 Failed");
+    		System.out.println("Expected Ouput :"+ output3);
+    		System.out.println("Your Answer :"+ ans3);  		
+    	}
+    	System.out.println("Best Approch ");
+    	
+    	ans1=maximumTripletValueBest(nums1);
+    	ans2=maximumTripletValueBest(nums2);
+    	ans3=maximumTripletValueBest(nums3);
     	
     	if(output1==ans1) {
     		System.out.println("Case 1 Passed");
