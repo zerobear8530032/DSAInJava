@@ -44,46 +44,53 @@ package TryHashMaps;
 import java.util.LinkedList;
 
 class MyHashMap {
+//	approch :
+//	create a array of certain size here i take 1000
+//	hash function used is k%maxsize : k is key and max size is 1k
+//	intitalize an array of max size map key with th hash funtion where each index 
+//	is a linked list to handle colletion each linked list node is a
+//	2 length array which hold key , value pairs
     LinkedList<int []> [] hashmap;
-    int MAXSIZE=1000;
+    int MAXSIZE=1000;// hashmap of size 1k
     public MyHashMap() {
         hashmap = new LinkedList [MAXSIZE];
     }
     
     public void put(int key, int value) {
-     int index= key%MAXSIZE;
-     if(hashmap[index]==null){
-        hashmap[index]= new LinkedList();
-        hashmap[index].add(new int [] {key,value});
+     int index= key%MAXSIZE;// get map index
+     if(hashmap[index]==null){// check current node is present 
+        hashmap[index]= new LinkedList();// if not we created it 
+        hashmap[index].add(new int [] {key,value});// put the values
      }else{
-        for(int i =0;i<hashmap[index].size();i++){
-            if(hashmap[index].get(i)[0]==key){
-                hashmap[index].get(i)[1]=value;
-                return ;
+        for(int i =0;i<hashmap[index].size();i++){// if already present 
+            if(hashmap[index].get(i)[0]==key){// check key already exists in here or not
+//            	cause if key exists we can put the value in this key without creating a new node
+                hashmap[index].get(i)[1]=value;//put the values on present key
+                return ;// exit
             }
         }
-        hashmap[index].add(new int [] {key,value});
+        hashmap[index].add(new int [] {key,value});// if the loop exits we can say the key does not exits we unsert the new noode 
      }
 
     }
     
-    public int get(int key) {
-        int index= key%MAXSIZE;
-        if(hashmap[index]==null) return -1;
-        for(int i =0;i<hashmap[index].size();i++){
-            if(hashmap[index].get(i)[0]==key){
+    public int get(int key) {// get the value
+        int index= key%MAXSIZE;// map index
+        if(hashmap[index]==null) return -1;// if node does not exists on that index that means we does not have that key
+        for(int i =0;i<hashmap[index].size();i++){// heere we check for key in linked list at map index
+            if(hashmap[index].get(i)[0]==key){// if fodun return value 
                 return hashmap[index].get(i)[1];
             }
         }
-        return -1;
+        return -1;// default -1
     }
     
-    public void remove(int key) {
-        int index= key%MAXSIZE;
-        if(hashmap[index]==null) return ;
-        for(int i =0;i<hashmap[index].size();i++){
+    public void remove(int key) {// remove element
+        int index= key%MAXSIZE;// map index
+        if(hashmap[index]==null) return ;// if the node does not exists means key never exists there 
+        for(int i =0;i<hashmap[index].size();i++){//find the index off the key
             if(hashmap[index].get(i)[0]==key){
-                hashmap[index].remove(i);
+                hashmap[index].remove(i);// remove it from linked list
             }
         }
     }

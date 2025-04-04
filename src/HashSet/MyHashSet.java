@@ -42,31 +42,35 @@
 package HashSet;
 import java.util.*;
 class MyHashSet {
+//	brute force apprpch :
+//	this is all similar to hashset implmentation
+//	ew created a max size array and to handle collision we used a method called caahning
     LinkedList<Integer>[]set;
     int MAXSIZE=10000;
     public MyHashSet() {
+    	// initialize the array of linked list
         set= new LinkedList [MAXSIZE];
     }
     
     public void add(int key) {
-        int index= key%MAXSIZE;
-        if(set[index]==null){
+        int index= key%MAXSIZE;// fnd the map index
+        if(set[index]==null){// it its null means we need to crete a linke list here 
             set[index]= new LinkedList();
             set[index].add(key);
-        }else{
-            if(set[index].contains(key)){
+        }else{// it not null means collision we can add a new node in linked list
+            if(set[index].contains(key)){// but first check the key already exits or not 
                 return ;
             }
             set[index].add(key);
         }
     }
     
-    public void remove(int key) {
-        int index= key%MAXSIZE;
-        if(set[index]==null){
+    public void remove(int key) {// remove
+        int index= key%MAXSIZE;// map index
+        if(set[index]==null){// check null node 
             return ;
         }else{
-            if(set[index].contains(key)){
+            if(set[index].contains(key)){// if the list contains key we can remove it  other wise we canot
                 set[index].remove(new Integer(key));
             }
         }
@@ -74,16 +78,16 @@ class MyHashSet {
     }
     
     public boolean contains(int key) {
-        int index= key%MAXSIZE;
-        if(set[index]==null){
+        int index= key%MAXSIZE;// get map index
+        if(set[index]==null){// if index not present then key cannot be there
             return false;
         }else{
-            for(int i =0;i<set[index].size();i++){
+            for(int i =0;i<set[index].size();i++){// check in the linked list to find the element
                 if(set[index].get(i)==key){
-                    return true;
+                    return true;// true if presetnt
                 }
             }
-            return false;
+            return false;// false if not 
         }
     }
     public static void main(String[] args) {
