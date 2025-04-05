@@ -123,6 +123,35 @@ class SumOfAllSubsetXORTotals_1863 {
             }
             return subsets;
         }
+        
+//   Optimize approch :
+//  we can remove the requirement of using the binary string of number to find subset we can use a bitmask
+//	time complexity : O(2^n*n)
+//	space complexity : O(2^n)
+        public static int subsetXORSumOptimze(int[] nums) {
+        	List<Integer>subsetsXOR= getAllSubSetXOROptimize(nums);
+        	int sum =0;
+        	for(int  XOR : subsetsXOR){
+        		sum+=XOR;
+        	}
+        	return sum;
+        	
+        }
+        public static List<Integer> getAllSubSetXOROptimize(int [] nums){
+        	List<Integer> subsets= new ArrayList();
+        	int n = nums.length;
+        	int total = 1 << n;  // 2^n subsets
+        	for(int mask =0;mask<total;mask++){
+        		int subsetXOR=0;
+        		for(int i=0;i<n;i++){
+        			if((mask& (1<<i))!=0) {
+        				subsetXOR^=nums[i];
+        			}
+        		}
+        		subsets.add(subsetXOR);
+        	}
+        	return subsets;
+        }
 
     
     
@@ -175,6 +204,34 @@ class SumOfAllSubsetXORTotals_1863 {
 		ans1= subsetXORSumBetter(nums1);	
 		ans2= subsetXORSumBetter(nums2);	
 		ans3= subsetXORSumBetter(nums3);	
+		
+		if(ans1==output1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ (output1));
+			System.out.println("Your Answer :"+ (ans1));
+		}
+		if(ans2==output2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ (output2));
+			System.out.println("Your Answer :"+ (ans2));
+		}
+		if(ans3==output3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Expected Ouput :"+ (output3));
+			System.out.println("Your Answer :"+ (ans3));
+		}
+		
+		System.out.println("Optimize Approch :");
+		
+		ans1= subsetXORSumOptimze(nums1);	
+		ans2= subsetXORSumOptimze(nums2);	
+		ans3= subsetXORSumOptimze(nums3);	
 		
 		if(ans1==output1) {
 			System.out.println("Case 1 Passed");
