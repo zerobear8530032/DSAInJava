@@ -34,13 +34,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
-import java.util.TreeMap;
 
 public class TopKFrequentElements_NEETCODE {
 	
@@ -49,7 +47,7 @@ public class TopKFrequentElements_NEETCODE {
 //	at last return top k elements;
 //	time complexity :O(n)+O(n log n)
 //	time complexity :O(n)
-	 public static int[] topKFrequentSimpleHashMap(int[] nums, int k) {
+	 public static int[] topKFrequentBruteForce(int[] nums, int k) {
 	     HashMap<Integer,Integer> map= new HashMap();  
 	     for(int x :nums) {
 	    	 if(map.containsKey(x)) {
@@ -58,7 +56,7 @@ public class TopKFrequentElements_NEETCODE {
 	    		 map.put(x, 1);
 	    	 }
 	     }
-//	     sort the map keys by values and store it in the linked list :
+//	     sort the map keys and store it in the linked list :
 	     
 	     List <Map.Entry<Integer,Integer>>list = new LinkedList<>(map.entrySet());
 	     Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
@@ -73,11 +71,16 @@ public class TopKFrequentElements_NEETCODE {
 	     }
 
 		return ans;
+	    
 	    }
-	 
-	 
-	 public static int[] topKFrequentLinkedHashMap(int[] nums, int k) {
-		 LinkedHashMap<Integer,Integer> map= new LinkedHashMap();  
+	
+//	Better Approch : 
+//	first create a frequecy hashmap then just use nax heap where the  
+//	at last return top k elements;
+//	time complexity :O(n log n)
+//	space complexity :O(n)
+	 public static int[] topKFrequentBetter(int[] nums, int k) {
+		 HashMap<Integer,Integer> map= new HashMap();  
 		 for(int x :nums) {
 			 if(map.containsKey(x)) {
 				 map.put(x, map.get(x)+1);
@@ -85,50 +88,91 @@ public class TopKFrequentElements_NEETCODE {
 				 map.put(x, 1);
 			 }
 		 }
-//	     sort the map keys by values and store it in the linked list :
+//	     sort the use a priority queue to store key value pairs in that:
 		 
-		 List <Map.Entry<Integer,Integer>>list = new LinkedList<>(map.entrySet());
-		 Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-			 public int compare(Map.Entry<Integer, Integer> o1,Map.Entry<Integer, Integer>o2) {
-				 return o2.getValue().compareTo(o1.getValue());
-			 }
-		 });
-//	     now just return the starting top k element from linked list
-		 int ans[] = new int[k];
-		 for(int i=0;i<k;i++) {
-			 ans[i]=list.get(i).getKey();
-		 }
-		 
+		 PriorityQueue<Map.Entry<Integer, Integer>> maxHeap = new PriorityQueue<>(
+		            (o1, o2) -> Integer.compare(o2.getValue(), o1.getValue())
+		        );
+		        // Add all entries to the minHeap (PriorityQueue)
+		        maxHeap.addAll(map.entrySet());
+		        int [] ans = new int [k];
+		        for(int i =0;i<k;i++) {
+		        	ans[i]=maxHeap.poll().getKey();
+		        }
 		 return ans;
 	 }
-
-//	 using tree map :
-	 public static int[] topKFrequentTreeMap(int[] nums, int k) {
-		 TreeMap<Integer,Integer> map= new TreeMap();  
+//	Best Approch : 
+//	 use bucket sort 
+//	 where we create a list of same length of input array and at each index it store 
+//	 elements how many time they occurred
+//	time complexity :O(n)
+//	space complexity :O(n)
+	 public static int[] topKFrequentBest(int[] nums, int k) {
+		 HashMap<Integer,Integer> map= new HashMap();  
 		 for(int x :nums) {
 			 if(map.containsKey(x)) {
 				 map.put(x, map.get(x)+1);
 			 }else {
 				 map.put(x, 1);
 			 }
-		 }
-//	     sort the map keys by values and store it in the linked list :
-		 
-		 List <Map.Entry<Integer,Integer>>list = new LinkedList<>(map.entrySet());
-		 Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-			 public int compare(Map.Entry<Integer, Integer> o1,Map.Entry<Integer, Integer>o2) {
-				 return o2.getValue().compareTo(o1.getValue());
+		 }// here we create frequency map
+//		 this array will map the number of elements which have frequency where each index 
+//		 is a list and each element is at  having frequency as its index
+		 List<Integer>[] bucketarray= new List[nums.length+1]; 
+		 for(Map.Entry<Integer, Integer> e:map.entrySet()) {
+			 int freq=e.getValue();
+			 int key=e.getKey();
+			 if(bucketarray[freq]==null) {
+				 bucketarray[freq]=new ArrayList();
+				 bucketarray[freq].add(key);
+			 }else {
+				 bucketarray[freq].add(key);
 			 }
-		 });
-//	     now just return the starting top k element from linked list
-		 int ans[] = new int[k];
-		 for(int i=0;i<k;i++) {
-			 ans[i]=list.get(i).getKey();
 		 }
+//		 this i creating the output array from the bucket array 
+		 int resindex=0;
+		 int[] ans = new int [k];
+		 for(int i =bucketarray.length-1;i>=0;i--) {
+			 
+			 if(bucketarray[i]==null) {
+				 continue;
+			 }else {
+				 if(resindex==k) {
+					 break;
+				 }
+				 for(int j=0;j<bucketarray[i].size();j++) {
+					 ans[resindex]=bucketarray[i].get(j);
+					 resindex++;
+				 }
+				 
+			 }
+		 }
+		 
+		 
 		 
 		 return ans;
 	 }
 	 
+	 public static boolean check(int [] ans,int []output) {
+		 if(ans.length!=output.length) {
+			 return false;
+		 }
+		 for(int i=0;i<ans.length;i++) {
+			 boolean exists=false;
+			 for(int j=0;j<output.length;j++) {
+				 if(ans[i]==output[j]) {
+					 exists=true;
+					 break;
+				 }
+				 
+			 }
+			 if(exists==false) {
+				 return false;
+			 }
+			 
+		 }
+		 return true;
+	 }
 
 	public static void main(String[] args) {
 		
@@ -145,64 +189,63 @@ public class TopKFrequentElements_NEETCODE {
 		int k2 = 1;
 		int [] output2= {7};
 		
-		int []nums3 = {5,5,5,5,5,5,1,1,3,3,4,5};
-		int k3 = 3;
-		int [] output3= {5,1,2};
+		int [] ans1=topKFrequentBruteForce(nums1, k1);
+		int [] ans2=topKFrequentBruteForce(nums2, k2);
 		
-		System.out.println("Simple Hash Map Case 1 :");
-		long before = System.currentTimeMillis();
-	    topKFrequentSimpleHashMap(nums1, k1);
-	    long after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds 
+		System.out.println("Brute Force Approch :");
+        
+        if(check(ans1,output1)) {
+			System.out.println("Case 1 Passed ");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Excepted Output : "+ Arrays.toString(output1));
+			System.out.println("Your Output : "+ Arrays.toString(ans1));
+		}
+		if(check(ans2,output2)) {
+			System.out.println("Case 2 Passed ");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Excepted Output : "+ Arrays.toString(output2));
+			System.out.println("Your Output : "+ Arrays.toString(ans2));
+		}
+		ans1=topKFrequentBetter(nums1, k1);
+		ans2=topKFrequentBetter(nums2, k2);
 		
-	    System.out.println("Simple Hash Map Case 2 :");
-	    before = System.currentTimeMillis();
-	    topKFrequentSimpleHashMap(nums2, k2);
-	    after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds
+		System.out.println("Brute Force Approch :");
+        
+        if(check(ans1,output1)) {
+			System.out.println("Case 1 Passed ");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Excepted Output : "+ Arrays.toString(output1));
+			System.out.println("Your Output : "+ Arrays.toString(ans1));
+		}
+		if(check(ans2,output2)) {
+			System.out.println("Case 2 Passed ");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Excepted Output : "+ Arrays.toString(output2));
+			System.out.println("Your Output : "+ Arrays.toString(ans2));
+		}
+		ans1=topKFrequentBest(nums1, k1);
+		ans2=topKFrequentBest(nums2, k2);
 		
-	    System.out.println("Simple Hash Map Case 3 :");
-	    before = System.currentTimeMillis();
-	    topKFrequentSimpleHashMap(nums3, k3);
-	    after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds
-	    
-	    System.out.println("Linked Hash Map Case 1 :");
-	    before = System.currentTimeMillis();
-	    topKFrequentLinkedHashMap(nums1, k1);
-	    after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds 
-	    
-	    System.out.println("Linked Hash Map Case 2 :");
-	    before = System.currentTimeMillis();
-	    topKFrequentLinkedHashMap(nums2, k2);
-	    after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds
-	    
-	    System.out.println("Linked Hash Map Case 3 :");
-	    before = System.currentTimeMillis();
-	    topKFrequentLinkedHashMap(nums3, k3);
-	    after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds
-	    
-	    System.out.println("Tree  Map Case 1 :");
-	    before = System.currentTimeMillis();
-	    topKFrequentLinkedHashMap(nums1, k1);
-	    after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds 
-	    
-	    System.out.println("Tree  Map Case 2 :");
-	    before = System.currentTimeMillis();
-	    topKFrequentLinkedHashMap(nums2, k2);
-	    after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds
-	    
-	    System.out.println("Tree  Map Case 3 :");
-	    before = System.currentTimeMillis();
-	    topKFrequentLinkedHashMap(nums3, k3);
-	    after = System.currentTimeMillis();
-	    System.out.println("run time : " + (after- before) );// mili seconds
-	    
+		System.out.println("Best Force Approch :");
+		
+		if(check(ans1,output1)) {
+			System.out.println("Case 1 Passed ");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Excepted Output : "+ Arrays.toString(output1));
+			System.out.println("Your Output : "+ Arrays.toString(ans1));
+		}
+		if(check(ans2,output2)) {
+			System.out.println("Case 2 Passed ");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Excepted Output : "+ Arrays.toString(output2));
+			System.out.println("Your Output : "+ Arrays.toString(ans2));
+		}
 	}
 
 }

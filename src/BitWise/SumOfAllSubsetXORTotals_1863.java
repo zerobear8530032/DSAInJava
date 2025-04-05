@@ -134,8 +134,7 @@ class SumOfAllSubsetXORTotals_1863 {
         	for(int  XOR : subsetsXOR){
         		sum+=XOR;
         	}
-        	return sum;
-        	
+        	return sum;	
         }
         public static List<Integer> getAllSubSetXOROptimize(int [] nums){
         	List<Integer> subsets= new ArrayList();
@@ -199,7 +198,7 @@ class SumOfAllSubsetXORTotals_1863 {
 			System.out.println("Your Answer :"+ (ans3));
 		}
 		
-		System.out.println("Best Approch :");
+		System.out.println("Better Approch :");
 		 	
 		ans1= subsetXORSumBetter(nums1);	
 		ans2= subsetXORSumBetter(nums2);	
@@ -254,8 +253,8 @@ class SumOfAllSubsetXORTotals_1863 {
 			System.out.println("Expected Ouput :"+ (output3));
 			System.out.println("Your Answer :"+ (ans3));
 		}
-
-    
+		System.out.println("Optimize Approch :");
+System.out.println("Best will come soon ........");    
     }
 
 }

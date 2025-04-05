@@ -84,34 +84,26 @@ public class SortColors_75 {
 //	time complexity :O(n )
 //	space complexity :O(1)
 //	 
-	 public static void sortColorsBest(int[] nums) { 
-		 int c1=0,c2=0,c3=0;
-		 for(int i =0;i<nums.length;i++) {
-			 if(nums[i]==0) {
-				 c1++;
-			 }
-			 if(nums[i]==1) {
-				 c2++;
-			 }
-			 if(nums[i]==2) {
-				 c3++;
-			 }
-		 }
-		 int i =0;
-		 for(int f =0;f<c1;f++) {
-			 nums[i]=0;
-			 i++;
-		 }
-		 for(int f =0;f<c2;f++) {
-			 nums[i]=1;
-			 i++;
-		 }
-		 for(int f =0;f<c3;f++) {
-			 nums[i]=2;
-			 i++;
-		 }
-		 
-	 }
+		    public static void sortColorsBest(int[] nums) {
+		        int [] map = new int [3];
+		        for(int   x: nums){
+		            map[x]++;
+		        }
+		        int index=0;
+		        for(int i =0;i<map[0];i++){
+		            nums[index]=0;
+		            index++;
+		        }
+		        for(int i =0;i<map[1];i++){
+		            nums[index]=1;
+		            index++;
+		        }
+		        for(int i =0;i<map[2];i++){
+		            nums[index]=2;
+		            index++;
+		        }
+		    }
+		
 	    public static boolean check(int [] arr1, int [] arr2) {
 			if(arr1.length!=arr2.length) {
 				return false;
