@@ -58,7 +58,7 @@ class ValidSuduko_NEETCODE {
 //	once done check all 3x3 small matrix that there any repeating number
 //	time complexity :O(n*m)^2;
 	
-    public static boolean isValidSudoku(char[][] board) {
+    public static boolean isValidSudokuBruteForce(char[][] board) {
         for(int i =0;i<board.length;i++){
             for(int j=0;j<board[i].length;j++){
                 if(board[i][j]!='.'){
@@ -125,6 +125,121 @@ class ValidSuduko_NEETCODE {
         }
         return true;
     }
+    
+    
+//    better approch :
+//    this will use a constant space of an 9 size array for each check
+//    which will be allocated root(9) times+ 9 times
+//    time complexity :O(n*n)
+//    space complexity :O(n*n)
+        public static boolean isValidSudokuBetter(char[][] board) {
+            for(int i =0;i<9;i++){
+                if(checkRow(board,i)==false) return false;
+                if(checkCol(board,i)==false) return false;
+            }
+            if(checkMatrix(board,0,0)==false) return false;
+            if(checkMatrix(board,0,3)==false) return false;
+            if(checkMatrix(board,0,6)==false) return false;
+            if(checkMatrix(board,3,0)==false) return false;
+            if(checkMatrix(board,3,3)==false) return false;
+            if(checkMatrix(board,3,6)==false) return false;
+            if(checkMatrix(board,6,0)==false) return false;
+            if(checkMatrix(board,6,3)==false) return false;
+            if(checkMatrix(board,6,6)==false) return false;
+            return true;
+        }
+        public static boolean checkMatrix(char [][] board , int r, int c){
+            int [] map = new int [9];
+            for(int i =r;i<r+3;i++){
+                for(int j=c;j<c+3;j++){
+                    if(board[i][j]=='.') continue;
+                    if(map[board[i][j]-'0'-1]!=0) {return false;}
+                    map[board[i][j]-'0'-1]++;
+                }
+            }
+            return true;
+        }
+
+
+        public static boolean checkRow(char [][] board,int row){
+            int [] map = new int [9];
+            for(char x:board[row]){
+                if(x=='.') continue;
+                if(map[x-'0'-1]!=0){return false;}
+                map[x-'0'-1]++;
+            }
+            return true;
+        }
+        public static boolean checkCol(char [][] board,int col){
+            int [] map = new int [9];
+            for(int i=0;i<9;i++){
+                if(board[i][col]=='.') continue;
+                if(map[board[i][col]-'0'-1]!=0){return false;}
+                map[board[i][col]-'0'-1]++;
+            }
+            return true;
+        }
+        
+        
+        
+        
+//    best approch :
+//    we  can reduce the array to map each element on a bit of integer will reduce our
+//    space significantly :
+//    time complexity :o(n*n)
+//    space complexity :o(n)
+     
+            public static boolean isValidSudokuBest(char[][] board) {
+                for(int i =0;i<9;i++){
+                    if(checkRowBest(board,i)==false) return false;
+                    if(checkColBest(board,i)==false) return false;
+                }
+                if(checkMatrixBest(board,0,0)==false) return false;
+                if(checkMatrixBest(board,0,3)==false) return false;
+                if(checkMatrixBest(board,0,6)==false) return false;
+                if(checkMatrixBest(board,3,0)==false) return false;
+                if(checkMatrixBest(board,3,3)==false) return false;
+                if(checkMatrixBest(board,3,6)==false) return false;
+                if(checkMatrixBest(board,6,0)==false) return false;
+                if(checkMatrixBest(board,6,3)==false) return false;
+                if(checkMatrixBest(board,6,6)==false) return false;
+                return true;
+            }
+            public static boolean checkMatrixBest(char [][] board , int r, int c){
+                int bitMask=0;
+                for(int i =r;i<r+3;i++){
+                    for(int j=c;j<c+3;j++){
+                        if(board[i][j]=='.') continue;
+                        int bit=1<<(board[i][j]-'0');
+                        if( (bitMask & bit)!=0) {return false;}
+                        bitMask^=bit;
+                    }
+                }
+                return true;
+            }
+
+
+            public static boolean checkRowBest(char [][] board,int row){
+                int bitMask=0;
+                for(char x:board[row]){
+                    if(x=='.') continue;
+                    int bit=(1<<x-'0');
+                    if( (bitMask & bit)!=0) {return false;}
+                    bitMask^=bit;
+                }
+                return true;
+            }
+            public static boolean checkColBest(char [][] board,int col){
+                int bitMask=0;
+                for(int i=0;i<9;i++){
+                    if(board[i][col]=='.') continue;
+                    int bit=1<<(board[i][col]-'0');
+                    if( (bitMask & bit)!=0) {return false;}
+                    bitMask^=bit;
+                }
+                return true;
+            }
+
     public static void main(String[] args) {
     	char [][] board1=
     			{{'1','2','.','.','3','.','.','.','.'},
@@ -164,11 +279,67 @@ class ValidSuduko_NEETCODE {
 			{'.','.','4','.','.','.','.','.','.'}};
     	boolean output3= false;                      
     	
-    	boolean ans1=isValidSudoku(board1);
-    	boolean ans2=isValidSudoku(board2);
-    	boolean ans3=isValidSudoku(board3);
+    	boolean ans1=isValidSudokuBruteForce(board1);
+    	boolean ans2=isValidSudokuBruteForce(board2);
+    	boolean ans3=isValidSudokuBruteForce(board3);
 		
 		System.out.println("Brute Force Approch :");
+		
+		if(output1==ans1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2==ans2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
+		}
+		if(output3==ans3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Actual Output :"+output3);
+			System.out.println("Your Output :"+ans3);
+		}
+		
+		System.out.println("Better Force Approch :");
+		
+		ans1=isValidSudokuBruteForce(board1);
+    	ans2=isValidSudokuBruteForce(board2);
+    	ans3=isValidSudokuBruteForce(board3);
+		
+		if(output1==ans1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2==ans2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
+		}
+		if(output3==ans3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Actual Output :"+output3);
+			System.out.println("Your Output :"+ans3);
+		}
+		
+		System.out.println("Best Approch :");
+		
+		ans1=isValidSudokuBest(board1);
+		ans2=isValidSudokuBest(board2);
+		ans3=isValidSudokuBest(board3);
 		
 		if(output1==ans1) {
 			System.out.println("Case 1 Passed");

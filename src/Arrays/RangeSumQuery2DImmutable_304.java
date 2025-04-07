@@ -119,9 +119,31 @@ class NumMatrixBetter{
 
 //approch create a matrix giving as input and just 
 //where each row in our matrix is the prefix sum of entire row
-// for getting the sumRange we can just do sum of all [all row] [cols1-1] index 
-// for getting the sumRange we can just do sum of all [all row] [cols2] index 
-// and if we substract the total sum - remaining it will give final answer
+//and for column we just take a prefix sum with the sum of above row of it will allow us to
+//keep track of sum of each reactagle from starting to ending at row2,col2 position
+// but if the rectange does not start from 0,0, then we need to remove
+// the top part and left part 
+// when we do that there will be a single cell 0,0, which will be counter 2 times
+//so we need to add it back as it will be counted in both top and left part 
+// at end we can return output
+
+// here we can take padding of 1,1 extra on top and left side to handle edge cases as well as computing easily
+// means if matrix = 
+//[3, 0, 1, 4, 2]
+//[5, 6, 3, 2, 1]
+//[1, 2, 0, 1, 5]
+//[4, 1, 0, 1, 7]
+//[1, 0, 3, 0, 5]
+// we will store it like this 
+//[0, 0, 0, 0, 0, 0]
+//[0, 3, 3, 4, 8, 10]-> each element is prefix sum + above cell 
+//[0, 8, 14, 18, 24, 27]
+//[0, 9, 17, 21, 28, 36]
+//[0, 13, 22, 26, 34, 49]
+//[0, 14, 23, 30, 38, 58]
+// now we can say if we want sum from 0 , 0 till 2,2 = [1,2],[1,2] // because we used padding we does not includ border elements
+// now to find then we can remove take total sum from 
+
 
 //time complexity:
 //constructor : o(row*col)
@@ -144,6 +166,8 @@ class NumMatrixBest{
 				sumMatrix[i+1][j+1]=Prefsum+above;
 			}
 		}
+		
+		
 		
 	}
 	
