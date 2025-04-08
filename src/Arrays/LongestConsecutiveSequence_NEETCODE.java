@@ -59,9 +59,16 @@ public class LongestConsecutiveSequence_NEETCODE {
 	
 //	best approch :
 //	here we use a single hash set and put each element in it 
-//	now we will iterateon nums and check if num[i]-1 exists it yes then continue
-//	else check(num[i]+1 exists in set if yes incremenet count each time and lsat last get the max
-//	countas result
+//	if we visualize every thing on a big  number line then each and every sequence willl be with each other
+//	now we can check  each element previous present of not means if nums[i] -1 is present on the array
+//	if its present means we can say its not a start of an sequence cause there is a smaller number then that
+//	we will skip it and keep checking each nums[i] there is a nums[ii]-1 is present or not
+//	when we found it we will have a infinite loop untill the nums[i]+1 are not present in the array 
+//	means if 1,2,3,4,100,200,201
+//	then  if we are at 1 we will check from 1 till untill 1+x is not present in the hashset in this case we will only get tilll4
+//	if we count it thats our answer
+//	to check each numeber present or not we can use a hashset this will remove duplicates also
+//	at most we will visit a number 2 times 
 //	time complexity :O(n);
 //	space complexity :O(n);
 	public static int longestConsecutiveBest(int[] nums) {

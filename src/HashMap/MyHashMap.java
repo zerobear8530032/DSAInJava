@@ -39,7 +39,7 @@
 //At most 104 calls will be made to put, get, and remove.
 
 
-package TryHashMaps;
+package HashMap;
 
 import java.util.LinkedList;
 
