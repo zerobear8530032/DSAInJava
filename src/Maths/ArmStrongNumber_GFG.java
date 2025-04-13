@@ -21,7 +21,7 @@
 
 package Maths;
 
-public class Snippet {
+public class ArmStrongNumber_GFG {
 //	assign x=n
 //	take mod of x by 10 and take cube of x and sum it
 //	then divide x by 10 until it reached 0 repeat this 
