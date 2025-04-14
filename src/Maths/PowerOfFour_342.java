@@ -136,9 +136,9 @@ public class PowerOfFour_342 {
 		
 		System.out.println("Recursion Approch :");
 		
-		ans1=isPowerOfFourBruteForce(n1);
-		ans2=isPowerOfFourBruteForce(n2);
-		ans3=isPowerOfFourBruteForce(n3);
+		ans1=isPowerOfFourRecursion(n1);
+		ans2=isPowerOfFourRecursion(n2);
+		ans3=isPowerOfFourRecursion(n3);
 		
 		if(output1==ans1) {
 			System.out.println("Case 1 Passed");
