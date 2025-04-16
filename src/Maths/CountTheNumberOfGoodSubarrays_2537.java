@@ -128,11 +128,9 @@ public class CountTheNumberOfGoodSubarrays_2537 {
 		return pairs;
 	}
 // Best approch :
-//	the approch is similar to what we were doing before just 
-//	one optimization is that we can use a sliding window where 
-//	we will include more elements in the subarray if it pairs are less then k
-//	and we remove element if it greter or equal to k
-//	time complexiy: O(n^2)
+//	we can optimize the calculation of pairs by on the go where we add and substract with 
+//	frequency without actually recalculation of each time
+//	time complexiy: O(n)
 //	space complexiy: O(n)
 	public static long countGoodBest(int[] nums, int k) {
 	    int ans = 0;
