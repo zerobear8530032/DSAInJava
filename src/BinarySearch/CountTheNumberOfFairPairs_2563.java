@@ -32,7 +32,7 @@
 //-109 <= lower <= upper <= 109
 
 
-package TwoPointers;
+package BinarySearch;
 
 import java.util.Arrays;
 
