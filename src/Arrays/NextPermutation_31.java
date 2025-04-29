@@ -41,7 +41,7 @@ package Arrays;
 
 import java.util.Arrays;
 
-public class next_Permutation_31 {
+public class NextPermutation_31 {
 //	approch :
 //	find the first non  decreasing element from right to left
 //	if no  found reverse entire array 
@@ -51,55 +51,55 @@ public class next_Permutation_31 {
 //	time complexity :O(n)
 //	space complexity :O(1)
 	 public static void nextPermutation(int[] nums) {
-	        int n = nums.length;
-	        
-	        //Find the breakpoint
-	        int breakpoint = -1;
-	        for (int i = n - 2; i >= 0; i--) {
-	            if (nums[i] < nums[i + 1]) {
-	                breakpoint = i;
-	                break;
-	            }
-	        }
-
-	        // If no breakpoint is found, reverse the entire array
-	        if (breakpoint == -1) {
-	            reverse(nums, 0, n - 1);
-	            return;
-	        }
-
-	        // Find the next greater element to swap with nums[breakpoint]
-	        for (int i = n - 1; i > breakpoint; i--) {
-	            if (nums[i] > nums[breakpoint]) {
-	                swap(nums, i, breakpoint);
-	                break;
-	            }
-	        }
-
-	        // Reverse the segment after breakpoint
-	        reverse(nums, breakpoint + 1, n - 1);
-	    }
-
-	    private static void reverse(int[] arr, int start, int end) {
-	        while (start < end) {
-	            swap(arr, start, end);
-	            start++;
-	            end--;
-	        }
-	    }
-
-	    private static void swap(int[] arr, int idx1, int idx2) {
-	        int temp = arr[idx1];
-	        arr[idx1] = arr[idx2];
-	        arr[idx2] = temp;
-	    }
-	    
+		 int n = nums.length;
+		 int r=n-1;
+		 while(r>0) {
+			 if(nums[r-1]<nums[r]) {
+				 break;
+			 }
+			 r--;
+		 }
+		 if(r==0) {
+			 reverse(nums, 0, n-1);
+			 return ;
+		 }
+		 int index =Search(nums, r, n-1, nums[r-1]);
+		 swap(nums, r-1, index);
+		 reverse(nums, r, n-1);
+	 }
+	 
+	 public static int Search(int [] nums, int s, int e, int t) {
+		 while(s<=e) {
+			 int m= s+(e-s)/2;
+			 if(t<nums[m]) {
+				 s=m+1;
+			 }else {
+				 e=m-1;
+			 }
+		 }
+		 return e;
+		 
+	 }
+	 
+	 public static void reverse(int [] nums,int l,int r) {
+		 while(l<r) {
+			 swap(nums,l,r);
+			 l++;
+			 r--;
+		 }
+	 }
+	 public static void swap(int [] nums,int l , int r) {
+		 int t= nums[l];
+		 nums[l]=nums[r];
+		 nums[r]=t;
+	 }
+	        	    
 
 	public static void main(String[] args) {
 		
 		//Example 1:
 
-		int [] nums1 = {1,2,3};
+		int [] nums1 = {3, 1 ,5 ,1};
 		int [] output1= {1,3,2};
 		
 		//Example 2:
