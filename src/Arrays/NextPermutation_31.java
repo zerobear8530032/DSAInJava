@@ -138,6 +138,8 @@ public class NextPermutation_31 {
 			System.out.println("Expected Ouput :"+ Arrays.toString(output3));
 			System.out.println("Your Answer :"+ Arrays.toString(nums3));	
 			}
+		String str="fsdfds";
+		System.out.println(str.hashCode());
 		
 	}
 }
