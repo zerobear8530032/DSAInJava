@@ -91,7 +91,7 @@
 
 
 package Strings;
-class Solution {
+public class StringToInteger_8 {
 //	brute force :
 //	first skip all white space
 //	then check for operator
