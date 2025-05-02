@@ -76,12 +76,7 @@ public class PushDominors_838 {
 	        		r++;
 	        	}
 	        }
-	        if(leftside=='R') {
-	        	while(l<n) {
-	        		ans[l]=='R';
-	        	l++;	
-	        	}
-	        }
+	        
 	        
 
 	        return new String(ans);
