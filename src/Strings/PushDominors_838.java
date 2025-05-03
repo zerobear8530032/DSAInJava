@@ -40,65 +40,53 @@
 package Strings;
 
 public class PushDominors_838 {
-	    public static String pushDominoes(String dominoes) {
-	        int l=0;
-	        int n = dominoes.length();
-	        char [] ans= dominoes.toCharArray();
-	        while(l<n && (ans[l]=='.' || ans[l]=='L')){
-	            if(ans[l]=='L'){
-	                int i=l-1;
-	                while(i>=0 && ans[i]=='.'){
-	                    ans[i]='L';
-	                    i--;
-	                }
-	            }
-	            l++;
-	        }
-	        int r=l+1;
-	        char leftside=ans[l];
-	        char rightside=ans[r];
-	        while(r<n){	
-	        	while(r<n && ans[r]=='.') {
-	        		r++;
-	        	}
-	        	if(r==n) break;
-	        	rightside=ans[r];
-	        	if(leftside==rightside) {
-	        		putChar(ans, l+1, r-1, rightside);
-	        		l=r;
-	        		r++;
-	        	}else if(leftside=='L' && rightside=='R') {
-	        		l=r;
-	        		r++;
-	        	}else {
-	        		putLR(ans,l+1,r-1);
-	        		l=r;
-	        		r++;
-	        	}
-	        }
-	        
-	        
+    public static String pushDominoes(String dominoes) {
+        int l=0;
+        int r=1;
+        char[] res= dominoes.toCharArray();
+        int n = res.length;
+        while(r<n){
+            while(r<n && (r==l || res[r]=='.')){
+                r++;
+            }
+            if(r<n &&  (res[l]=='.' && res[r]=='L')){
+                while(l<r){
+                    res[l]='L';
+                    l++;
+                }
+            }else if(r<n &&(res[l]=='.' && res[r]=='R')) {
+            	l=r;            	
+            }else if(r<n && (res[l]==res[r])){
+                char ch =res[l];
+                while(l<r){
+                    res[l]=ch;
+                    l++;
+                }
+//                l=r;
+            }else if(r<n &&(res[l]=='L' && res[r]=='R')){
+                l=r;
+            }else if(r<n && (res[l]=='R' && res[r]=='L')){
+                int left=l+1;
+                int right=r-1;
+                while(left<right){
+                    res[left]='R';
+                    res[right]='L';
+                    left++;
+                    right--;
+                }
+                l=r;
+            }
+            r++;
+        }
+        if(res[l]=='R' && res[n-1]=='.') {
+        	while(l<n) {
+        		res[l]='R';
+        		l++;
+        	}
+        }
+		return new String(res);
+    }
 
-	        return new String(ans);
-	    }
-	    public static void putLR(char[] arr, int s , int e){
-	        while(s<e){
-	            arr[s]='R';
-	            arr[e]='L';
-	        s++;
-	        e--;
-	        }
-
-	    }
-	    public static void putChar(char[] arr, int s , int e,char ch){
-	    	while(s<=e){
-	    		arr[s]=ch;
-	    		arr[e]=ch;
-	    		s++;
-	    		e--;
-	    	}
-	    	
-	    }
 	    
 	    
 	    public static void main(String[] args) {
@@ -114,14 +102,49 @@ public class PushDominors_838 {
 	    	
 	    	//Example 3:
 	    	
-	    	String dominoes3 = "L.....RR.RL.....L.R.";
-	    	String output3="RRR.L";
+	    	String dominoes3 = ".R..L.";
+	    	String output3=".RRLL.";
+	    	
+	    	//Example 4:
+	    	
+	    	String dominoes4 = ".R..LR.....";
+	    	String output4=".RRLLRRRRRR";	    	
 	    	
 	    	
-	    	System.out.println(pushDominoes(dominoes1));
-	    	System.out.println(pushDominoes(dominoes2));
-	    	System.out.println(pushDominoes(dominoes3));
-	    	
+	    	String ans1=pushDominoes(dominoes1);
+	    	String ans2=pushDominoes(dominoes2);
+	    	String ans3=pushDominoes(dominoes3);
+	    	String ans4=pushDominoes(dominoes4);
+			
+			
+			if(output1.equals(ans1)) {
+				System.out.println("Case 1 Passed");
+			}else {
+				System.out.println("Case 1 Failed");
+				System.out.println("Actual Output :"+output1 );
+				System.out.println("Your Output :"+ans1);
+			}
+			if(output2.equals(ans2)) {
+				System.out.println("Case 2 Passed");
+			}else {
+				System.out.println("Case 2 Failed");
+				System.out.println("Actual Output :"+output2 );
+				System.out.println("Your Output :"+ans2);
+			}
+			if(output3.equals(ans3)) {
+				System.out.println("Case 3 Passed");
+			}else {
+				System.out.println("Case 3 Failed");
+				System.out.println("Actual Output :"+output3);
+				System.out.println("Your Output :"+ans3);
+			}
+			if(output4.equals(ans4)) {
+				System.out.println("Case 4 Passed");
+			}else {
+				System.out.println("Case 4 Failed");
+				System.out.println("Actual Output :"+output4);
+				System.out.println("Your Output :"+ans4);
+			}
 
 		}
 	
