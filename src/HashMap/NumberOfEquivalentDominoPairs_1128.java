@@ -27,7 +27,7 @@
 //1 <= dominoes[i][j] <= 9
 
 
-package HashSet;
+package HashMap;
 
 import java.util.HashMap;
 import java.util.HashSet;
