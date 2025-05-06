@@ -39,7 +39,12 @@
 package Maths;
 
 public class PermutationSequence_60 {
-	   public static String getPermutation(int n, int k) {
+//approch :
+//	geenrate the number as a array
+//	now find next pemutation of number k times
+//	time complexity : O(n*k)
+//	space complexity : O(n*k)
+	public static String getPermutation(int n, int k) {
 		   char [] num= new char[n];
 		   for(int i =1;i<=n;i++) {
 			   num[i-1]=(char) ('0'+i);
