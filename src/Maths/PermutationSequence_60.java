@@ -101,23 +101,44 @@ public class PermutationSequence_60 {
 		//Example 1:
 
 		int n1 = 3, k1 = 3;
-		int output1=213;
+		String output1="213";
 		
 		//Example 2:
 
 		int n2 = 4, k2 = 9;
-		int output2=2314;
+		String output2="2314";
 
 		//Example 3:
 
 		int n3 = 3, k3 = 1;
-		int output3=123;
+		String output3="123";
 		
 		System.out.println("Brute Force Approch :");
-		System.out.println(getPermutation(n1, k1));
-		System.out.println(getPermutation(n2, k2));
-		System.out.println(getPermutation(n3, k3));
-
+		String ans1=getPermutation(n1,k1);
+		String ans2=getPermutation(n2,k2);
+		String ans3=getPermutation(n3,k3);
+		
+		if(output1.equals(ans1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2.equals(ans2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
+		}
+		if(output3.equals(ans3)) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Actual Output :"+output3);
+			System.out.println("Your Output :"+ans3);
+		}
 	}
 
 }
