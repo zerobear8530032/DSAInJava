@@ -74,10 +74,33 @@ public class NumberOfDigitOne_233 {
 		int n3 = 10000;
 		int output3=46000;
 		
-		//Example 4:
+		System.out.println("Brute Force  Approch : ");
 		
-		int n2 = 0;
-		int output2=0;
+		int ans1=countDigitOne(n1);
+		int ans2=countDigitOne(n2);
+		int ans3=countDigitOne(n3);
+		
+		if(output1== ans1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2 ==ans2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
+		}
+		if(output3==ans3) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Actual Output :"+output3);
+			System.out.println("Your Output :"+ans3);
+		}
 		
 
 		
