@@ -59,7 +59,7 @@
 //s consists only of lowercase English letters.
 //1 <= t <= 105
 
-package Arrays;
+package Strings;
 
 public class TotalCharactersInStringAfterTransformationsI_3335 {
 	
