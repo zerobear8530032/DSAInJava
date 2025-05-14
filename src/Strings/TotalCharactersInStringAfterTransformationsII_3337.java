@@ -80,8 +80,8 @@ public class TotalCharactersInStringAfterTransformationsII_3337 {
 //	apply the transformation on it 
 //	t times 
 //	as instructed
-//	time complexity : O(N*2^T);
-//	space complexity : O(N*2^T);
+//	time complexity : O(N*T*T);
+//	space complexity : O(N*K^T);
 		
 	public static int lengthAfterTransformationsBruteForce(String s, int t, List<Integer> nums) {
         int MOD= 1000000007;
@@ -109,7 +109,7 @@ public class TotalCharactersInStringAfterTransformationsII_3337 {
 //	this allow us to does not create or update string each time
 //	and  we can just change frequency of string character in the map which will be of length 26
 //	much smaller the string
-//	time complexity : O(T);
+//	time complexity : O(T*26*K);
 //	space complexity : O(1);
 	
 	public static int lengthAfterTransformationsBetter(String s, int t, List<Integer> nums) {
@@ -144,6 +144,12 @@ public class TotalCharactersInStringAfterTransformationsII_3337 {
 		}
 		return sum;
 		
+	}  
+	
+//	approch :Best approch :s
+//	
+	public static int lengthAfterTransformationsBest(String s, int t, List<Integer> nums) {
+	return -1;	
 	}  
 
 	public static void main(String[] args) {
