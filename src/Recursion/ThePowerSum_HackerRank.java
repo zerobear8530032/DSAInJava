@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/challenges/the-power-sum?isFullScreen=true
 //Find the number of ways that a given integer, , can be expressed as the sum of the  powers of unique, natural numbers.
 //
 //For example, if  and , we have to find all combinations of unique squares adding up to . The only solution is .
@@ -58,7 +59,7 @@
 //. There is no other way to express  as the sum of cubes.
 package Recursion;
 
-public class ThePowerSum {
+public class ThePowerSum_HackerRank {
 	 public static int powerSum(int X, int N) {
 		    // Write your code here
 		        int Xthroot =(int) Math.ceil(Math.pow(X, 1.0/N));
