@@ -81,7 +81,7 @@ public class DecodeString_394 {
 			  inner= helper(recursive.toString());
 		  }
 		  
-		  return prefix
+		  return prefix.toString();
 		  
 	  }
 	  

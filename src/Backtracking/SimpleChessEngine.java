@@ -110,6 +110,10 @@ class Knight implements pieces{
 			if(piece.getColor().equals(k.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=k;
 		}
 
 	}
@@ -132,6 +136,10 @@ class Knight implements pieces{
 			if(piece.getColor().equals(k.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=k;
 		}
 	}
 	public void moveDownLeft(pieces [][] matrix, Knight k) throws Exception {
@@ -153,6 +161,10 @@ class Knight implements pieces{
 			if(piece.getColor().equals(k.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=k;
 		}
 	}
 	public void moveDownRight(pieces [][] matrix, Knight k) throws Exception {
@@ -174,6 +186,10 @@ class Knight implements pieces{
 			if(piece.getColor().equals(k.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=k;
 		}
 	}
 	
@@ -198,6 +214,10 @@ class Knight implements pieces{
 			if(piece.getColor().equals(k.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=k;
 		}
 	}
 	
@@ -220,6 +240,10 @@ class Knight implements pieces{
 			if(piece.getColor().equals(k.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=k;
 		}
 
 	}
@@ -242,6 +266,10 @@ class Knight implements pieces{
 			if(piece.getColor().equals(k.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=k;
 		}
 	}
 	public void moveRightDown(pieces [][] matrix, Knight k) throws Exception {
@@ -263,6 +291,10 @@ class Knight implements pieces{
 			if(piece.getColor().equals(k.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=k;
 		}
 		
 
@@ -322,6 +354,10 @@ class Bishop implements pieces{
 			if(piece.getColor().equals(b.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=b;
 		}
 
 	}
@@ -344,6 +380,10 @@ class Bishop implements pieces{
 			if(piece.getColor().equals(b.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=b;
 		}
 	}
 	public void moveDownLeft(pieces [][] matrix, Bishop b) throws Exception {
@@ -365,6 +405,10 @@ class Bishop implements pieces{
 			if(piece.getColor().equals(b.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=b;
 		}
 	}
 	public void moveDownRight(pieces [][] matrix, Bishop b) throws Exception {
@@ -386,6 +430,10 @@ class Bishop implements pieces{
 			if(piece.getColor().equals(b.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=b;
 		}
 
 	}
@@ -443,6 +491,10 @@ class Rook implements pieces{
 			if(piece.getColor().equals(ro.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=ro;
 		}
 
 
@@ -464,6 +516,10 @@ class Rook implements pieces{
 			if(piece.getColor().equals(ro.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=ro;
 		}
 
 
@@ -484,6 +540,11 @@ class Rook implements pieces{
 			if(piece.getColor().equals(ro.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=ro;
+
 		}
 
 	}
@@ -503,6 +564,11 @@ class Rook implements pieces{
 			if(piece.getColor().equals(ro.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=ro;
+
 		}	
 	}
 		
@@ -559,6 +625,11 @@ class Queen implements pieces{
 			if(piece.getColor().equals(q.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=q;
+
 		}
 	}
 	public void moveDown(pieces [][] matrix, Queen q) throws Exception {
@@ -577,6 +648,11 @@ class Queen implements pieces{
 			if(piece.getColor().equals(q.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=q;
+
 		}
 	}
 	public void moveLeft(pieces [][] matrix, Queen q) throws Exception {
@@ -595,6 +671,11 @@ class Queen implements pieces{
 			if(piece.getColor().equals(q.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=q;
+
 		}
 	}
 	public void moveRight(pieces [][] matrix, Queen q) throws Exception {
@@ -613,6 +694,11 @@ class Queen implements pieces{
 			if(piece.getColor().equals(q.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=q;
+
 		}
 	}
 	
@@ -635,6 +721,10 @@ class Queen implements pieces{
 			if(piece.getColor().equals(q.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=q;
 		}
 	}
 	public void moveUpRight(pieces [][] matrix, Queen q) throws Exception {
@@ -655,7 +745,12 @@ class Queen implements pieces{
 			pieces piece= matrix[r][c];
 			if(piece.getColor().equals(q.getColor())){
 				throw new Exception();	
-			}		
+			}
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=q;
+
 		}
 	}
 	public void moveDownLeft(pieces [][] matrix, Queen q) throws Exception {
@@ -677,6 +772,11 @@ class Queen implements pieces{
 			if(piece.getColor().equals(q.getColor())){
 				throw new Exception();	
 			}		
+			matrix[row][col]=null;
+			row=r;
+			col=c;
+			matrix[row][col]=q;
+
 		}
 	}
 	public void moveDownRight(pieces [][] matrix, Queen q) throws Exception {
@@ -708,25 +808,35 @@ class Queen implements pieces{
 }
 
 
-public class SimpleChessEngine {
 
+public class SimpleChessEngine {
+	public static boolean BlackQueenExists(int x, int y,pieces [][] matrix ) {
+		if(matrix[x][y]!=null) {
+			return matrix[x][y].getColor().equals("black");
+		}
+		return false;
+	}
+	
+	public static void printMatrix(pieces [][] matrix) {
+		for(int i =0;i<matrix.length;i++) {
+			System.out.println(Arrays.toString(matrix[i]));
+		}
+	}
+	
+	
+
+	
+	
 	public static void main(String[] args) throws Exception {
 		
-		pieces [][] matrix = new pieces[5][5];
-		Queen q = new Queen(2,2, "black");
-		matrix[2][2]= q;
-		System.out.println("----------------------------------------");
-		for(int i =0;i<5;i++) {
-			System.out.println(Arrays.toString(matrix[i]));
-		}
-		System.out.println("----------------------------------------");
-		q.moveDownRight(matrix, q);
-		for(int i =0;i<5;i++) {
-			System.out.println(Arrays.toString(matrix[i]));
-		}
-		System.out.println("----------------------------------------");
-		
-		
+		pieces [][] board= new pieces[4][4];
+		Knight k= new Knight(board.length-1-(2-1), 'B'-'A', "White");
+		Queen  qw= new Queen(board.length-1-(1-1), 'B'-'A', "White");
+		Queen  qb= new Queen(board.length-1-(4-1), 'A'-'A', "Black");
+		board[k.getRow()][k.getCol()]=k;
+		board[qw.getRow()][qw.getCol()]=qw;
+		board[qb.getRow()][qb.getCol()]=qb;
+		printMatrix(board);
 	}
 
 }
