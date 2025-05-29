@@ -41,53 +41,52 @@ public class DecodeString_394 {
 	  }
 	  
 	  public static String helper(String s) {
-		  if(!s.contains("[")) {
+		  if(s.isBlank() ) {
 			  return "";
 		  }
-		  if(s.isBlank()) {
+		  if(s.length()==1 && s.charAt(0)==']') {
 			  return "";
 		  }
-		  int multiple=0;
-		  int idx =0;
 		  StringBuilder prefix= new StringBuilder();
 		  int n = s.length();
+		  int idx =0;
 		  while(idx<n && isCharacter(s.charAt(idx))) {
 			  prefix.append(s.charAt(idx));
 			  idx++;
 		  }
-		  StringBuilder num = new StringBuilder();
+		  StringBuilder multiplier = new StringBuilder();
 		  while(idx<n && isNumber(s.charAt(idx))) {
-			  num.append(s.charAt(idx));
+			  multiplier.append(s.charAt(idx));
 			  idx++;
 		  }
-		  String inner ="";
+		  int multi= Integer.parseInt(multiplier.toString());
+		  StringBuilder str= new StringBuilder();
 		  if(s.charAt(idx)=='[') {
-			  int open =1;
-			  int close =0;
-			  idx++;
-			  StringBuilder recursive = new StringBuilder();
-			  while(idx<n) {
-				  if(s.charAt(idx)=='[') {
-					  open++;
-				  }
-				  if(s.charAt(idx)==']') {
-					  close++;
-				  }
-				  if(open==close) break;
-				  recursive.append(s.charAt(idx));
+			  idx++;// skip the opening bracket;
+			  while(idx<n && isCharacter(s.charAt(idx))) {
+				  str.append(s.charAt(idx));
 				  idx++;
-			  }
-			  idx++;
-			  inner= helper(recursive.toString());
+			  }  
 		  }
-		  
-		  return prefix.toString();
-		  
+		  if(s.charAt(idx)==']') {
+			  idx++;
+		  }
+		  String temp = str.toString();  
+		  String res=prefix.toString()+decode(temp, multi);
+		  String rest= s.substring(idx);
+		  return res+helper(rest );
 	  }
 	  
 	  
 	  public static boolean isCharacter(char ch) {
 		  return ch<='z'&& ch>='a';
+	  }
+	  public static String decode(String str, int n) {
+		  StringBuilder res= new StringBuilder();
+		  for(int i =0;i<n;i++) {
+			  res.append(str);
+		  }
+		  return res.toString();
 	  }
 	  public static boolean isNumber(char ch) {
 		  return ch<='9'&& ch>='0';
@@ -113,7 +112,9 @@ public class DecodeString_394 {
 		String output3= "abcabccdcdcdef";
 		
 		
-		System.out.println();
+		System.out.println(decodeString(s1));
+		System.out.println(decodeString(s2));
+		System.out.println(decodeString(s3));
 
 	}
 
