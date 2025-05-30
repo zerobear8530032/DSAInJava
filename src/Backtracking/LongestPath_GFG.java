@@ -1,3 +1,4 @@
+//https://www.geeksforgeeks.org/longest-possible-route-in-a-matrix-with-hurdles/
 //Longest Possible Route in a Matrix with Hurdles
 //Last Updated : 04 Jun, 2023
 //Given an M x N matrix, with a few hurdles arbitrarily placed, calculate the length of the longest possible route possible from source to a destination within the matrix. We are allowed to move to only adjacent cells which are not hurdles. The route cannot contain any diagonal moves and a location once visited in a particular path cannot be visited again.
@@ -10,7 +11,7 @@
 
 package Backtracking;
 
-public class LongestPath {
+public class LongestPath_GFG {
 //	backtracking :
 //	we can use backtracking and check each direction what is the highest we can go each side and add it to the result
 
