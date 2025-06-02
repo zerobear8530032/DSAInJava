@@ -123,174 +123,203 @@ import java.util.List;
 
 public class SolveCrossWord {
 	
+//	approch:
+//	we will use recursive back tracking 
+//	first we have a helper function which take input of question and final result output list res
+//	now we itearte in entire board where we skip all the character which are +  or any alphabetic character
+//	so when ever a blank space is comes like '-'
+//	we check all directions of that 
+//	up,down , left, right
+//	once done we will find all possible words that can come in its place in side the wordlist/
+//	now we will fill the words and remove the word from word list and send it to next recusion call
+//	---------------------------------------------
+//	important note : 
+//	we will check either row first or column first and make a recusion call 
+//	then after we will check col because if the row fill that blank in some way it will not be updated 
+//	for our col check if we check all direction at once
+//	so always check row first and make a recusion call or check col first then make a recursion call
+//	then check the rest of ddirections 
+//	---------------------------------------------
+//	Worst-case Time: O((W·L)^W) (exponential)
+//	Space Complexity: O(W·L)
 
-	public static List<String> res;
+
     public static List<String> crosswordPuzzle(List<String> crossword, String words) {
-
-        List<String> wordslist = new ArrayList(Arrays.asList(words.split(";")));
-        res= new ArrayList();
-        helper(crossword, 0, 0, wordslist);
-        return res;
+    	List<String> wordList= new ArrayList(Arrays.asList(words.split(";")));
+    	List<String>  res= new ArrayList<String>();
+    	helper(crossword,wordList,res);
+    	return res;
     }
-    public static void helper(List<String> board, int r, int c, List<String> words){
-    	if(words.size()==0) {
-    		res= new ArrayList(board);
-    		return ;
+    
+    public static boolean helper(List<String> board, List<String> wordList,List<String> res) {
+    	if(wordList.size()==0) {
+    		res.addAll(board);
+    		return true;// this will return true to prune all the next calls 
     	}
-    	for(int i =r;i<10;i++) {
-    		for(int j =c;j<10;j++) {
-    			String str= board.get(i);
-    			char ch = str.charAt(j);
-    			if(ch=='+'|| (ch>='A' && ch<='Z')) 
-    			{continue;}
-    			String rowStrRight=lookRowRight(board, i, j);
-    			String colStrDown=lookColDown(board, i, j);
-    			
-    			String rowStrLeft=lookRowLeft(board, i, j);
-    			String colStrUp=lookColUp(board, i, j);
-    			
-    			String colStr = colStrUp+colStrDown;
-    			String rowStr = rowStrLeft+rowStrRight;
-    			List<String> tempboard = new ArrayList(board);
-    			List<String>possibleRow=getSimilarString(rowStr, words);
-    			List<String>possibleCol=getSimilarString(colStr, words);
-//    			try all row strings:
-    			List<String> removedWords= new ArrayList();
-    			for(String  strrow:possibleRow) {
-    				int n = rowStrLeft.length();
-    				fillRows(board,i,j-n,strrow);
-    				removedWords.add(strrow);
-    				words.remove(strrow);
-    				helper(board, i, j, words);
+//    	get every row
+    	for(int i =0;i<10;i++) {
+    		String  strRow = board.get(i);
+//    		get every character
+    		for(int j =0;j<10;j++) {
+    			char ch = strRow.charAt(j);
+//    			this will pass this line only when the blank space is there
+    			if(ch=='+' || (ch>='A' && ch <='Z')) {
+    				continue;
     			}
-    			for(String  strcol:possibleCol) {
-    				int n = colStrUp.length();
-    				fillCols(board,i-n,j,strcol);
-    				removedWords.add(strcol);
-    				words.remove(strcol);
-    				helper(board, i, j, words);
+//    			check left side / right side
+    			String leftside =lookLeft(board, i, j-1);
+    			String rightside =lookRight(board, i, j);
+    			String row= leftside+rightside;// entire row word
+//    			get all possible stirngs to put there
+    			List<String> possibleWordRow = possible(wordList, row);
+//    			get deleted words to back track
+    			List<String> deleteWord = new ArrayList<String>();
+//    			fill the words:
+    			List<String> temp = new ArrayList<String>(board);
+    			for(String word: possibleWordRow ) {
+    				int r=i;
+    				int c= j-leftside.length();
+    				fillRow(board, word, r,c);
+    				deleteWord.add(word);
+    				wordList.remove(word);
+//    				recursive call for row 
+    				if(helper(board, wordList, res)) return true;
     			}
-    			board=tempboard;
-    			words.addAll(removedWords);
+//    			get up / down side of words
+    			String upside =lookUp(board, i-1, j);    			
+    			String downside =lookDown(board, i, j);
+    			String col = upside+downside;// entire word blanks
+    			List<String> possibleWordCol = possible(wordList, col);// possible col words from list
+//    			fill words at col
+    			for(String word: possibleWordCol) {
+    				int r=i-upside.length();
+    				int c= j;
+    				fillCol(board, word, r,c);
+    				deleteWord.add(word);
+    				wordList.remove(word);
+//    				recursive call for col
+    				if(helper(board, wordList, res)) return true;
+    			}
+//    			this will backtrack if the both possible words are missing
+//    			means therea re no valid words to put in blanks means
+//    			we have to remove some words 
+    			if(possibleWordCol.size()==0 && possibleWordRow.size()==0) {
+    				return false;
+    			}
+    			// back track
+    			board=temp;
+    			wordList.addAll(deleteWord);
     		}
     	}
-
-    }
-    
-    public static void fillRows(List<String> board, int row,int col, String str){
-    	String initalrow = board.get(row);
-    	char [] chararr= initalrow.toCharArray();
-    	int idx=0;
-    	for(int i=col;i<col+str.length();i++) {
-    		chararr[i]=str.charAt(idx);
-    		idx++;
-    	}
-    	board.set(row, new String(chararr));
-    }
-    
-    public static void fillCols(List<String> board, int row,int col, String str){
-    	int idx =0;
-    	for(int i =row;i<row+str.length();i++) {
-    		String initalrow = board.get(i);
-    		char [] chararr= initalrow.toCharArray();
-    		chararr[col]=str.charAt(idx);
-    		board.set(i, new String(chararr));
-    		idx++;
-    	}
-    }
-    
-    public static List<String> getSimilarString(String str,List<String> arr){        
-        List<String> res= new ArrayList();
-        for(String s: arr){
-                if(s.length()==str.length()){
-                        boolean accept = true;
-                        for(int i =0;i<s.length();i++){
-                                if(str.charAt(i)==' ' || str.charAt(i)=='-'){
-                                        continue;
-                                }
-                                if(str.charAt(i)!=s.charAt(i)){
-                                        accept=false;
-                                        break;
-                                }
-                        }
-                        if(accept){
-                                res.add(s);
-                        }                      
-                }
-        }
-        return res;
+    	return false;
     }
     
     
-    public static String lookColDown(List<String> board, int r,int c){
-        if( r<0  ||  r>=10 ||c<0  ||  c>=10){
-                return "";
-        }        
-        StringBuilder str= new StringBuilder();
-        int idx=r;
-        while(idx<10 && board.get(idx).charAt(c)!='+'){
-        		String string = board.get(idx);
-                char ch = string.charAt(c);
-                if(ch>='A' && ch<='Z'){
-                        str.append(ch);
-                }else{
-                        str.append(" ");
-                }
-                idx++;
-        } 
-        return str.toString();
-    }
-    public static String lookRowLeft(List<String> board, int r, int c){
-        if( c<0 ||  c>=10 ||r<0   || r>=10 ){
-                return "";
-        }        
-        StringBuilder str= new StringBuilder();
-        int idx=c;
-        	String row = board.get(r);
-        	for(int i=idx;i>0;i--) {
-        		char ch = row.charAt(i-1);
-        		if(ch=='+') {
-        			break;
-        		}
-        		str.insert(0, ch);
-        	}
-        return str.toString();
-    }
-    public static String lookColUp(List<String> board, int r,int c){
-    	if( r<0  ||  r>=10 ||c<0  ||  c>=10){
-    		return "";
-    	}        
-    	StringBuilder str= new StringBuilder();
-    	int idx=r;
-    	for(int i=r;i>0;i--) {
-    		String row = board.get(i-1);
-    		char ch = row.charAt(c);
+//    check left side of the row
+    public static String lookLeft(List<String> board, int r, int c) {
+    	StringBuilder  leftside = new StringBuilder();
+    	String row= board.get(r);
+    	for(int i = c;i>=0;i--) {
+    		char ch = row.charAt(i);
     		if(ch=='+') {
     			break;
     		}
-    		str.insert(0, ch);
+    		leftside.append(ch);
     	}
-    	return str.toString();
+    	return leftside.reverse().toString();
     }
-    public static String lookRowRight(List<String> board, int r, int c){
-    	if( c<0 ||  c>=10 ||r<0   || r>=10 ){
-    		return "";
-    	}        
-    	StringBuilder str= new StringBuilder();
-    	int idx=c;
-    	while(idx<10 && board.get(r).charAt(idx)!='+'){
-    		String string= board.get(r); 
-    		char ch = string.charAt(idx);
-    		if(ch>='A' && ch<='Z'){
-    			str.append(ch);
-    		}else{
-    			str.append(" ");
+//    check right side of the row
+    public static String lookRight(List<String> board, int r, int c) {
+    	StringBuilder  rightside = new StringBuilder();
+    	String row= board.get(r);
+    	for(int i = c;i<row.length();i++) {
+    		char ch = row.charAt(i);
+    		if(ch=='+') {
+    			break;
     		}
-    		idx++;
-    	} 
-    	return str.toString();
+    		rightside.append(ch);
+    	}
+    	return rightside.toString();
     }
-
+//    check up side of the col
+    public static String lookUp(List<String> board, int r, int c) {
+    	StringBuilder  upside= new StringBuilder();
+    	for(int i=r;i>=0;i--) {
+    		String str = board.get(i);
+    		char ch = str.charAt(c);
+    		if(ch=='+') {
+    			break;
+    		}
+    		upside.append(ch);
+    	}
+    	return upside.reverse().toString();
+    }
+//    check down side of the col
+    public static String lookDown(List<String> board, int r, int c) {
+    	StringBuilder downside= new StringBuilder();
+    	for(int i=r;i<10;i++) {
+    		String str = board.get(i);
+    		char ch = str.charAt(c);
+    		if(ch=='+') {
+    			break;
+    		}
+    		downside.append(ch);
+    	}
+    	return downside.toString();
+    }
+    
+    public static boolean isCharacter(char ch) {
+    	return ch>='A' && ch<='Z';
+    }
+    
+//    find the possible string we can put in the blank spaces 
+    public static List<String> possible(List<String> words, String str){
+    	List<String> possiblewords = new ArrayList<String>();
+    	for(String word : words) {
+    		if(word.length()==str.length()) {
+    			boolean possible=true;
+    			for(int i =0;i<str.length();i++) {
+    				if(str.charAt(i)=='-') {
+    					continue;
+    				}
+    				if(str.charAt(i)!=word.charAt(i)) {
+    					possible=false;
+    					break;
+    				}
+    			}
+    			if(possible) {
+    				possiblewords.add(word);
+    			}
+    		}
+    		
+    	}
+    	return possiblewords;
+    }
+    
+//    fill board row wise
+    public static void fillRow(List<String> board, String word, int row, int col) {
+    	String strRow = board.get(row);
+    	char[] charrow = strRow.toCharArray();
+    	int idx =0;
+    	for(int i = col;idx<word.length();i++) {
+    		charrow[i]=word.charAt(idx);
+    		idx++;
+    	}
+    	board.set(row, new String (charrow));
+    }
+//    fill board col wise
+    public static void fillCol(List<String> board, String word, int row, int col) {
+    	int idx =0;
+    	for(int i = row;idx<word.length();i++) {
+    		String rowStr = board.get(i);
+    		char [] chararr= rowStr.toCharArray();
+    		char ch = word.charAt(idx);
+    		chararr[col]=ch;
+    		board.set(i,new String(chararr));
+    		idx++;
+    	}
+    	
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -299,7 +328,7 @@ public class SolveCrossWord {
 //		Example 1:
 		
 		
-		List<String> crossword = new ArrayList(Arrays.asList(
+		List<String> crossword1 = new ArrayList(Arrays.asList(
 													"+-++++++++",
 													"+-++++++++",
 													"+-++++++++",
@@ -312,7 +341,103 @@ public class SolveCrossWord {
 													"+++++-++++"));
 		String words1="LONDON;DELHI;ICELAND;ANKARA";
 		
-		System.out.println(crosswordPuzzle(crossword, words1));
+		List<String> output1= new ArrayList(Arrays.asList(
+													"+L++++++++",
+													"+O++++++++",
+													"+N++++++++",
+													"+DELHI++++",
+													"+O+++C++++",
+													"+N+++E++++",
+													"+++++L++++",
+													"++ANKARA++",
+													"+++++N++++",
+													"+++++D++++"));
+		
+		
+		List<String> crossword2 = new ArrayList(Arrays.asList(
+				"+-++++++++",
+				"+-++++++++",
+				"+-------++",
+				"+-++++++++",
+				"+-++++++++",
+				"+------+++",
+				"+-+++-++++",
+				"+++++-++++",
+				"+++++-++++",
+				"++++++++++"));
+		String words2="AGRA;NORWAY;ENGLAND;GWALIOR";
+		
+		
+		List<String> output2= new ArrayList(Arrays.asList(
+				"+E++++++++",
+				"+N++++++++",
+				"+GWALIOR++",
+				"+L++++++++",
+				"+A++++++++",
+				"+NORWAY+++",
+				"+D+++G++++",
+				"+++++R++++",
+				"+++++A++++",
+				"++++++++++"));
+
+		
+		List<String> crossword3 = new ArrayList(Arrays.asList(
+				
+				"+-++++++++",
+				"+-++-+++++",
+				"+-------++",
+				"+-++-+++++",
+				"+-++-+++++",
+				"+-++-+++++",
+				"++++-+++++",
+				"++++-+++++",
+				"++++++++++",
+				"----------"		
+				));
+		String words3="CALIFORNIA;NIGERIA;CANADA;TELAVIV";
+		List<String> output3= new ArrayList(Arrays.asList(
+				"+C++++++++",
+				"+A++T+++++",
+				"+NIGERIA++",
+				"+A++L+++++",
+				"+D++A+++++",
+				"+A++V+++++",
+				"++++I+++++",
+				"++++V+++++",
+				"++++++++++",
+				"CALIFORNIA"));
+	
+		
+		List<String> ans1 = crosswordPuzzle(crossword1, words1);
+		List<String> ans2 = crosswordPuzzle(crossword2, words2);
+		List<String> ans3 = crosswordPuzzle(crossword3, words3);
+		
+		
+		if(output1.equals(ans1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2.equals(ans2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
+		}
+		if(output3.equals(ans3)) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Actual Output :"+output3 );
+			System.out.println("Your Output :"+ans3);
+		}
+
+
+		
+		
 
 	}
 
