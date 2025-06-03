@@ -34,49 +34,65 @@
 
 package Recursion;
 
+import java.util.List;
+import java.util.Stack;
+
 public class DecodeString_394 {
 
+//	iterative approch :
+//	we can use a astack where we input each character in the stack
+//	untill the ']' appear when it does
+//	we will pop all character untill '[' and then all digits 
+//	once done we can repeat the string digits times and append all the 
+//	String in side the stack and keep doing it 
+//	at last pop whole string reverse and return ooutput:
+//	time complexity :	O(S)	Where S is The Length Of TheDecodedString
+//	space complexity :	O(S)	Where S is The Length Of TheDecodedString
 	  public static String decodeString(String s) {
-		  return helper(s);
-	  }
-	  
-	  public static String helper(String s) {
-		  if(s.isBlank() ) {
-			  return "";
-		  }
-		  if(s.length()==1 && s.charAt(0)==']') {
-			  return "";
-		  }
-		  StringBuilder prefix= new StringBuilder();
-		  int n = s.length();
 		  int idx =0;
-		  while(idx<n && isCharacter(s.charAt(idx))) {
-			  prefix.append(s.charAt(idx));
-			  idx++;
+		  int n = s.length();
+		  Stack <Character> stack = new Stack();
+		  while(idx<n) {
+			  char ch=s.charAt(idx);
+			  if(ch==']') {
+				  StringBuilder str= new StringBuilder();
+				  while(stack.peek()!='[') {
+					  char ch1 =stack.pop();
+					  str.append(ch1);
+				  }
+				  stack.pop();// remove opening bracket
+				  StringBuilder repeat= new StringBuilder();
+				  while(!stack.isEmpty() && isNumber(stack.peek())) {
+					  char ch1 =stack.pop();
+					  repeat.append(ch1);
+				  }
+				  int rep = Integer.parseInt(repeat.reverse().toString());
+				  String repeated = repeatStr(rep,str.reverse().toString());
+				 for(int i =0;i<repeated.length();i++) {
+					 char ch2=repeated.charAt(i);
+					 stack.push(ch2);
+				 }
+			  }else {
+				  stack.push(ch);
+			  }
+			  idx++;				  
 		  }
-		  StringBuilder multiplier = new StringBuilder();
-		  while(idx<n && isNumber(s.charAt(idx))) {
-			  multiplier.append(s.charAt(idx));
-			  idx++;
+		  StringBuilder decode= new StringBuilder();
+		  while(!stack.isEmpty()) {
+			  char ch=stack.pop();
+			  decode.append(ch);
 		  }
-		  int multi= Integer.parseInt(multiplier.toString());
-		  StringBuilder str= new StringBuilder();
-		  if(s.charAt(idx)=='[') {
-			  idx++;// skip the opening bracket;
-			  while(idx<n && isCharacter(s.charAt(idx))) {
-				  str.append(s.charAt(idx));
-				  idx++;
-			  }  
-		  }
-		  if(s.charAt(idx)==']') {
-			  idx++;
-		  }
-		  String temp = str.toString();  
-		  String res=prefix.toString()+decode(temp, multi);
-		  String rest= s.substring(idx);
-		  return res+helper(rest );
+		  return decode.reverse().toString();
+		  
 	  }
-	  
+	 
+	  public static String repeatStr(int n , String str) {
+		  StringBuilder res= new StringBuilder();
+		  for(int i =0;i<n;i++) {
+			  res.append(str);
+		  }
+		  return res.toString();  
+	  }
 	  
 	  public static boolean isCharacter(char ch) {
 		  return ch<='z'&& ch>='a';
@@ -111,10 +127,35 @@ public class DecodeString_394 {
 		String s3 = "2[abc]3[cd]ef";
 		String output3= "abcabccdcdcdef";
 		
+		System.out.println("Iterative Approch :");
 		
-		System.out.println(decodeString(s1));
-		System.out.println(decodeString(s2));
-		System.out.println(decodeString(s3));
+		String ans1 = decodeString(s1);
+		String ans2 = decodeString(s2);
+		String ans3 = decodeString(s3);
+		
+		
+		if(output1.equals(ans1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2.equals(ans2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
+		}
+		if(output3.equals(ans3)) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Actual Output :"+output3 );
+			System.out.println("Your Output :"+ans3);
+		}
+
 
 	}
 
