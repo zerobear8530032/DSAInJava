@@ -147,7 +147,7 @@ public class Handshakes_GFG {
 			System.out.println("Your Output :"+ans3);
 		}
 		
-		System.out.println("Brute Force Approch");
+		System.out.println("Better Approch");
 		
 		ans1 = countBetter(n1);
 		ans2 = countBetter(n2);
