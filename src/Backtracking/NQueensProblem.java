@@ -4,7 +4,9 @@ package Backtracking;
 public class NQueensProblem {
 	
 //	N queens :
-	public static int Queens(boolean [][]board, int n) {
+//	time complexity :O(n!)
+//	space complexity :O(n)
+	public static int Queens(boolean [][]board) {
 		return placeQueens(board,0);
 	}
 	public static int placeQueens(boolean [][] board, int row) {
@@ -78,8 +80,12 @@ public class NQueensProblem {
 //	
 	public static void main(String args[]) {
 		
-		boolean [][] board = new boolean [4][4];
-		System.out.println(Queens(board, board.length));
+		int n1 = 4;
+		boolean [][] board1 = new boolean [n1][n1];
+		System.out.println(Queens(board1));
+		int n2 = 5;
+		boolean [][] board2 = new boolean [n2][n2];
+		System.out.println(Queens(board2));
 		
 	}
 
