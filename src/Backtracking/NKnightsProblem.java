@@ -29,7 +29,6 @@ public class NKnightsProblem {
 		}		
 		helper(board,r,c+1,knight);
 		return count ;
-		
 	}
 	
 	public static boolean isSafe(boolean [][] board, int row , int col) {
