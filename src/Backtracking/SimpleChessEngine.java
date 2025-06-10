@@ -45,777 +45,754 @@
 
 package Backtracking;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 interface pieces{
-	public int getRow() ;
-	public void setRow(int row) ;
-	public int getCol() ;
-	public void setCol(int col) ;
-	public String getColor() ;
-	public void setColor(String color) ;
-	public String toString() ;	
+	public List<int []> generateAllPossibleMoves(int r, int c,pieces [][] board);
+	default boolean canCapture(pieces[][] board,int currx, int curry, int oppx, int oppy ) {
+		pieces player= board[currx][curry];
+		pieces opponent= board[oppx][oppy];
+		if(opponent==null) {
+			return true;
+		}
+		return !(opponent.getColor().equals(player.getColor()));
+	}	
+	default boolean isInBounds(int r,pieces [][] board) {
+		return r>=0 && r<board.length;
+	}
+	public String getName();
+	public String getColor();
+	
+	public void setR(int r) ;
+	public void setC(int c) ;
+	public int getR() ;
+	public int getC() ;
 }
+
 
 class Knight implements pieces{
-	int row;
-	int col ;
-	String color ;
-	public Knight(int r, int c,String color) {
-		row=r;
-		col=c;
-		this.color= color;
+	String color;
+	int r;
+	int c;
+	
+	
+	public Knight(String color, int r , int c) {
+		this.color=color;
+		this.r=r;
+		this.c=c;
 	}
 	
-	public int getRow() {
-		return row;
-	}
-	public void setRow(int row) {
-		this.row = row;
-	}
-	public int getCol() {
-		return col;
-	}
-	public void setCol(int col) {
-		this.col = col;
+	public void setColor(String color) {
+		this.color=color;
 	}
 	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
+		return this.color;
 	}
 	
 	@Override
-	public String toString() {
-		return "Knight";
-	}
-	
-	public void moveUpLeft(pieces [][] matrix, Knight k) throws Exception {
-		if(row-2<0) {
-			throw new Exception();
-		}
-		if(col-1<0) {
-			throw new Exception();
-		}	
-		int r= row-2;
-		int c= col-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(k.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}
-
-	}
-	public void moveUpRight(pieces [][] matrix, Knight k) throws Exception {
-		if(row-2<0) {
-			throw new Exception();
-		}
-		if(col+1>=matrix[0].length) {
-			throw new Exception();
-		}	
-		int r= row-2;
-		int c= col+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(k.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}
-	}
-	public void moveDownLeft(pieces [][] matrix, Knight k) throws Exception {
-		if(row+2>=matrix.length) {
-			throw new Exception();
-		}
-		if(col-1<0) {
-			throw new Exception();
-		}	
-		int r= row+2;
-		int c= col-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(k.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}
-	}
-	public void moveDownRight(pieces [][] matrix, Knight k) throws Exception {
-		if(row+2>=matrix.length) {
-			throw new Exception();
-		}
-		if(col+1>=matrix[0].length) {
-			throw new Exception();
-		}	
-		int r= row+2;
-		int c= col+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(k.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}
-	}
-	
-	
-	
-	public void moveLeftUp(pieces [][] matrix, Knight k) throws Exception {
-		if(col-2<0) {
-			throw new Exception();
-		}
-		if(row-1<0) {
-			throw new Exception();
-		}	
-		int c= col-1;
-		int r= row-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(k.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}
-	}
-	
-	public void moveLeftDown(pieces [][] matrix, Knight k) throws Exception {
-		if(col-2<0) {
-			throw new Exception();
-		}
-		if(row+1>=matrix.length) {
-			throw new Exception();
-		}		
-		int c= col-1;
-		int r= row+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(k.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}
-
-	}
-	public void moveRightUp(pieces [][] matrix, Knight k) throws Exception {
-		if(col+2>=matrix[0].length) {
-			throw new Exception();
-		}
-		if(row-1<0) {
-			throw new Exception();
-		}		
-		int c= col+2;
-		int r= row-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(k.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}
-	}
-	public void moveRightDown(pieces [][] matrix, Knight k) throws Exception {
-		if(col+2>=matrix[0].length) {
-			throw new Exception();
-		}
-		if(row+1>=matrix.length) {
-			throw new Exception();
-		}		
-		int c= col+2;
-		int r= row+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(k.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=k;
-		}
-		
-
-		}
-}
-
-
-class Bishop implements pieces{
-	int row;
-	int col ;
-	String color ;
-	public Bishop(int r, int c,String color) {
-		row=r;
-		col=c;
-		this.color= color;
-	}
-	
-	public int getRow() {
-		return row;
-	}
-	public void setRow(int row) {
-		this.row = row;
-	}
-	public int getCol() {
-		return col;
-	}
-	public void setCol(int col) {
-		this.col = col;
+	public int getR() {
+		return this.r;
 	}
 	@Override
-	public String toString() {
-		return "Bishop";
-	}
-	
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
-	}
-	public void moveUpLeft(pieces [][] matrix, Bishop b) throws Exception {
-		if(row-1<0) {
-			throw new Exception();
-		}
-		if(col-1<0) {
-			throw new Exception();
-		}	
-		int r= row-1;
-		int c= col-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=b;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(b.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=b;
-		}
-
-	}
-	public void moveUpRight(pieces [][] matrix, Bishop b) throws Exception {
-		if(row-1<0) {
-			throw new Exception();
-		}
-		if(col+1>=matrix[0].length) {
-			throw new Exception();
-		}	
-		int r= row-1;
-		int c= col+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=b;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(b.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=b;
-		}
-	}
-	public void moveDownLeft(pieces [][] matrix, Bishop b) throws Exception {
-		if(row+1>=matrix.length) {
-			throw new Exception();
-		}
-		if(col-1<0) {
-			throw new Exception();
-		}	
-		int r= row+1;
-		int c= col-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=b;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(b.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=b;
-		}
-	}
-	public void moveDownRight(pieces [][] matrix, Bishop b) throws Exception {
-		if(row+1>=matrix.length) {
-			throw new Exception();
-		}
-		if(col+1>=matrix[0].length) {
-			throw new Exception();
-		}	
-		int r= row+1;
-		int c= col+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=b;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(b.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=b;
-		}
-
-	}
-}
-
-
-class Rook implements pieces{
-	int row;
-	int col ;
-	String color ;
-	public Rook(int r, int c,String color) {
-		row=r;
-		col=c;
-		this.color= color;
-	}
-
-	
-	public int getRow() {
-		return row;
-	}
-	public void setRow(int row) {
-		this.row = row;
-	}
-	public int getCol() {
-		return col;
-	}
-	public void setCol(int col) {
-		this.col = col;
-	}
-	
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
+	public int getC() {
+		return this.c;
 	}
 	@Override
-	public String toString() {
-		return "Rook";
+	public void setR(int r) {
+		this.r=r;
+	}
+	@Override
+	public void setC(int c) {
+		this.c=c;
 	}
 	
-	public void moveUp(pieces [][] matrix, Rook ro) throws Exception {
-		if(row-1<0) {
-			throw new Exception();
-		}
-		int r= row-1;
-		int c=col;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=ro;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(ro.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=ro;
-		}
-
-
+	@Override
+	public String getName() {
+		String name = this.color.charAt(0)+"K";
+		return name;
 	}
-	public void moveDown(pieces [][] matrix, Rook ro) throws Exception {
-		if(row+1>=matrix.length) {
-			throw new Exception();
-		}
-		
-		int r= row+1;
-		int c= col;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=ro;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(ro.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=ro;
-		}
-
-
+	
+	
+	
+	@Override
+	public String toString() {
+		char ch = color.charAt(0);
+		return ch+"K";
 	}
-	public void moveLeft(pieces [][] matrix, Rook ro) throws Exception {
-		if(col-1<0) {
-			throw new Exception();
+	
+	@Override
+	public List<int[]> generateAllPossibleMoves(int r, int c, pieces [][] board) {
+		List<int []>  moves = new ArrayList<int[]>();
+		int row = r-2;
+		if(isInBounds(row,board)) {
+			int col = c+1;
+			if(isInBounds(col,board)) {
+				if(canCapture(board, r,c,row,col)) {
+					moves.add( new int []{row,col});					
+				}
+			}
+			col = c-1;
+			if(isInBounds(col,board)) {
+				if(canCapture(board, r,c,row,col)) {
+					moves.add( new int []{row,col});					
+				}
+			}
 		}
-		int r= row;
-		int c= col-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=ro;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(ro.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=ro;
-
+		row = r+2;
+		if(isInBounds(row,board)) {
+			int col = c+1;
+			if(isInBounds(col,board)) {
+				if(canCapture(board, r,c,row,col)) {
+					moves.add( new int []{row,col});					
+				}
+			}
+			col = c-1;
+			if(isInBounds(col,board)) {
+				if(canCapture(board, r,c,row,col)) {
+					moves.add( new int []{row,col});					
+				}
+			}
 		}
-
+		int col = c-2;
+		if(isInBounds(col,board)) {
+			row = r+1;
+			if(isInBounds(row,board)) {
+				if(canCapture(board, r,c,row,col)) {
+					moves.add( new int []{row,col});					
+				}
+			}
+			row=r-1;
+			if(isInBounds(row,board)) {
+				if(canCapture(board, r,c,row,col)) {
+					moves.add( new int []{row,col});					
+				}
+			}
+		}
+		col = c+2;
+		if(isInBounds(col,board)) {
+			row = r+1;
+			if(isInBounds(row,board)) {
+				if(canCapture(board, r,c,row,col)) {
+					moves.add( new int []{row,col});					
+				}
+			}
+			row=r-1;
+			if(isInBounds(row,board)) {
+				if(canCapture(board, r,c,row,col)) {
+					moves.add( new int []{row,col});					
+				}
+			}
+		}
+		return moves;
 	}
-	public void moveRight(pieces [][] matrix, Rook ro) throws Exception {
-		if(col+1>=matrix.length) {
-			throw new Exception();
-		}
-		int r= row;
-		int c= col+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=ro;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(ro.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=ro;
-
-		}	
-	}
-		
+	
 }
 
 
 class Queen implements pieces{
-	int row;
-	int col ;
-	String color ;
-	public Queen(int r, int c,String color) {
-		row=r;
-		col=c;
-		this.color= color;
-	}
-
+	String color;
+	int r;
+	int c;
 	
-	public int getRow() {
-		return row;
+	public Queen(String color, int r , int c) {
+		this.color=color;
+		this.r=r;
+		this.c=c;
 	}
-	public void setRow(int row) {
-		this.row = row;
-	}
-	public int getCol() {
-		return col;
-	}
-	public void setCol(int col) {
-		this.col = col;
+	
+	public void setColor(String color) {
+		this.color=color;
 	}
 	public String getColor() {
-		return color;
+		return this.color;
 	}
-	public void setColor(String color) {
-		this.color = color;
+	
+	@Override
+	public int getR() {
+		return this.r;
 	}
 	@Override
+	public int getC() {
+		return this.c;
+	}
+	@Override
+	public void setR(int r) {
+		this.r=r;
+	}
+	@Override
+	public void setC(int c) {
+		this.c=c;
+	}
+	
+	
+	@Override
 	public String toString() {
-		return "Queen";
+		char ch = color.charAt(0);
+		return ch+"Q";
 	}
 	
-	public void moveUp(pieces [][] matrix, Queen q) throws Exception {
-		if(row-1<0) {
-			throw new Exception();
-		}
-		int r= row-1;
-		int c= col;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(q.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-
-		}
-	}
-	public void moveDown(pieces [][] matrix, Queen q) throws Exception {
-		if(row+1>=matrix.length) {
-			throw new Exception();
-		}
-		int r= row+1;
-		int c= col;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(q.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-
-		}
-	}
-	public void moveLeft(pieces [][] matrix, Queen q) throws Exception {
-		if(col-1<0) {
-			throw new Exception();
-		}
-		int r= row;
-		int c= col-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(q.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-
-		}
-	}
-	public void moveRight(pieces [][] matrix, Queen q) throws Exception {
-		if(col+1>=matrix.length) {
-			throw new Exception();
-		}
-		int r= row;
-		int c= col+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(q.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-
-		}
+	@Override
+	public String getName() {
+		String name = this.color.charAt(0)+"Q";
+		return name;
 	}
 	
-	public void moveUpLeft(pieces [][] matrix, Queen q) throws Exception {
-		if(row-1<0) {
-			throw new Exception();
-		}
-		if(col-1<0) {
-			throw new Exception();
-		}	
-		int r= row-1;
-		int c= col-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(q.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}
-	}
-	public void moveUpRight(pieces [][] matrix, Queen q) throws Exception {
-		if(row-1<0) {
-			throw new Exception();
-		}
-		if(col+1>=matrix[0].length) {
-			throw new Exception();
-		}	
-		int r= row-1;
-		int c= col+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(q.getColor())){
-				throw new Exception();	
+	@Override
+	public List<int[]> generateAllPossibleMoves(int r, int c, pieces [][] board) {
+		List<int []> moves = new ArrayList<int[]>();
+//		goUP:
+		for(int i=r-1;i>=0;i--) {
+			if(board[i][c]!=null) {
+				if(canCapture(board,r,c,i,c )) {
+					moves.add(new int [] {i,c});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {i,c});
 			}
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-
 		}
-	}
-	public void moveDownLeft(pieces [][] matrix, Queen q) throws Exception {
-		if(row+1>=matrix.length) {
-			throw new Exception();
+//		go down:
+		for(int i=r+1;i<board.length;i++) {
+			if(board[i][c]!=null) {
+				if(canCapture(board,r,c,i,c )) {
+					moves.add(new int [] {i,c});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {i,c});
+			}
 		}
-		if(col-1<0) {
-			throw new Exception();
-		}	
-		int r= row+1;
-		int c= col-1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(q.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-
+		
+//		go left:
+		for(int i=c-1;i>=0;i--) {
+			if(board[r][i]!=null) {
+				if(canCapture(board,r,c,r,i )) {
+					moves.add(new int [] {r,i});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {r,i});
+			}
 		}
-	}
-	public void moveDownRight(pieces [][] matrix, Queen q) throws Exception {
-		if(row+1>=matrix.length) {
-			throw new Exception();
+//		go right:
+		for(int i=c+1;i<board.length;i++) {
+			if(board[r][i]!=null) {
+				if(canCapture(board,r,c,r,i )) {
+					moves.add(new int [] {r,i});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {r,i});
+			}
 		}
-		if(col+1>=matrix[0].length) {
-			throw new Exception();
-		}	
-		int r= row+1;
-		int c= col+1;
-		if(matrix[r][c]== null){
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
-		}else {
-			pieces piece= matrix[r][c];
-			if(piece.getColor().equals(q.getColor())){
-				throw new Exception();	
-			}		
-			matrix[row][col]=null;
-			row=r;
-			col=c;
-			matrix[row][col]=q;
+		
+//		go upper left:
+		int row =r-1;
+		int col =c-1;
+		while(isInBounds(row, board) && isInBounds(col, board)) {
+			if(board[row][col]!=null) {
+				if(canCapture(board,r,c,row,col )) {
+					moves.add(new int [] {row,col});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {row,col});
+			}
+			row--;
+			col--;
 		}
+//		go upper righ:
+		row =r-1;
+		col =c+1;
+		while(isInBounds(row, board) && isInBounds(col, board)) {
+			if(board[row][col]!=null) {
+				if(canCapture(board,r,c,row,col )) {
+					moves.add(new int [] {row,col});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {row,col});
+			}
+			row--;
+			col++;
+		}
+		
+//		go down left:
+		row =r+1;
+		col =c-1;
+		while(isInBounds(row, board) && isInBounds(col, board)) {
+			if(board[row][col]!=null) {
+				if(canCapture(board,r,c,row,col )) {
+					moves.add(new int [] {row,col});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {row,col});
+			}
+			row++;
+			col--;
+		}
+//		go down right:
+		row =r+1;
+		col =c+1;
+		while(isInBounds(row, board) && isInBounds(col, board)) {
+			if(board[row][col]!=null) {
+				if(canCapture(board,r,c,row,col )) {
+					moves.add(new int [] {row,col});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {row,col});
+			}
+			row++;
+			col++;
+		}
+		return moves;
 	}
 	
 }
 
 
+class Rook implements pieces{
+	String color;
+	int r;
+	int c;
+	public Rook(String color, int row, int col) {
+		this.color=color;
+		this.r=r;
+		this.c=c;
+	}
+	
+	public void setColor(String color) {
+		this.color=color;
+	}
+	public String getColor() {
+		return this.color;
+	}
+	
+	@Override
+	public int getR() {
+		return this.r;
+	}
+	@Override
+	public int getC() {
+		return this.c;
+	}
+	@Override
+	public void setR(int r) {
+		this.r=r;
+	}
+	@Override
+	public void setC(int c) {
+		this.c=c;
+	}
+	
+	@Override
+	public String toString() {
+		char ch = color.charAt(0);
+		return ch+"R";
+	}
+	
+	@Override
+	public List<int[]> generateAllPossibleMoves(int r, int c, pieces [][] board) {
+		List<int []> moves = new ArrayList<int[]>();
+//		goUP:
+		for(int i=r-1;i>=0;i--) {
+			if(board[i][c]!=null) {
+				if(canCapture(board,r,c,i,c )) {
+					moves.add(new int [] {i,c});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {i,c});
+			}
+		}
+//		go down:
+		for(int i=r+1;i<board.length;i++) {
+			if(board[i][c]!=null) {
+				if(canCapture(board,r,c,i,c )) {
+					moves.add(new int [] {i,c});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {i,c});
+			}
+		}
+		
+//		go left:
+		for(int i=c-1;i>=0;i--) {
+			if(board[r][i]!=null) {
+				if(canCapture(board,r,c,r,i )) {
+					moves.add(new int [] {r,i});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {r,i});
+			}
+		}
+//		go right:
+		for(int i=c+1;i<board.length;i++) {
+			if(board[r][i]!=null) {
+				if(canCapture(board,r,c,r,i )) {
+					moves.add(new int [] {r,i});
+					break;
+				}else {
+					break;
+				}
+			}else {
+				moves.add(new int [] {r,i});
+			}
+		}
+				return moves;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
+
+class Bishop implements pieces{
+		String color;
+		int r ;
+		int c;
+		public Bishop(String color, int r , int c) {
+			this.color=color;
+			this.r=r;
+			this.c=c;
+		}
+		
+		public void setColor(String color) {
+			this.color=color;
+		}
+		public String getColor() {
+			return this.color;
+		}
+		
+		@Override
+		public int getR() {
+			return this.r;
+		}
+		@Override
+		public int getC() {
+			return this.c;
+		}
+		@Override
+		public void setR(int r) {
+			this.r=r;
+		}
+		@Override
+		public void setC(int c) {
+			this.c=c;
+		}
+		
+		@Override
+		public String toString() {
+			char ch = color.charAt(0);
+			return ch+"B";
+		}
+		
+		@Override
+		public List<int[]> generateAllPossibleMoves(int r, int c, pieces [][] board) {
+			List<int []> moves = new ArrayList<int[]>();
+//			go upper left:
+			int row =r-1;
+			int col =c-1;
+			while(isInBounds(row, board) && isInBounds(col, board)) {
+				if(board[row][col]!=null) {
+					if(canCapture(board,r,c,row,col )) {
+						moves.add(new int [] {row,col});
+						break;
+					}else {
+						break;
+					}
+				}else {
+					moves.add(new int [] {row,col});
+				}
+				row--;
+				col--;
+			}
+//			go upper righ:
+			row =r-1;
+			col =c+1;
+			while(isInBounds(row, board) && isInBounds(col, board)) {
+				if(board[row][col]!=null) {
+					if(canCapture(board,r,c,row,col )) {
+						moves.add(new int [] {row,col});
+						break;
+					}else {
+						break;
+					}
+				}else {
+					moves.add(new int [] {row,col});
+				}
+				row--;
+				col++;
+			}
+			
+//			go down left:
+			row =r+1;
+			col =c-1;
+			while(isInBounds(row, board) && isInBounds(col, board)) {
+				if(board[row][col]!=null) {
+					if(canCapture(board,r,c,row,col )) {
+						moves.add(new int [] {row,col});
+						break;
+					}else {
+						break;
+					}
+				}else {
+					moves.add(new int [] {row,col});
+				}
+				row++;
+				col--;
+			}
+//			go down right:
+			row =r+1;
+			col =c+1;
+			while(isInBounds(row, board) && isInBounds(col, board)) {
+				if(board[row][col]!=null) {
+					if(canCapture(board,r,c,row,col )) {
+						moves.add(new int [] {row,col});
+						break;
+					}else {
+						break;
+					}
+				}else {
+					moves.add(new int [] {row,col});
+				}
+				row++;
+				col++;
+			}
+
+			return moves;
+		}
+
+		@Override
+		public String getName() {
+			return this.color.charAt(0)+"B";
+		}
+}
+
+
+
+
 
 public class SimpleChessEngine {
-	public static boolean BlackQueenExists(int x, int y,pieces [][] matrix ) {
-		if(matrix[x][y]!=null) {
-			return matrix[x][y].getColor().equals("black");
+	public static boolean canWin(pieces [][] board, int moves) {
+		List<pieces>  blackpieces= new ArrayList();
+		List<pieces>  whitepieces= new ArrayList();
+		for(int i=0;i<board.length;i++) {
+			for(int j =0;j<board.length;j++) {
+				if(board[i][j]!=null) {
+					String color= board[i][j].getColor();
+					if(color.equalsIgnoreCase("White")) {
+						whitepieces.add(board[i][j]);
+					}else {
+						blackpieces.add(board[i][j]);						
+					}
+				}
+			}
 		}
-		return false;
+		return helper(board,moves,blackpieces,whitepieces);
 	}
+	
+	
+	
+	
+	 static boolean helper(pieces[][] board, int moves, List<pieces> blacks, List<pieces> whites) {
+		 if(isWon(board)) {
+			 return true;
+		 }
+		 if(moves==0) {
+			 return false;
+		 }
+		 boolean result = false;
+		 for(pieces p: whites) {
+			 List<int []> allmoves= p.generateAllPossibleMoves(p.getR(), p.getC(), board);
+			 int prevR= p.getR();
+			 int prevC= p.getC();
+			 for(int [] RC : allmoves) {
+				 int nextR= RC[0];
+				 int nextC= RC[1];
+				 if(board[nextR][nextC]==null) {					 
+				 p.setR(nextR);
+				 p.setC(nextC);
+				 board[prevR][prevC]=null;
+				 board[nextR][nextC]=p;
+				 printMatrix(board);
+				 System.out.println();
+				 System.out.println();
+
+				 if(helper(board,moves-1,blacks,whites)) {
+					 return true;
+				 }else {
+					 
+//				 back tracked
+				 board[nextR][nextC]=null;
+				 board[prevR][prevC]=p;
+				 p.setR(prevR);
+				 p.setC(prevC);
+				 printMatrix(board);
+				 System.out.println();
+				 System.out.println();
+				 }
+				 }else {
+					 if(p.canCapture(board, prevR,prevC,nextR,nextC)) {
+						 pieces captured=board[nextR][nextC];
+						 p.setR(nextR);
+						 p.setC(nextC);
+						 board[prevR][prevC]=null;
+						 board[nextR][nextC]=p;
+						 if(captured.getColor().equals("White")) {
+							 whites.remove(captured);
+						 }else {
+							 blacks.remove(captured);							 
+						 }
+						 printMatrix(board);
+						 System.out.println();
+						 System.out.println();
+
+						 if(helper(board,moves-1,blacks,whites)) {
+							 return true;
+						 }else {
+							 
+						 p.setR(prevR);
+						 p.setC(prevC);
+						 if(captured.getColor().equals("Whites")) {
+							 whites.add(captured);
+						 }else {
+							 blacks.add(captured);							 
+						 }
+						 board[nextR][nextC]=captured;
+						 board[prevR][prevC]=p;
+						 printMatrix(board);
+						 System.out.println();
+						 System.out.println();
+						 }
+					 }
+					 
+				 }
+			 }
+//			 black turns:
+			 for(pieces bp: blacks) {
+				 List<int []> allblackmoves= bp.generateAllPossibleMoves(bp.getR(), bp.getC(), board);
+				 int prevBR= bp.getR();
+				 int prevBC= bp.getC();
+				 for(int [] RC : allblackmoves) {
+					 int nextR= RC[0];
+					 int nextC= RC[1];
+					 if(board[nextR][nextC]==null) {					 
+					 bp.setR(nextR);
+					 bp.setC(nextC);
+					 board[prevBR][prevBC]=null;
+					 board[nextR][nextC]=bp;
+					 printMatrix(board);
+					 System.out.println();
+					 System.out.println();
+
+					 if(helper(board,moves,blacks,whites)) {
+						 return true;
+					 }else {
+						 
+//					 back tracked
+					 board[nextR][nextC]=null;
+					 board[prevBR][prevBC]=bp;
+					 bp.setR(prevBR);
+					 bp.setC(prevBC);
+					 }
+					 }else {
+						 if(bp.canCapture(board, prevBR,prevBC,nextR,nextC)) {
+							 pieces captured=board[nextR][nextC];
+							 bp.setR(nextR);
+							 bp.setC(nextC);
+							 board[prevBR][prevBC]=null;
+							 board[nextR][nextC]=bp;
+							 if(captured.getColor().equals("White")) {
+								 whites.remove(captured);
+							 }else {
+								 blacks.remove(captured);							 
+							 }
+							 printMatrix(board);
+							 System.out.println();
+							 System.out.println();
+
+							 if(helper(board,moves,blacks,whites)) {
+								 return true;
+							 }else {
+								 
+							 bp.setR(prevBR);
+							 bp.setC(prevBC);
+							 if(captured.getColor().equals("Whites")) {
+								 whites.add(captured);
+							 }else {
+								 blacks.add(captured);							 
+							 }
+							 board[nextR][nextC]=captured;
+							 board[prevBR][prevBC]=bp;
+							 }
+						 }
+						 
+					 }
+				 }				 
+
+//				 -------------------
+				 
+			 }
+			 
+			 
+			 
+			 
+		 }
+		 return result;
+		 
+	}
+
+
+
+
+	public static boolean isWon(pieces [][] board) {
+		for(int i =0;i<board.length;i++) {
+			for(int j=0;j<board.length;j++) {
+				if(board[i][j]==null) {
+					continue;
+				}
+				pieces piece= board[i][j];
+				if(piece.getName().equals("BQ")) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	
 	public static void printMatrix(pieces [][] matrix) {
 		for(int i =0;i<matrix.length;i++) {
@@ -823,20 +800,69 @@ public class SimpleChessEngine {
 		}
 	}
 	
-	
-
-	
-	
 	public static void main(String[] args) throws Exception {
-		
+		Scanner sc = new Scanner(System.in);
 		pieces [][] board= new pieces[4][4];
-		Knight k= new Knight(board.length-1-(2-1), 'B'-'A', "White");
-		Queen  qw= new Queen(board.length-1-(1-1), 'B'-'A', "White");
-		Queen  qb= new Queen(board.length-1-(4-1), 'A'-'A', "Black");
-		board[k.getRow()][k.getCol()]=k;
-		board[qw.getRow()][qw.getCol()]=qw;
-		board[qb.getRow()][qb.getCol()]=qb;
-		printMatrix(board);
+		int games = sc.nextInt();
+		for(int i =0;i<games;i++) {
+			int whitepieces= sc.nextInt();
+			int blackpieces= sc.nextInt();
+			int moves= sc.nextInt();
+			for(int p =0;p<whitepieces;p++) {
+				char type = sc.next().charAt(0);
+				int col = sc.next().charAt(0)-'A';
+				int row = board.length-sc.nextInt();
+				if(type == 'Q') {
+					pieces	player = new Queen("White",row,col);
+					board[row][col]=player;
+				}else if(type == 'N') {
+					pieces	player = new Knight("White",row,col);					
+					board[row][col]=player;
+				}else if(type== 'R') {
+					pieces	player = new Rook("White",row,col);										
+					board[row][col]=player;
+				}else {
+					pieces	player = new Bishop("White",row,col);															
+					board[row][col]=player;
+				}
+			}
+			for(int p =0;p<blackpieces;p++) {
+				char type = sc.next().charAt(0);
+				int col = sc.next().charAt(0)-'A';
+				int row = board.length-sc.nextInt();
+				if(type=='Q') {
+					pieces	player = new Queen("Black",row,col);
+					board[row][col]=player;
+				}else if(type == 'K') {
+					pieces	player = new Knight("Black",row,col);					
+					board[row][col]=player;
+				}else if(type== 'R') {
+					pieces	player = new Rook("Black",row,col);										
+					board[row][col]=player;
+				}else {
+					pieces	player = new Bishop("Black",row,col);															
+					board[row][col]=player;
+				}
+				
+			}
+			
+			
+			printMatrix(board);
+			System.out.println();
+			System.out.println();
+			System.out.println(canWin(board,moves));
+//			1
+//			1 1 2
+//			Q B 1
+//			Q A 4
+//1
+//1 1 1
+//Q B 1
+//Q A 4
+
+		}
+		
+	}
 	}
 
-}
+
