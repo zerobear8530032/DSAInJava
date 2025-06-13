@@ -28,11 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FindShortestSafeRouteInAPathWithLandmines_GFG {
-	
-	
-	public static int  shortestPath(int [][] board) {
-		
-		
+	public static int  shortestPath(int [][] board) {		
 //		preprocess board:
 		
 		int entry =1;
@@ -138,7 +134,19 @@ public class FindShortestSafeRouteInAPathWithLandmines_GFG {
 		};
 		
 		
-		System.out.println(shortestPath(grid));
+		int ans1 =shortestPath(grid);
+		int output1=13;
+		
+		
+		if(output1==ans1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+
+		
 
 	}
 
