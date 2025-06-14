@@ -25,7 +25,7 @@
 
 package Recursion;
 
-public class MinStepToReachDestination {
+public class MinStepToReachDestination_GFG {
 	
 	
 //	approch :
