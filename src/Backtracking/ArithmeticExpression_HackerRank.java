@@ -46,20 +46,24 @@ package Backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class ArithmeticExpression_HackerRank {
-	
+//	BruteForceapproch :
+//	we take 2 numbers and try to apply  each opeartion + - * on them and try to get the condition satisfied 
+//	time complexity : O(3^n)
+//	space complexity : O(n)
 	public static String arithmeticExpressionsBruteForce(List<Integer> nums) {
 		result="";
 		int f= nums.get(0);
-		helper(nums,1,f+"",f);
+		helperBruteForce(nums,1,f+"",f);
 		return result;
 	}
 	
 	static String result ;
 	
-	public static boolean helper(List<Integer>nums, int idx, String expression, int res) {
+	public static boolean helperBruteForce(List<Integer>nums, int idx, String expression, long res) {
 			if(idx==nums.size()) {
 				if( res%101==0) {
 					result=expression;
@@ -74,25 +78,78 @@ public class ArithmeticExpression_HackerRank {
 			exp.append("+");		
 			exp.append(s);		
 //			substract
-			if(helper(nums,idx+1,exp.toString(),res+s)) {
-				return true;
-			}
+			helperBruteForce(nums,idx+1,exp.toString(),res+s);
 			exp = new StringBuilder();
 			exp.append(expression);			
 			exp.append("-");		
 			exp.append(s);		
-			if(helper(nums,idx+1,exp.toString(),res-s)) {
-				return true;
-			}
+			helperBruteForce(nums,idx+1,exp.toString(),res-s) ;
 			exp = new StringBuilder();
 			exp.append(expression);			
 			exp.append("*");		
 			exp.append(s);		
+			helperBruteForce(nums,idx+1,exp.toString(),res*s);
+			return false;
+	}
+	
+//	approch :
+//	we take 2 numbers and try to apply  each opeartion + - * on them and try to get the condition satisfied 
+//	time complexity : O(3^n)
+//	space complexity : O(n)
+	public static String arithmeticExpressionsBetter(List<Integer> nums) {
+		result="";
+		int f= nums.get(0);
+		HashMap<String, Boolean> memo = new HashMap();
+		helperBetter(nums,1,f+"",f,memo);
+		return result;
+	}
+	
+	
+	public static boolean helperBetter(List<Integer>nums, int idx, String expression, int res,HashMap<String,Boolean> memo) {
+		String key = idx+","+res;
+		if(memo.containsKey(key)) {
+			return memo.get(key);
+		}
+		if(idx==nums.size()) {
+			if( res%101==0) {
+				result=expression;
+				memo.put(key, true);
 			
-			if(helper(nums,idx+1,exp.toString(),res*s)) {
 				return true;
 			}
+			memo.put(key, false);			
 			return false;
+		}
+		int s = nums.get(idx);
+//			add
+		StringBuilder exp = new StringBuilder();
+		exp.append(expression);			
+		exp.append("+");		
+		exp.append(s);		
+//			substract
+		if(helperBetter(nums,idx+1,exp.toString(),res+s,memo)) {
+			memo.put(key, true);			
+			return true;
+		}
+		exp = new StringBuilder();
+		exp.append(expression);			
+		exp.append("-");		
+		exp.append(s);		
+		if(helperBetter(nums,idx+1,exp.toString(),res-s,memo)) {
+			memo.put(key, true);			
+			return true;
+		}
+		exp = new StringBuilder();
+		exp.append(expression);			
+		exp.append("*");		
+		exp.append(s);		
+		
+		if(helperBetter(nums,idx+1,exp.toString(),res*s,memo)) {
+			memo.put(key, true);			
+			return true;
+		}
+		memo.put(key, false);			
+		return false;
 	}
 	
 	
@@ -109,9 +166,14 @@ public class ArithmeticExpression_HackerRank {
 		List<Integer> nums2 = new ArrayList(Arrays.asList(55,3,45,33,25));
 		String output2= "55+3-45*33-25";
 		
+//		Example 3 :
 		
-		System.out.println(arithmeticExpressionsBruteForce(nums1));
-		System.out.println(arithmeticExpressionsBruteForce(nums2));
+		List<Integer> nums3 = new ArrayList(Arrays.asList(100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100 ,100, 100 ,100 ,100 ,100 ,100 ,100 ,100 ,100,100,100));
+		
+		
+		System.out.println(arithmeticExpressionsBruteForce(nums3));
+		
+		System.out.println(8028684878046298112L%101L);
 
 	}
 
