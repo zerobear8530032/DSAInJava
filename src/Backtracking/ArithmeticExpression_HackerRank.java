@@ -172,8 +172,6 @@ public class ArithmeticExpression_HackerRank {
 		
 		
 		System.out.println(arithmeticExpressionsBruteForce(nums3));
-		
-		System.out.println(8028684878046298112L%101L);
 
 	}
 
