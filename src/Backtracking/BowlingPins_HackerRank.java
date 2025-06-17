@@ -96,7 +96,7 @@ class Move{
 	 
 }
 
-public class BowlingPins {
+public class BowlingPins_HackerRank {
 	
 	
 	  public static String isWinning(int n, String config) {
