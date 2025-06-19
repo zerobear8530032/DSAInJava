@@ -19,7 +19,7 @@
 //Explanation: The absolute difference between the two subsets is 1, which is minimum.
 
 
-package Recursion;
+package Backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
