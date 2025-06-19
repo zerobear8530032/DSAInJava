@@ -26,7 +26,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TugOfWar_GFG {
-
+//approch :
+//  we will try every single combination and prune the invalid once using back tracking and recusrion
 	public static String divideArray(int []arr){
 		List<Integer> set1= new ArrayList<Integer>();
 		List<Integer> set2= new ArrayList<Integer>();
@@ -48,12 +49,16 @@ public class TugOfWar_GFG {
 			return ;
 		}
 
-
+// put elementin set1
+//		we check it possible to add element in set1
+//		this case works for both odd and even
 		if(set1.size()<(arr.length+1)/2) {			
 		set1.add(arr[idx]);
 		helper(arr,idx+1,set1,set2,sum1+arr[idx],sum2);
 		set1.remove(set1.size()-1);
 		}
+// put elementin set2
+//		we check it possible to add element in set2
 		if(set2.size()<(arr.length+1)/2) {			
 		set2.add(arr[idx]);
 		helper(arr,idx+1,set1,set2,sum1,sum2+arr[idx]);
