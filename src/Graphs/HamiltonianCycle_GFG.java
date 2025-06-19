@@ -34,6 +34,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HamiltonianCycle_GFG {
+//	approch : 
+//	This solution uses backtracking to explore all possible paths starting from node 0, marking nodes as visited to avoid revisiting. When a path includes all nodes and ends at the starting node, a Hamiltonian cycle is found. The function uses a visited array for state tracking and backtracks if a dead end is reached. If no such cycle exists, it reports that no valid path is found
+//	time complexity :O(n!) 
+//	space complexity :O(n) 
 	public static List<Integer> detectHamiltonianCycle(int [][] graph ){
 		List<Integer> res= new ArrayList<Integer>();
 		List<Integer> finalres=  new ArrayList();
@@ -88,7 +92,7 @@ public class HamiltonianCycle_GFG {
 				{1, 1, 0, 0, 1}, 
 				{0, 1, 1, 1, 0}
 							};
-		
+//		output path exists 
 		int [][] graphs2=  {
 				{0, 1, 0, 1, 0}, 
 				{1, 0, 1, 1, 1}, 
@@ -96,6 +100,7 @@ public class HamiltonianCycle_GFG {
 				{1, 1, 0, 0, 0}, 
 				{0, 1, 1, 0, 0}
 				};
+//		output path does not exists  
 		
 		List<Integer> output1= detectHamiltonianCycle(graphs1);
 		List<Integer> output2= detectHamiltonianCycle(graphs2);
@@ -111,7 +116,6 @@ public class HamiltonianCycle_GFG {
 			System.out.println(output1);			
 			
 		}
-
 
 	}
 }
