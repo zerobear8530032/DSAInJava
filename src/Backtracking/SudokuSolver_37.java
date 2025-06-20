@@ -74,7 +74,6 @@ public class SudokuSolver_37 {
 	            	   board[row][col]='.';	            	   
 	               }
 	            }
-	            
 	        }
 	        return false;
 	 }
@@ -119,9 +118,19 @@ public class SudokuSolver_37 {
 				{ '.' , '.' , '.' ,'4' , '1' , '9' , '.' , '.' , '5' },
 				{ '.' , '.' , '.' ,'.' , '8' , '.' , '.' , '7' , '9'}};
 		
+		char [][] board2= new  char [9][9];
+		for(int i =0;i<9;i++) {
+			Arrays.fill(board2[i], '.');
+			
+			}
+		
 		solveSudoku(board1);
+		solveSudoku(board2);
 		
 		for(char [] arr:board1) {
+			System.out.println(Arrays.toString(arr));
+		}
+		for(char [] arr:board2) {
 			System.out.println(Arrays.toString(arr));
 		}
 
