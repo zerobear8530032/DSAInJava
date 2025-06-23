@@ -9,7 +9,7 @@ public class LL {
 		size=0;
 	}
 	
-	class InvalidIndexException extends RuntimeException{
+	private class InvalidIndexException extends RuntimeException{
 		public InvalidIndexException() {
 			super();
 		}
@@ -17,7 +17,7 @@ public class LL {
 			super(msg);
 		}
 	}
-	class EmptyListException extends RuntimeException{
+	private class EmptyListException extends RuntimeException{
 		public EmptyListException() {
 			super();
 		}
