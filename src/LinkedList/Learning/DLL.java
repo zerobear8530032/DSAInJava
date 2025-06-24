@@ -148,6 +148,55 @@ public class DLL {
 		size++;
 	}
 	
+	
+//	remove elements :
+	public int removeFirst() {
+		if(size==0) {
+			throw new EmptyListException("List is Empty cannot remove elements");
+		}
+		int val =head.getVal();
+		head= head.next;
+		if(head!=null) {
+			head.prev=null;
+		}
+		size--;
+		return val;
+	}
+	public int removeLast() {
+		if(size==0) {
+			throw new EmptyListException("List is Empty cannot remove elements");
+		}
+		int val=tail.getVal();
+		tail= tail.prev;
+		if(tail!=null) {
+			tail.next=null;
+		}
+		size--;
+		return val;
+	}
+	
+	
+	
+	
+	public int removeAtIndex(int idx) {
+		if(size==0) {
+			throw new EmptyListException("List is Empty cannot remove elements");
+		}
+		if(idx==0) {
+			return removeFirst();
+			
+		}else if(idx==size-1) {
+			return removeLast();
+		}
+		Node removenode = get(idx);
+		int val = removenode.getVal();
+		Node prev = removenode.prev;
+		Node next = removenode.next;
+		prev.next=next;
+		next.prev=prev;
+		size--;
+		return val;
+	}
 	public Node find(int val) {
 		Node temp = head;
 		while(temp!=null) {
@@ -158,6 +207,25 @@ public class DLL {
 			
 		}
 		return null;
+	}
+	
+	public int removeVal(int val) {
+		Node node = find(val);
+		if(node==null) {
+			throw new NodeDoesNotExistsException("There is no node with Value : "+val);
+		}
+		if(node==head) {
+			return removeFirst();
+		}else if(node==tail) {
+			return removeLast();			
+		}
+		int removeval = node.getVal();
+		Node prev = node.prev;
+		Node next = node.next;
+		prev.next=next;
+		next.prev=prev;
+		size--;
+		return removeval;
 	}
 	
 	

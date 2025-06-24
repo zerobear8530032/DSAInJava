@@ -43,12 +43,12 @@ public class ConvertBinaryNumberInALinkedListToInteger_1290 {
 //	then we can use the formula  from left to irght bysum+= nums[i]*2^index
 //	time complexity : O(n)
 //	space complexity : O(n)
-	  public static  int getDecimalValue(Node head) {
+	  public static  int getDecimalValue(ListNode head) {
 	        StringBuilder num = new StringBuilder();
-	        Node temp =head;
+	        ListNode temp =head;
 	        while(temp!=null){
-	            int x=temp.getValue();
-	            temp=temp.getNext();
+	            int x=temp.val;
+	            temp=temp.next;
 	            num.append(x);
 	        }
 	        int res=0;
@@ -64,29 +64,29 @@ public class ConvertBinaryNumberInALinkedListToInteger_1290 {
 		
 		//Example 1:
 
-		MySinglyLinkedList list1= new MySinglyLinkedList();
-		list1.insertAtTail(1);
-		list1.insertAtTail(0);
-		list1.insertAtTail(1);
-		Node head1 = list1.getHead();
+		MyList list1= new MyList();
+		list1.add(1);
+		list1.add(0);
+		list1.add(1);
+		ListNode head1 = list1.getHead();
 		int output1=5;
 
 
 		//Example 2:
 		
-		MySinglyLinkedList list2= new MySinglyLinkedList();
-		list2.insertAtTail(0);
-		Node head2 = list2.getHead();
+		MyList list2= new MyList();
+		list2.add(0);
+		ListNode head2 = list2.getHead();
 		int output2=0;
 		
 		//Example 3:
 		
-		MySinglyLinkedList list3= new MySinglyLinkedList();
-		list3.insertAtTail(1);
-		list3.insertAtTail(0);
-		list3.insertAtTail(1);
-		list3.insertAtTail(0);
-		Node head3 = list3.getHead();
+		MyList list3= new MyList();
+		list3.add(1);
+		list3.add(0);
+		list3.add(1);
+		list3.add(0);
+		ListNode head3 = list3.getHead();
 		int output3=10;
 		
 		int ans1=getDecimalValue(head1);		
