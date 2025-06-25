@@ -32,10 +32,11 @@ public class MyList {
 	 public String toString() {
 		 StringBuilder res= new StringBuilder("[");
 		 ListNode temp = head;
-		 while(temp!=null) {
-			 res.append(temp.val);
+		 while(temp.next!=null) {
+			 res.append(temp.val).append(",");
 			 temp=temp.next;
 		 }
+		 res.append(temp.val);
 		 res.append("]");
 		 return res.toString();
 	 }
@@ -45,6 +46,19 @@ public class MyList {
 			 add(X);
 		 }
 	 }
+
+	public ListNode getVal(int val) {
+		ListNode temp = head;
+		ListNode node=null;
+		while(temp!=null) {
+			if(temp.val==val) {
+				node=temp;
+				break;
+			}
+			temp = temp.next;
+		}
+		return node;
+	}
 	 
 	
 	

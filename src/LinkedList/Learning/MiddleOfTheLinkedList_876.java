@@ -46,7 +46,7 @@ public class MiddleOfTheLinkedList_876 {
 	
    public static boolean check(ListNode ans, ListNode output) {
     	ListNode anstemp =ans;
-    	ListNode outputtemp =ans;
+    	ListNode outputtemp =output;
     	while(anstemp!=null && outputtemp!=null) {
     		if(anstemp.val!=outputtemp.val) {
     			return false;
