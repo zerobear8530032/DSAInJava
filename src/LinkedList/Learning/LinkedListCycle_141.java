@@ -90,7 +90,7 @@ public class LinkedListCycle_141 {
 	        ListNode fast=slow.next;
 	        while(slow!=fast ){
 	            slow=slow.next;
-	            if(fast==null){
+	            if(fast==null){// check if fast == null we can return false
 	                return false;
 	            }
 	            fast=fast.next;
