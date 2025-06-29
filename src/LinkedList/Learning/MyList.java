@@ -121,6 +121,20 @@ public class MyList {
 		
 		return l1==null && l2 ==null;
 	}
+	public  boolean equals(MyList lst) {
+		ListNode l1=head;
+		ListNode l2=lst.getHead();
+		
+		while(l1 != null && l2!= null) {
+			if(l1.val!=l2.val) {
+				return false;
+			}
+			l1=l1.next;
+			l2=l2.next;
+		}
+		
+		return l1==null && l2 ==null;
+	}
 	public static  boolean equals(ListNode lst1,ListNode lst2) {
 		ListNode l1=lst1;
 		ListNode l2=lst2;
