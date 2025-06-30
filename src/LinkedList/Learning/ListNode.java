@@ -12,4 +12,18 @@ package LinkedList.Learning;
 			this.val=val;
 			this.next=next;
 		}
+		
+		 public String toString() {
+			 StringBuilder res= new StringBuilder("[");
+			 ListNode temp = this;
+			 while(temp.next!=null) {
+				 res.append(temp.val).append(",");
+				 temp=temp.next;
+			 }
+			 res.append(temp.val);
+			 res.append("]");
+			 return res.toString();
+		 }
+		 
+		
 	}
