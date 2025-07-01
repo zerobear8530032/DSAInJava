@@ -69,6 +69,9 @@ package LinkedList.Learning;
 
 import java.util.HashSet;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class IntersectionOfTwoLinkedLists_160 {
 
 

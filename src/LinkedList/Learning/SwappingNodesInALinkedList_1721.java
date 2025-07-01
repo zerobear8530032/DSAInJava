@@ -29,6 +29,9 @@
 //0 <= Node.val <= 100
 package LinkedList.Learning;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class SwappingNodesInALinkedList_1721 {
 	
 //	approch:

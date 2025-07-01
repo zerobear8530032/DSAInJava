@@ -34,6 +34,9 @@ package LinkedList.Learning;
 import java.util.ArrayList;
 import java.util.List;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class ReverseLinkedListII_92 {
 	
 	
@@ -53,7 +56,7 @@ public class ReverseLinkedListII_92 {
 	 *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 	 * }
 	 */
-	    public ListNode reverseBetweenBruteForce(ListNode head, int left, int right) {
+	    public static ListNode reverseBetweenBruteForce(ListNode head, int left, int right) {
 	        if(head==null) {
 	            return null;
 	        }
@@ -101,7 +104,7 @@ public class ReverseLinkedListII_92 {
 //  after that we can put the left+1 pointer to point at the right part of the linked list 
 //	time complexity :O(n)
 //	space complexity :O(1)
-	        public ListNode reverseBetween(ListNode head, int left, int right) {
+	        public static ListNode reverseBetweenBetter(ListNode head, int left, int right) {
 	            if(left==right){
 	                return head;
 	            }
@@ -156,7 +159,7 @@ public class ReverseLinkedListII_92 {
 		
 		MyList head2 = new MyList(5);
 		int  left2 = 1, right2 = 1;
-		MyList output2 = new MyList(1,4,3,2,5);
+		MyList output2 = new MyList(5);
 		
 		//Example 2:
 		
@@ -164,6 +167,72 @@ public class ReverseLinkedListII_92 {
 		int  left3 = 1, right3 = 2;
 		MyList output3 = new MyList(3,5);
 
+		System.out.println("Brute Force Approch :");
+		
+		ListNode ans1 = reverseBetweenBruteForce(head1.getHead(), left1, right1);
+		ListNode ans2 = reverseBetweenBruteForce(head2.getHead(), left2, right2);
+		ListNode ans3 = reverseBetweenBruteForce(head3.getHead(), left3, right3);
+	    	
+		  
+
+		if(output1.equals(ans1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ output1);
+			System.out.println("Your Answer :"+ head1);  		
+		}
+		if(output2.equals(ans2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ output2);
+			System.out.println("Your Answer :"+ head2);  		
+		}
+		if(output3.equals(ans3)) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Expected Ouput :"+ output3);
+			System.out.println("Your Answer :"+ head3);  		
+		}
+		
+		System.out.println("Better Approch :");
+		
+		head1 = new MyList(1,2,3,4,5);
+		head2 = new MyList(5);
+		head3 = new MyList(5,3);
+		
+		ans1 = reverseBetweenBetter(head1.getHead(), left1, right1);
+		ans2 = reverseBetweenBetter(head2.getHead(), left2, right2);
+		ans3 = reverseBetweenBetter(head3.getHead(), left3, right3);
+		
+		
+		
+		if(output1.equals(ans1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ output1);
+			System.out.println("Your Answer :"+ head1);  		
+		}
+		if(output2.equals(ans2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Expected Ouput :"+ output2);
+			System.out.println("Your Answer :"+ head2);  		
+		}
+		if(output3.equals(ans3)) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Expected Ouput :"+ output3);
+			System.out.println("Your Answer :"+ head3);  		
+		}
+			
+		
+		
 
 	}
 

@@ -33,6 +33,9 @@
 
 package LinkedList.Learning;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class RemoveLinkedListElements_203 {
 
 //	approch :

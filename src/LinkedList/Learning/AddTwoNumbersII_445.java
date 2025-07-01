@@ -35,6 +35,9 @@ package LinkedList.Learning;
 
 import java.util.Stack;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class AddTwoNumbersII_445 {
 	
 	/**
@@ -58,9 +61,7 @@ public class AddTwoNumbersII_445 {
 	     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		        ListNode n1=reverseList(l1);
 		        ListNode n2=reverseList(l2);
-		        ListNode resHead= new ListNode();
-		        ListNode ptr=resHead;
-		        ListNode prev=resHead;
+		        ListNode resHead= null;
 		        int carry =0;
 		        while(n1!=null && n2!=null){
 		            int v1=n1.val;
@@ -68,10 +69,9 @@ public class AddTwoNumbersII_445 {
 		            int sum = v1+v2+carry;
 		            int n= sum%10;
 		            carry = sum/10;
-		            ptr.val=n;
-		            ptr.next= new ListNode();
-		            prev=ptr;
-		            ptr=ptr.next;
+	                ListNode node = new ListNode(n);
+	                node.next=resHead;
+	                resHead=node;
 		            n1=n1.next;
 		            n2=n2.next;
 		        }
@@ -80,10 +80,9 @@ public class AddTwoNumbersII_445 {
 		            int sum = v1+carry;
 		            int n= sum%10;
 		            carry = sum/10;
-		            ptr.val=n;
-		            ptr.next= new ListNode();
-		            prev=ptr;
-		            ptr=ptr.next;
+	                ListNode node = new ListNode(n);
+	                node.next=resHead;
+	                resHead=node;
 		            n1=n1.next;
 		        }
 		        while(n2!=null){
@@ -91,20 +90,20 @@ public class AddTwoNumbersII_445 {
 		            int sum = v2+carry;
 		            int n= sum%10;
 		            carry = sum/10;
-		            ptr.val=n;
-		            ptr.next= new ListNode();
-		            prev=ptr;
-		            ptr=ptr.next;
+	                ListNode node = new ListNode(n);
+	                node.next=resHead;
+	                resHead=node;
 		            n2=n2.next;
 		        }
 		        if(carry!=0){
-		            ptr.val=carry;
-		            ptr.next=new ListNode();
-		            prev=ptr;
-		            ptr=ptr.next;
+	                ListNode node = new ListNode(carry);
+	                node.next=resHead;
+	                resHead=node;
 		        }
-		        prev.next=null;
-		        return reverseList(resHead);
+//		        this can be used to  revert the linked list
+		        // reverseList(l1);
+                // reverseList(l2);
+		        return resHead;
 		    }
 
 	    public static ListNode reverseList(ListNode head) {

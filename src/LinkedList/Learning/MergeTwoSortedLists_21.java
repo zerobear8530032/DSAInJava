@@ -39,6 +39,9 @@ package LinkedList.Learning;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class MergeTwoSortedLists_21 {
 //	approch :
 //	here we use  a 2 pointer kind of  traversal where we check the val of list one 

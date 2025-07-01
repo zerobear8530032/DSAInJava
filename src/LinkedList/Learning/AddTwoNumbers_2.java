@@ -34,6 +34,9 @@
 
 package LinkedList.Learning;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class AddTwoNumbers_2 {
 //	approch :
 //	simple just iterate over 2 list with a pointer 

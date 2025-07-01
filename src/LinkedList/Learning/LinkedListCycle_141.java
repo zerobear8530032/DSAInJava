@@ -45,6 +45,9 @@ package LinkedList.Learning;
 
 import java.util.HashSet;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class LinkedListCycle_141 {
 //	approch : bruteforce:
 //	we can iterate over thelist and add node to set if not exists if any already exists in set means its a cycle here 

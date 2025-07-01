@@ -27,6 +27,9 @@
 
 package LinkedList.Learning;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class RemoveDuplicatesFromSortedList_83 {
 // approch : best
 //	we can have 2 pointer left and right

@@ -1,8 +1,7 @@
-package LinkedList.Learning;
+package LinkedList.Utils;
 
 import java.util.List;
 
-import LinkedList.Learning.DLL.InvalidIndexException;
 
 public class MyList {
 	

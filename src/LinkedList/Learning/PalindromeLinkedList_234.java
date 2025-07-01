@@ -34,6 +34,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class PalindromeLinkedList_234 {
 //	approch : brute force:
 //	here we use a arraylist and store all element of the linkedlist in one traversal

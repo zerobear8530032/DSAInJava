@@ -34,6 +34,9 @@ package LinkedList.Learning;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class MiddleOfTheLinkedList_876 {
 	
 	

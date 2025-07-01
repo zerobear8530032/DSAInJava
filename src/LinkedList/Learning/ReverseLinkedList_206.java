@@ -39,6 +39,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 
 public class ReverseLinkedList_206 {
 	

@@ -50,6 +50,9 @@ package LinkedList.Learning;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class DeleteNodeInALinkedList_237 {
 	
 // approch :
@@ -107,11 +110,8 @@ public class DeleteNodeInALinkedList_237 {
 		ListNode node2=head2.getVal(1);		
 		MyList output2 = new MyList();
 		output2.addAll(new ArrayList(Arrays.asList(4,5,9)));
-		
 		deleteNode(node1);
-		deleteNode(node2);
-		
-		
+		deleteNode(node2);	
 		if(check(output1.getHead(),head1.getHead())) {
 			System.out.println("Case 1 Passed");
 		}else {
@@ -125,14 +125,6 @@ public class DeleteNodeInALinkedList_237 {
 			System.out.println("Case 2 Failed");
 			System.out.println("Actual Output :"+output2 );
 			System.out.println("Your Output :"+head2);
-		}
-		
-		
-		
-
-
-
-
+		}		
 	}
-
 }

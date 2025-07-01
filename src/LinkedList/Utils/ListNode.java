@@ -1,7 +1,10 @@
-package LinkedList.Learning;
- public class ListNode {
-		int val;
-		ListNode next;
+package LinkedList.Utils;
+
+import java.util.HashSet;
+
+public class ListNode {
+		public int val;
+		public ListNode next;
 		
 		public ListNode() {
 		}
@@ -16,14 +19,29 @@ package LinkedList.Learning;
 		 public String toString() {
 			 StringBuilder res= new StringBuilder("[");
 			 ListNode temp = this;
+			 HashSet<ListNode> set= new HashSet();
+			 boolean addlast=true;
 			 while(temp.next!=null) {
+				 if(set.contains(temp)) {
+					 addlast=false;
+					 break;
+				 }else {
+					 set.add(temp);
+				 }
 				 res.append(temp.val).append(",");
 				 temp=temp.next;
 			 }
+			 if(addlast) {
+				 
 			 res.append(temp.val);
 			 res.append("]");
+			 }else {
+				 res.setCharAt(res.length()-1, ']');
+			 }
 			 return res.toString();
 		 }
+		 
+		 
 		 
 		
 	}

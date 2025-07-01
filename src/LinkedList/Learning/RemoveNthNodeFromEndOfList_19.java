@@ -36,6 +36,9 @@
 
 package LinkedList.Learning;
 
+import LinkedList.Utils.ListNode;
+import LinkedList.Utils.MyList;
+
 public class RemoveNthNodeFromEndOfList_19 {
 // approch : 
 //	here we first get the length
