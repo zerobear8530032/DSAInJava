@@ -89,7 +89,7 @@ System.out.println("Best Approch :");
 		if(output1.equals(ans1)) {
 			System.out.println("Case 1 Passed");
 		}else {
-			System.out.println("Case 1 Failed");
+			System.out.println("Case 1 Faile5rd");
 			System.out.println("Actual Output :"+output1);
 			System.out.println("Your Output :"+ans1);
 		}
