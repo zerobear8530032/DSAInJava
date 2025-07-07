@@ -41,6 +41,21 @@ public class ListNode {
 			 return res.toString();
 		 }
 		 
+		public boolean equals(ListNode node) {
+			 
+			 ListNode ptr= this;
+			 while(ptr!=null && node!=null) {
+				 if(ptr.val!=node.val) {
+					 return false;
+				 }
+				 ptr=ptr.next;
+				 node=node.next;
+				 
+			 }
+			 return ptr==null && node==null;
+		}
+		 
+		 
 		 
 		 
 		
