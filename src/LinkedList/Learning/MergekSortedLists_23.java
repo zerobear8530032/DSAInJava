@@ -173,7 +173,6 @@ public class MergekSortedLists_23 {
 			}
 			
 
-
 	}
 
 }
