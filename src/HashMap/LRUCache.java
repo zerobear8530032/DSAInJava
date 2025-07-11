@@ -3,46 +3,87 @@ package HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import java.util.HashMap;
+
+class DNode {
+    int key;
+    int val;
+    DNode prev;
+    DNode next;
+
+    public DNode(int key, int val) {
+        this.key = key;
+        this.val = val;
+    }
+}
+
+class DLL {
+    DNode head;
+    DNode tail;
+
+    public DLL() {
+        head = new DNode(0, 0);  // dummy head
+        tail = new DNode(0, 0);  // dummy tail
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    public void addToHead(DNode node) {
+        node.prev = head;
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+    }
+
+    public void remove(DNode node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+
+    public DNode removeTail() {
+        DNode node = tail.prev;
+        remove(node);
+        return node;
+    }
+}
+
 class LRUCache {
-//	here we use linked hash map so that the order of insertion if preserved
-    static LinkedHashMap<Integer, Integer> map;
-   static int capacity;
+    private int capacity;
+    private HashMap<Integer, DNode> map;
+    private DLL dll;
 
-    public  LRUCache(int cap) {
-        map= new LinkedHashMap();
-        this.capacity=cap;// inital cap
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.map = new HashMap<>();
+        this.dll = new DLL();
     }
-    
-    public static int get(int key) {
-//    	this is a edge case where when use a simple linked hash set it only store insertion 
-//    	order not operations order means the order remain static once we insert no change in order
-//    	we can manage then when we use get operation we remove the element from the hashset and 
-//    	reinsert it 
-    	 if(map.containsKey(key)){// check value exists
-             int val = map.get(key);// here
-             map.remove(key);
-             map.put(key,val);
-             return val;
-         }else{
-             return -1;
-         }
-    }
-    
-    public static void put(int key, int value) {
 
-        if (map.containsKey(key)) {// check the current key avaible then put
-            map.remove(key);
-            map.put(key, value);
+    public int get(int key) {
+        if (!map.containsKey(key)) return -1;
+        DNode node = map.get(key);
+        dll.remove(node);
+        dll.addToHead(node);
+        return node.val;
+    }
+
+    public void put(int key, int value) {
+        if (map.containsKey(key)) {
+            DNode node = map.get(key);
+            node.val = value;
+            dll.remove(node);
+            dll.addToHead(node);
         } else {
-            if (map.size() == capacity) {// apply remove when only capacity reach max
-//            	here insertion order remains means the first key is inserted is always at first index 
-            	int firstkey=map.keySet().iterator().next();// get first key using iterator
-            	map.remove(firstkey);// remove first key
+            if (map.size() == capacity) {
+                DNode tail = dll.removeTail();
+                map.remove(tail.key);
             }
-            map.put(key, value);// last put the current values
+            DNode newNode = new DNode(key, value);
+            dll.addToHead(newNode);
+            map.put(key, newNode);
         }
+   
+}
 
-    }
     public static void main(String[] args) {
     	LRUCache lRUCache = new LRUCache(1);
     	lRUCache.put(2, 1);

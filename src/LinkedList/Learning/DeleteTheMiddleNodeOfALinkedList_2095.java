@@ -63,9 +63,6 @@ public class DeleteTheMiddleNodeOfALinkedList_2095 {
 	        if(head.next==null){
 	            return null;
 	        }
-	        if(head.next==null){
-	            return null;
-	        }
 	        int size= getLength(head);
 	        int mididx= size/2;
 	        ListNode prev= getNode(head,mididx-1);
