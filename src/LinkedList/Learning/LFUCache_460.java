@@ -57,6 +57,13 @@
 //At most 2 * 105 calls will be made to get and put.
 package LinkedList.Learning;
 import java.util.*;
+
+//approch :
+// we will have 2 hashmap 
+// one will map the key to the node address
+// second will map the frequency of node to a dll where the node resides in 
+// a ascending order of most recently used to most frequently used 
+// DLL implements every thing in O(1)
 public class LFUCache_460 {
 	
 	static  class Node {
