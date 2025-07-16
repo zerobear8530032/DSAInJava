@@ -146,23 +146,34 @@ public class ReverseLinkedList_206 {
     	}
     	return anstemp==null && outputtemp==null;
     }
+    
+    
+    
+//    reverse recursive :
+    public static ListNode reverseListRec(ListNode head) {
+    	  if (head == null || head.next == null) {
+    	        return head;
+    	    }
+    	    ListNode newHead = reverseListRec(head.next);
+    	    ListNode front = head.next;
+    	    front.next=head;
+    	    head.next=null;
+    	    return newHead;
+    }
+    
 
 	public static void main(String[] args) {
 		
 		//Example 1:
 		
-		MyList list1 = new MyList();
-		list1.addAll(new ArrayList(Arrays.asList(1,2,3,4,5)));
-		MyList output1= new MyList();
-		output1.addAll(new ArrayList(Arrays.asList(5,4,3,2,1)));
+		MyList list1 = new MyList(1,2,3,4,5);
+		MyList output1= new MyList(5,4,3,2,1);
 		
 		
 		//Example 2:
 
-		MyList list2 = new MyList();
-		list2.addAll(new ArrayList(Arrays.asList(1,2)));
-		MyList output2= new MyList();
-		output2.addAll(new ArrayList(Arrays.asList(2,1)));
+		MyList list2 = new MyList(1,2);
+		MyList output2= new MyList(2,1);
 
 
 		//Example 3:
@@ -200,12 +211,10 @@ public class ReverseLinkedList_206 {
 		
 		
 		System.out.println("Recursive Approch ");
-		list1= new MyList();
-		list1.addAll(new ArrayList(Arrays.asList(1,2,3,4,5)));
-		list2= new MyList();
-		list2.addAll(new ArrayList(Arrays.asList(1,2)));
+		list1= new MyList(1,2,3,4,5);
+		list2= new MyList(1,2);
 		list3= new MyList();
-	
+
 		ans1= reverseListRecursive(list1.getHead());
 		ans2= reverseListRecursive(list2.getHead());
 		ans3= reverseListRecursive(list3.getHead());
@@ -233,31 +242,29 @@ public class ReverseLinkedList_206 {
 		}
 		
 		System.out.println("Best Approch ");
-		list1= new MyList();
-		list1.addAll(new ArrayList(Arrays.asList(1,2,3,4,5)));
-		list2= new MyList();
-		list2.addAll(new ArrayList(Arrays.asList(1,2)));
+		list1= new MyList(1,2,3,4,5);
+		list2= new MyList(1,2);
 		list3= new MyList();
 		
 		ans1= reverseListBest(list1.getHead());
 		ans2= reverseListBest(list2.getHead());
 		ans3= reverseListBest(list3.getHead());
 		
-		if(check(output1.getHead(),ans1)) {
+		if(output1.equals(ans1)) {
 			System.out.println("Case 1 Passed");
 		}else {
 			System.out.println("Case 1 Failed");
 			System.out.println("Actual Output :"+output1 );
 			System.out.println("Your Output :"+ans1);
 		}
-		if(check(output2.getHead(),ans2)) {
+		if(output2.equals(ans2)) {
 			System.out.println("Case 2 Passed");
 		}else {
 			System.out.println("Case 2 Failed");
 			System.out.println("Actual Output :"+output2 );
 			System.out.println("Your Output :"+ans2);
 		}
-		if(check(output3.getHead(),ans3)) {
+		if(output2.equals(ans2)) {
 			System.out.println("Case 3 Passed");
 		}else {
 			System.out.println("Case 3 Failed");
@@ -267,7 +274,37 @@ public class ReverseLinkedList_206 {
 
 		
 		
-	
+		System.out.println("Recursive Approch ");
+		list1= new MyList(1,2,3,4,5);
+		list2= new MyList(1,2);
+		list3= new MyList();
+		
+		
+		ans1= reverseListRec(list1.getHead());
+		ans2= reverseListRec(list2.getHead());
+		ans3= reverseListRec(list3.getHead());
+		
+		if(output1.equals(ans1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2.equals(ans2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
+		}
+		if(output2.equals(ans2)) {
+			System.out.println("Case 3 Passed");
+		}else {
+			System.out.println("Case 3 Failed");
+			System.out.println("Actual Output :"+output3 );
+			System.out.println("Your Output :"+ans3);
+		}
 	}
 
 }

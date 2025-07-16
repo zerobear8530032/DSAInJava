@@ -45,200 +45,227 @@
 
 package LinkedList.Learning;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 
+
+
+class AllOne {
 	
-//	class Node {
-//	    int count;
-//	    HashSet<String> keys;
-//	    Node next;
-//	    Node prev;
-//	    
-//
-//	    public Node(HashSet<String> keys, int count) {
-//	        this.keys = keys;
-//	        this.count = count;
-//	        this.next=null;
-//	        this.prev=null;
-//	    }
-//	}
-//
-//	class DLL {
-//	    Node head;
-//	    Node tail;
-//	    int size;
-//
-//	    DLL() {
-//	        size = 0;
-//	        head = new Node(new HashSet(), -1);
-//	        tail = new Node(new HashSet(), -1);
-//	        head.next = tail;
-//	        tail.prev = head;
-//	    }
-//
-//	    public void addFirst(Node node) {
-//	        Node next = head.next;
-//	        head.next = node;
-//	        node.prev = head;
-//	        node.next = next;
-//	        next.prev = node;
-//	        size++;
-//	    }
-//
-//	    public void addLast(Node node) {
-//	        Node prev = tail.prev;
-//	        prev.next = node;
-//	        node.prev = prev;
-//	        node.next = tail;
-//	        tail.prev = node;
-//	        size++;
-//	    }
-//
-//	    public Node getHead() {
-//	        return head.next;
-//	    }
-//
-//	    public Node getTail() {
-//	        return tail.prev;
-//	    }
-//	    public void addAfter(Node node,Node newnode){
-//	        Node nodenext= node.next;
-//	        node.next=newnode;
-//	        newnode.prev=node;
-//
-//	        newnode.next=nodenext;
-//	        nodenext.prev=newnode;
-//	    }
-//	    public void addBefore(Node node,Node newnode){
-//	        Node nodeprev= node.prev;
-//	        nodeprev.next=newnode;
-//	        newnode.prev=nodeprev;
-//
-//	        newnode.next=node;
-//	        node.prev=newnode;
-//	    }
-//	    public void remove(Node node) {
-//	        System.out.println("["+node.keys + " " + node.count+"]");
-//	        node.prev.next = node.next;
-//	        node.next.prev = node.prev;
-//	        node.prev = null;
-//	        node.next = null;
-//	        size--;
-//	    }
-//
-//	    public void display(){
-//	        Node ptr= head.next;
-//	        while(ptr!=tail){
-//	            System.out.print(ptr.keys+" "+ptr.count+"->");
-//	            ptr=ptr.next;
-//	        }
-//	        System.out.println("null");
-//	    }
-//
-//
-//
-//	}
-//
-//	class AllOne {
-//	    HashMap<String, Node> map;
-//	    DLL list;
-//
-//	    public AllOne() {
-//	        map = new HashMap();
-//	        list = new DLL();
-//	    }
-//	    public void inc(String key) {
-//	        if(map.containsKey(key)){
-//	            Node node = map.get(key);
-//	            Node nodenext=node.next;
-//	            int count = node.count+1;
-//	            if(nodenext.count==count){
-//	                node.keys.remove(key);
-//	                nodenext.keys.add(key);
-//	            }else{
-//	            	HashSet<String> set= new HashSet();
-//	            	set.add(key);
-//	            	Node newnode = new Node(set,count);
-//	                list.addAfter(node,newnode);
-//	                map.put(key,newnode);
-//	            }
-//	            if(node.keys.size()==0){
-//	                list.remove(node);
-//	            }
-//	        }else{
-//	        	HashSet<String> set= new HashSet();
-//	        	set.add(key);
-//	            Node node = new Node(set,1);
-//	            list.addFirst(node);
-//	            map.put(key,node);
-//	        }
-//	    }
-//
-//	    public void dec(String key) {
-//	        if(!map.containsKey(key)){
-//	            return ;
-//	        }
-//	        Node node = map.get(key);
-//	        Node prev = node.prev;
-//	        int count = node.count-1;
-//	        if(prev.count==node.count){
-//	            node.keys.remove(key);
-//	            prev.keys.add(key);
-//	        }else if(count==0) {
-//	            node.keys.remove(key);
-//	        }else{
-//	        	HashSet<String> set= new HashSet();
-//	        	set.add(key);
-//	            Node newnode = new Node(set,count);
-//	            list.addBefore(node , newnode);
-//
-//	        }
-//	        if(node.keys.size()==0){
-//	            list.remove(node);
-//	        }
-//	        
-//	    }
-//
-//	    public String getMaxKey() {
-//	        Node tail= list.getTail();
-//	        if(tail.keys.size()==0){
-//	            return "";
-//	        }else{
-//	            for(String s:tail.keys){
-//	                return s;
-//	            }
-//	        }
-//	        return null;
-//	    }
-//
-//	    public String getMinKey() {
-//	        Node head= list.getHead(); 
-//	        if(head.keys.size()==0){
-//	            return "";
-//	        }else{
-//	            for(String s:head.keys){
-//	                return s;
-//	            }
-//	        }
-//	        return null;
-//	    }
-//	}
+	static class Node {
+	    String key;
+	    int freq;
+	    Node next;
+	    Node prev;
+
+	    public Node(String key, int freq){
+	        this.key=key;
+	        this.freq=freq;
+	        this.next=null;
+	        this.prev=null;
+	    }
+
+	    public String toString(){
+	        StringBuilder str= new StringBuilder();
+	        str.append("["+key+","+freq+"]");
+	        return str.toString();
+	    }
+	}
+
+	static class DLL{
+	    Node head;
+	    Node tail;
+	    int size;
+
+	    
+	    public DLL(){
+	        size=0;
+	        head=new Node("-1",-1);
+	        tail=new Node("-1",-1);
+	        head.next=tail;
+	        tail.prev=head;
+	    }
+
+	    public Node getHead(){
+	        return head.next!=tail?  head.next: null;
+	    }
+
+	    public Node getTail(){
+	        return tail.prev!=head?  tail.prev: null;
+	    }
+
+	// adding at the end of the linked list 
+	    public void add(Node node){
+	        Node prev = tail.prev;
+	        prev.next=node;
+	        node.prev=prev;
+
+	        node.next=tail;
+	        tail.prev=node;
+	        size++;
+	    }
+
+	    public void remove(Node node){
+	        Node prev= node.prev;
+	        Node next= node.next;
+	        prev.next=next;
+	        next.prev=prev;
+	        node.next=null;
+	        node.prev=null;
+	        size--;
+	    }
+
+	    public String toString(){
+	        Node ptr=head.next;
+	        StringBuilder res= new StringBuilder("[");
+	        while(ptr!=tail){
+	            res.append(ptr).append(",");
+	            ptr=ptr.next;
+	        }
+	        res.setCharAt(res.length()-1,']');
+	        return res.toString();
+	    }
+	}  
+
+
+    HashMap<String,Node> nodemap ;
+    TreeMap<Integer,DLL> freqmap ;
+
+    public AllOne() {
+        nodemap = new HashMap();
+        freqmap = new TreeMap();
+    }
+    
+    public void inc(String key) {
+        // System.out.println("brefore inc :");
+        // System.out.println("nodemap : "+nodemap);
+        // System.out.println("freqmap : "+freqmap);
+        if(nodemap.containsKey(key)){
+            Node node =nodemap.get(key);
+            int oldfreq=node.freq;
+            // removing to old frequncy list :
+            freqmap.get(oldfreq).remove(node);
+            // increasing node freq;
+            node.freq++;
+            int newfreq=node.freq;
+            // after remove we will insert it into the new entry list
+            if(freqmap.containsKey(newfreq)){
+                // if the entry exists we can add to existing DLL there 
+                freqmap.get(newfreq).add(node);
+            }else{
+                // if not we will create a entry
+                DLL dll = new DLL();
+                dll.add(node);
+                freqmap.put(newfreq,dll);
+            }
+            // remove the freq map entry where there is not a single node in  the dll
+            if(freqmap.get(oldfreq).size==0){
+                freqmap.remove(oldfreq);
+            }
+        }else{
+            int freq=1;
+            Node node = new Node(key,freq);
+            nodemap.put(key,node);
+            if(freqmap.containsKey(freq)){
+                // if the entry exists we can add to existing DLL there 
+                freqmap.get(freq).add(node);
+            }else{
+                // if not we will create a entry
+                DLL dll = new DLL();
+                dll.add(node);
+                freqmap.put(freq,dll);
+            }
+        }
+        // System.out.println("after inc :");
+        // System.out.println("nodemap : "+nodemap);
+        // System.out.println("freqmap : "+freqmap);
+    }
+    
+    public void dec(String key) {
+        
+        // System.out.println("brefore dec :");
+        // System.out.println("nodemap : "+nodemap);
+        // System.out.println("freqmap : "+freqmap);
+          if(nodemap.containsKey(key)){
+            Node node =nodemap.get(key);
+            int oldfreq=node.freq;
+            // removing to old frequncy list :
+            freqmap.get(oldfreq).remove(node);
+            // increasing node freq;
+            node.freq--;
+            int newfreq=node.freq;
+            // after remove we will insert it into the new entry list
+            if(newfreq==0){
+                // remove from node map
+                nodemap.remove(node.key);
+            }else if( freqmap.containsKey(newfreq)){
+                // if the entry exists we can add to existing DLL there 
+                freqmap.get(newfreq).add(node);
+            }else{
+                // if not we will create a entry
+                DLL dll = new DLL();
+                dll.add(node);
+                freqmap.put(newfreq,dll);
+            }
+            // remove the freq map entry where there is not a single node in  the dll
+            if(freqmap.get(oldfreq).size==0){
+                freqmap.remove(oldfreq);
+            }
+        }else{
+            // for debugging :
+          System.out.println("Key Does not exist");  
+        }
+        
+        // System.out.println("after inc :");
+        // System.out.println("nodemap : "+nodemap);
+        // System.out.println("freqmap : "+freqmap);
+    }
+    
+    public String getMaxKey() {
+        // System.out.println(freqmap);
+        if(freqmap.size()==0){
+            return "";
+        }else{
+            int key= freqmap.lastKey();
+            Node node = freqmap.get(key).getHead();
+            return node.key;
+        }
+    }
+    
+    public String getMinKey() {
+        // System.out.println(freqmap);
+        if(freqmap.size()==0){
+            return "";
+        }else{
+            int key= freqmap.firstKey();
+            Node node = freqmap.get(key).getHead();
+            return node.key;
+        }
+    }
+}
+
+/**
+ * Your AllOne object will be instantiated and called as such:
+ * AllOne obj = new AllOne();
+ * obj.inc(key);
+ * obj.dec(key);
+ * String param_3 = obj.getMaxKey();
+ * String param_4 = obj.getMinKey();
+ */
 
 public class AllOoneDataStructure_432 {
 	public static void main(String[] args) {
 
 		
-//		AllOne allOne = new AllOne();
-//		allOne.inc("hello");
-//		allOne.inc("hello");
-//		System.out.println(allOne.getMaxKey()); // return "hello"
-//		System.out.println(allOne.getMinKey()); // return "hello"
-//		allOne.inc("leet");
-//		System.out.println(allOne.getMaxKey()); // return "hello"
-//		System.out.println(allOne.getMinKey()); // return "hello"
-//
+		AllOne allOne = new AllOne();
+		allOne.inc("hello");
+		allOne.inc("hello");
+		System.out.println(allOne.getMaxKey()); // return "hello"
+		System.out.println(allOne.getMinKey()); // return "hello"
+		allOne.inc("leet");
+		System.out.println(allOne.getMaxKey()); // return "hello"
+		System.out.println(allOne.getMinKey()); // return "hello"
+
 
 	}
 
