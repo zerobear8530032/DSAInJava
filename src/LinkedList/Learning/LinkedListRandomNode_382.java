@@ -51,7 +51,7 @@ import java.util.Random;
 import LinkedList.Utils.ListNode;
 import LinkedList.Utils.MyList;
 
-public class Snippet {
+public class LinkedListRandomNode_382 {
 	static class Solution {
 	    List<Integer> arr;
 	    public Solution(ListNode head) {
