@@ -90,7 +90,10 @@ public class ImplementQueueUsingStacks_232 {
     }
     
     }
-//
+// here we can fast pop but push is O(n)
+//	here also we use 2 stack in push we will first empty stack 1 to stack 2 and 
+//	then push the new element in stack 1
+//	now we will push back every thing back from stack 2 to stack 1
     
     
    static  class MyQueueFastPop {
