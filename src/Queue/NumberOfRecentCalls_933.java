@@ -41,6 +41,17 @@ package Queue;
 import java.util.*;
 public class NumberOfRecentCalls_933 {
 	
+//	approch :
+// in this question we are given time on which a request will come and we have to give return
+//	the number of request in 3000ms 
+//	so we will use a queue 
+//	when ever a request comes lesser then 3000 we can just add to the queue
+//	when its greater then 3000 we will find request time t - 3000
+//	that will give us the range in which each request we have server in 3000ms
+//	so we can pop all the element from queue front which are lesser then t-3000ms
+//	and return the list size
+//	time complexity :O(1)  amaotized when poping can cause all element to be poped but it not always need to pop 
+//	space complexity :O(1)
 	static class RecentCounter {
 	    Queue<Integer> queue;
 	    public RecentCounter() {
