@@ -49,6 +49,8 @@
 //At most 3000 calls will be made to enQueue, deQueue, Front, Rear, isEmpty, and isFull.
 package Queue;
 
+import java.util.LinkedList;
+
 public class DesignCircularQueue_622 {
 	
 	static class MyCircularQueue {
@@ -123,7 +125,7 @@ public class DesignCircularQueue_622 {
 		System.out.println(myCircularQueue.deQueue());
 		System.out.println(myCircularQueue.enQueue(4));
 		System.out.println(myCircularQueue.Rear());
-
+	
 
 	}
 
