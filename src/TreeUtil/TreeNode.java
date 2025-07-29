@@ -1,13 +1,13 @@
 package TreeUtil;
 
 public class TreeNode {
-		public int val;
-	   public  TreeNode left, right;
-	  public   TreeNode(int x) {
-	        val = x;
-	    }
+	public int val;
+	public  TreeNode left, right;
+	
 	  
-	  public TreeNode() {
-		// TODO Auto-generated constructor stub
+	public TreeNode() {}
+	
+	public TreeNode(int val) {
+		  this.val=val;
 	}
 }
