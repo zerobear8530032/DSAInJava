@@ -29,9 +29,11 @@
 //The number of nodes in both trees is in the range [0, 100].
 //-104 <= Node.val <= 104
 
-package TreeUtil;
+package Tree;
 
 import java.util.List;
+
+import TreeUtil.TreeNode;
 
 public class SameTree_100 {
 //	approch :
