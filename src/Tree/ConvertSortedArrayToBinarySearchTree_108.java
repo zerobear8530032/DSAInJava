@@ -67,9 +67,50 @@ public class ConvertSortedArrayToBinarySearchTree_108 {
     }
 	
     
+    public static boolean isBalancedBetter(TreeNode root) {
+        return checkBalanced(root)!=-1;
+    }
+    public static int checkBalanced(TreeNode node){
+        if(node==null){
+            return 0;
+        }
+
+        int lh= checkBalanced(node.left);
+        int lr= checkBalanced(node.right);
+        boolean notbalance = Math.abs(lh-lr)>1;
+        if(lh==-1 || lr==-1 || notbalance){
+            return -1;
+        }
+
+        return Math.max(lh,lr)+1;
+    }
+    
 	public static void main(String[] args) {
+		
 		int [] nums1 =  {-10,-3,0,5,9};
+		
 		int [] nums2 =  {1,3};
+		
+		TreeNode ans1 =sortedArrayToBST(nums1);
+		TreeNode ans2 =sortedArrayToBST(nums2);
+		
+		
+		if(isBalancedBetter(ans1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Your Tree is not Balanced Binary Tree "  );
+		}
+		if(isBalancedBetter(ans2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Your Tree is not Balanced Binary Tree "  );
+		}
+
+
+		
+		
 		
 		
 	}
