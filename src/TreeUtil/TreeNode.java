@@ -14,6 +14,6 @@ public class TreeNode {
 	@Override
 	public String toString() {
 		
-		return "[Val :"+val+"L : "+left+"R : "+right+"]";
+		return " [ Val : "+val+" L : "+left+" R : "+right+" ] ";
 	}
 }
