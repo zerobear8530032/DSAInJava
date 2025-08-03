@@ -32,7 +32,12 @@ package Tree;
 import TreeUtil.TreeNode;
 
 public class SumOfLeftLeaves_404 {
-	
+//	approch :
+//	we will just pass a character to find its a left or right node 
+//	and check if this is leaf or not
+//	as last we will reutnr sum of left and right sub tree 
+//	time complexity : O(n)
+//	space complexity : O(n)
 	 public static int sumOfLeftLeaves(TreeNode root) {
 	        return dfs(root, 'R');
 	    }
@@ -102,10 +107,7 @@ public class SumOfLeftLeaves_404 {
 			System.out.println("Actual Output :"+output3);
 			System.out.println("Your Output :"+ans3);
 		}
-		
-
-
-
+	
 	}
 
 }
