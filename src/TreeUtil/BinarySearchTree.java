@@ -1,7 +1,10 @@
 package TreeUtil;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+
+import TreeUtil.AVL.Node;
 
 public class BinarySearchTree {
 	BSTNode root;
@@ -111,6 +114,34 @@ public class BinarySearchTree {
 		postorder(root.left,res);
 		postorder(root.right,res);
 		res.add(root.val);
+	}
+	
+	
+	public void BreadthFirstTraversal() {
+		BreadthFirstTraversal(this.root);
+	}
+	
+	private void BreadthFirstTraversal(BSTNode root) {
+		if(root==null) {
+			System.out.println("[]");
+			return ;
+		}
+		
+		System.out.print("[");
+		ArrayDeque<BSTNode> queue = new ArrayDeque();
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			BSTNode poped = queue.remove();
+			System.out.print(poped.val+", ");
+			if(poped.left!=null) {
+				queue.add(poped.left);
+			}
+			if(poped.right!=null) {
+				queue.add(poped.right);
+			}
+		}
+		System.out.print("]");
+		System.out.println();
 	}
 	 
 	

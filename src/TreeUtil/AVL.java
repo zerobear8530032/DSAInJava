@@ -1,5 +1,6 @@
 package TreeUtil;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,5 +211,36 @@ public class AVL {
 		p.height= Math.max(getHeight(p.left),getHeight(p.right))+1;
 		return p;
 	}
+	
+	
+	public void BreadthFirstTraversal() {
+		BreadthFirstTraversal(this.root);
+	}
+	
+	private void BreadthFirstTraversal(Node root) {
+		if(root==null) {
+			System.out.println("[]");
+			return ;
+		}
+		
+		System.out.print("[");
+		ArrayDeque<Node> queue = new ArrayDeque();
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			Node poped = queue.remove();
+			System.out.print(poped.val+", ");
+			if(poped.left!=null) {
+				queue.add(poped.left);
+			}
+			if(poped.right!=null) {
+				queue.add(poped.right);
+			}
+		}
+		System.out.print("]");
+		System.out.println();
+	}
+	
+	
+	
 	
 }
