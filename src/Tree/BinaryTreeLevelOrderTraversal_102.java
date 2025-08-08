@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import TreeUtil.BinaryTree;
 import TreeUtil.TreeNode;
 
 public class BinaryTreeLevelOrderTraversal_102 {

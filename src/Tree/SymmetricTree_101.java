@@ -125,9 +125,8 @@ public class SymmetricTree_101 {
 			System.out.println("Case 2 Failed");
 			System.out.println("Actual Output :"+output2 );
 			System.out.println("Your Output :"+ans2);
-		}
-
-
+		}		
+		
 		
 		
 	}

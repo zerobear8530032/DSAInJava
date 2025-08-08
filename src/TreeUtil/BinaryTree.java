@@ -1,82 +1,80 @@
 package TreeUtil;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class BinaryTree {
 	
 	private TreeNode root;
-	public BinaryTree() {
-	}
-	
 	
 	public TreeNode getRoot() {
 		return root;
 	}
+	
 	public void setRoot(TreeNode root) {
 		this.root = root;
 	}
-	public void populate(Scanner sc) {
-		
-		System.out.println("Enter the Root Node Value :");
-		int rootval = sc.nextInt();
-		root =new TreeNode(rootval);
-		populate(sc, root);
-	}
-	private void populate(Scanner sc , TreeNode root) {
-		System.out.println("you want to enter Element Left of :"+root.val);
-		boolean left= sc.nextBoolean();
-		if(left) {
-			System.out.println("Enter the Value of the Node Left of :"+root.val);
-			int leftval = sc.nextInt();
-			root.left= new TreeNode(leftval);
-			System.out.println("Node inserted ");
-			populate(sc,root.left);
-		}
-		System.out.println("you want to enter Element Right of :"+root.val);
-		boolean right= sc.nextBoolean();
-		if(right) {
-			System.out.println("Enter the Value of the Node Right of :"+root.val);
-			int rightval = sc.nextInt();
-			root.right= new TreeNode(rightval);
-			System.out.println("Node inserted ");
-			populate(sc,root.right);
-		}
+	
+	public BinaryTree() {
+		// TODO Auto-generated constructor stub
 	}
 	
-	public void display() {
-		display(this.root);
-		System.out.println();
-	}
-	private void display(TreeNode root) {
-		if(root==null) {
+	public BinaryTree(List<Integer> arr) {
+		if(arr==null) {
 			return ;
 		}
-		System.out.print(root.val+" ");
-		display(root.left);
-		display(root.right);
-	}
-	
-	public void prettyDisplay() {
-		prettyDisplay(this.root,0);
-	}
-	private void prettyDisplay(TreeNode root,int level) {
-		if(root==null) {
+		if(arr.size()==0) {
 			return ;
 		}
-		prettyDisplay(root.right,level+1);
-		if(level!=0) {
-			for(int i =0;i<level-1;i++) {
-				System.out.print("|\t\t");
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		int idx =0;
+		this.root= new TreeNode(arr.get(idx));
+		idx++;
+		queue.add(root);
+		while(!queue.isEmpty() ) {
+			TreeNode currNode=queue.remove();
+			if(idx <arr.size() && arr.get(idx)!=null) {
+				int left = arr.get(idx);
+				currNode.left= new TreeNode(left);
+				queue.add(currNode.left);
 			}
-			System.out.println("|---->"+root.val);			
-		}else {
-			System.out.println(root.val);			
+			idx++;			
+			if(idx <arr.size() && arr.get(idx)!=null ) {
+				int right = arr.get(idx);
+				currNode.right= new TreeNode(right);
+				queue.add(currNode.right);
+			}
+			idx++;
 		}
-		prettyDisplay(root.left,level+1);
 		
 	}
+	public BinaryTree(Integer... values) {
+		this(java.util.Arrays.asList(values));
+	}
 	
+	public boolean equals(TreeNode obj) {
+		return isSameTree(this.root,obj);
+	}
 	
+	public boolean equals(Tree obj) {
+		return isSameTree(this.root,obj.getRoot());
+	}
 	
-
+	private boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null && q==null){
+            return true;
+        }
+        if((p==null && q!=null) ||(q==null && p!=null) ){
+            return false;
+        }
+        if(p.val!=q.val){
+            return false;
+        }
+        boolean left =isSameTree(p.left,q.left);
+        boolean right =  isSameTree(p.right,q.right);
+        return  left && right ;
+    }
+	
 }
