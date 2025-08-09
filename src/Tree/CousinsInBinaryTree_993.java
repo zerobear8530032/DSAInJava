@@ -138,9 +138,5 @@ public class CousinsInBinaryTree_993 {
 			System.out.println("Actual Output :"+output3);
 			System.out.println("Your Output :"+ans3);
 		}		
-		
-
-
 	}
-
 }

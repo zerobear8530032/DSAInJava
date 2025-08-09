@@ -1,5 +1,7 @@
 package Tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 import TreeUtil.TreeNode;
@@ -18,7 +20,7 @@ public class SymmetricTree_101 {
 //	then also we return false;
 //	time complexity :O(n)
 //	space complexity :O(n)
-	public static boolean isSymmetric_Iterative(TreeNode root) {
+	public static boolean isSymmetricIterative(TreeNode root) {
         Stack<TreeNode []>  stk = new Stack();
         TreeNode left= root.left;
         TreeNode right= root.right;
@@ -65,6 +67,44 @@ public class SymmetricTree_101 {
 	        boolean checkRight= DFS(left.right,right.left);
 	        return checkLeft && checkRight;
 	    }
+	    
+//	approch : we will use BFS traversal here we can use the approch where first we divide
+//	tree in 2 parts from root  left , right  then we can just 
+//	follow this where on left side we first take left node and 
+//	put it in queue and then take rightside right node in queue
+//	and after that the other side this will make sure the node which should be equal are one after another
+//	then we can just check if both are equal or not and return true
+//	one edge cases we cannot keep track of left and right side node in queue so we will
+//	also append null so that if the left node is null we will consider it as entry for comparison 
+	    
+	public static boolean isSymmetricBFS(TreeNode root) {
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.add(root.left);
+		queue.add(root.right);
+		while(!queue.isEmpty()) {
+			int levelSize = queue.size();
+			for(int i =0;i<levelSize;i+=2) {
+				TreeNode left = queue.remove();
+				TreeNode right = queue.remove();
+				if((left==null && right!=null) ||(left!=null && right==null)  || ((left!=null && right!=null) && (left.val != right.val))) {
+					return false;
+				}
+				if(left!=null) {
+					queue.add(left.left);
+				}
+				if(right!=null) {
+					queue.add(right.right);
+				}
+				if(left!=null) {
+					queue.add(left.right);
+				}
+				if(right!=null) {
+					queue.add(right.left);
+				}
+			}
+		}
+		return true;
+	}
 	public static void main(String[] args) {
 			
 		//		Example 1 :
@@ -89,8 +129,8 @@ public class SymmetricTree_101 {
 		
 		System.out.println("Iterative Approch : ");
 		
-    	boolean ans1 =isSymmetric_Iterative(t1);
-    	boolean ans2 =isSymmetric_Iterative(t2);
+    	boolean ans1 =isSymmetricIterative(t1);
+    	boolean ans2 =isSymmetricIterative(t2);
 
 		if(ans1==output1) {
 			System.out.println("Case 1 Passed");
@@ -125,7 +165,29 @@ public class SymmetricTree_101 {
 			System.out.println("Case 2 Failed");
 			System.out.println("Actual Output :"+output2 );
 			System.out.println("Your Output :"+ans2);
+		}	
+		
+		System.out.println("BFS  Approch : ");
+		
+		ans1 =isSymmetricBFS(t1);
+		ans2 =isSymmetricBFS(t2);
+		
+		if(ans1==output1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1 );
+			System.out.println("Your Output :"+ans1);
+		}
+		if(ans2==output2) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2 );
+			System.out.println("Your Output :"+ans2);
 		}		
+
+		
 		
 		
 		

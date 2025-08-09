@@ -61,6 +61,9 @@ public class BinaryTree {
 		return isSameTree(this.root,obj);
 	}
 	
+	public boolean equals(BinaryTree obj) {
+		return isSameTree(this.root,obj.getRoot());
+	}
 	public boolean equals(Tree obj) {
 		return isSameTree(this.root,obj.getRoot());
 	}
@@ -79,5 +82,31 @@ public class BinaryTree {
         boolean right =  isSameTree(p.right,q.right);
         return  left && right ;
     }
+	
+	
+	@Override
+	public String toString() {
+		StringBuilder  res = new StringBuilder("[");
+		TreeNode node = root;
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			int levelSize = queue.size();
+			for(int i =0;i<levelSize;i++) {
+				TreeNode poped = queue.remove();
+				if(poped==null) {
+					res.append(poped+",");
+				}else {
+					res.append(poped.val+",");
+					queue.add(poped.left);
+					queue.add(poped.right);
+				}
+			}
+			
+		}
+		res.setCharAt(res.length()-1, ']');
+		return res.toString();
+		
+	}
 	
 }
