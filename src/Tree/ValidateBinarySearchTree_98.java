@@ -123,22 +123,42 @@ public class ValidateBinarySearchTree_98 {
 	        prev=null;  
 	        return inOrderBest(root);
 	    }
-	    public static boolean inOrderBest(TreeNode node){
-	        if(node==null){
-	            return true;
-	        }
-	        boolean left = inOrderBest(node.left);
-	        if(prev!=null && prev.val>=node.val){
-	            return false;
-	        }
-	        prev=node;
-	        boolean right = inOrderBest(node.right);
-	        return left && right;
-	    }
-	    
-	    
-	    
+	    public static boolean inOrderBest(TreeNode node) {
+            if (node == null) {
+                return true;
+            }
+            boolean left = inOrderBest(node.left);
+            if (prev != null && prev.val >= node.val) {
+                return false;
+            }
+            prev = node;
+            boolean right = inOrderBest(node.right);
+            return left && right;
+        }
 
+//        Approch : here we can use pre -order traversal where we keep a range of number the node should be initialy no range can be define
+//              but if we check left side we can check the upper limit should be less then previos node
+//          similarly on right side we can do in right side where lower limiit is the previouse node
+//	time compleixyty :O(n)
+//	space compleixyty :O(n) -> only call stack space
+    public static boolean isValidBSTRecursion(TreeNode root) {
+        return helper(root, null,null);
+    }
+
+    public static boolean helper(TreeNode node , Integer low, Integer high){
+        if(node==null){
+            return true;
+        }
+        if(low!=null && low>=node.val){
+            return false;
+        }
+        if(high!=null && high<=node.val){
+            return false;
+        }
+        boolean leftside= helper(node.left,low,node.val);
+        boolean rightside= helper(node.right,node.val,high);
+        return leftside && rightside;
+    }
 	public static void main(String[] args) {
 		
 		//Example 1:
@@ -200,10 +220,11 @@ public class ValidateBinarySearchTree_98 {
 			System.out.println("Your Output :"+ans2);
 		}
 		
-		System.out.println("Bestapproch : ");
+
+		System.out.println("Best Recursion Approch : ");
 		
-		ans1= isValidBSTBest(root1);
-		ans2= isValidBSTBest(root2);
+		ans1= isValidBSTRecursion(root1);
+		ans2= isValidBSTRecursion(root2);
 		
 		
 		if(ans1==output1) {
@@ -220,7 +241,6 @@ public class ValidateBinarySearchTree_98 {
 			System.out.println("Actual Output :"+output2 );
 			System.out.println("Your Output :"+ans2);
 		}
-
 
 	}
 

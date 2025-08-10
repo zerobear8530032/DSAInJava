@@ -38,6 +38,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import TreeUtil.BinaryTree;
 import TreeUtil.TreeNode;
 
 public class FlattenBinaryTreeToLinkedList_114 {

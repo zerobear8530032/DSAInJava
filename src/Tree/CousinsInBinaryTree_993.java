@@ -43,6 +43,7 @@ package Tree;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import TreeUtil.BinaryTree;
 import TreeUtil.Tree;
 import TreeUtil.TreeNode;
 
