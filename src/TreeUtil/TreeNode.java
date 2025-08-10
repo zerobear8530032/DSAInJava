@@ -21,8 +21,11 @@ public class TreeNode {
 		
 		return " [ Val : "+val+" L : "+left+" R : "+right+" ] ";
 	}
+
 	
 	public boolean equals(TreeNode p) {
+        if(p==null && this==null){return true;}
+
 		return isSameTree(p,this);
 	}
 	  public boolean isSameTree(TreeNode p, TreeNode q) {

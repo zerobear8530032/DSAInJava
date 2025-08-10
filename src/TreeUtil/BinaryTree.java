@@ -20,7 +20,21 @@ public class BinaryTree {
 	public BinaryTree() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
+    public TreeNode getNode(int val){
+        return getNode(root,val);
+    }
+    private TreeNode getNode(TreeNode node, int val){
+        if(node==null){return null;}
+        if(node.val==val){return node;}
+        TreeNode left= getNode(node.left,val);
+        if(left!=null){
+            return left;
+        }else{
+            return getNode(node.right,val);
+        }
+    }
+
 	public BinaryTree(List<Integer> arr) {
 		if(arr==null) {
 			return ;
