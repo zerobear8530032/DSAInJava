@@ -46,12 +46,14 @@
 //
 //The number of nodes in the tree is in the range [0, 100].
 //-100 <= Node.val <= 100
+
 package Tree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import TreeUtil.BinaryTree;
 import TreeUtil.TreeNode;
 
 public class BinaryTreeRightSideView_199 {
@@ -108,44 +110,33 @@ public class BinaryTreeRightSideView_199 {
 
 	    }
 	public static void main(String[] args) {
-		//Example 1:
 
-		TreeNode root1 = new TreeNode(1);
-		root1.left= new TreeNode(2);
-		root1.right= new TreeNode(3);
-		root1.left.right= new TreeNode(5);
-		root1.right.right= new TreeNode(4);
-		
-		List<Integer> output1= new ArrayList(Arrays.asList(1,3,4));
+        //Example 1:
 
+        BinaryTree  root1 =  new BinaryTree(1,2,3,null,5,null,4);
+        List<Integer> output1= new ArrayList(Arrays.asList(1,3,4));
 
-		//Example 2:
+        //Example 2:
 
-		TreeNode root2 = new TreeNode(1);
-		root2.left= new TreeNode(2);
-		root2.left.left= new TreeNode(4);
-		root2.left.left.left= new TreeNode(5);
-		root2.right= new TreeNode(3);
-		
-		List<Integer> output2= new ArrayList(Arrays.asList(1,3,4,5));
-		
-		//Example 3:
+        BinaryTree  root2 =  new BinaryTree(1,2,3,4,null,null,null,5);
+        List<Integer> output2= new ArrayList(Arrays.asList(1,3,4,5));
 
-		TreeNode root3 = new TreeNode(1);
-		root3.right= new TreeNode(3);
-		List<Integer> output3= new ArrayList(Arrays.asList(1,3));
-		
-		//Example 4:
+        //Example 3:
 
-		TreeNode root4 =null;
-		List<Integer> output4= new ArrayList();
-		
-		List<Integer> ans1 = rightSideViewBruteForce(root1);
-		List<Integer> ans2 = rightSideViewBruteForce(root2);
-		List<Integer> ans3 =  rightSideViewBruteForce(root3);
-		List<Integer> ans4 =  rightSideViewBruteForce(root4);
-		
-		
+        BinaryTree  root3 =  new BinaryTree(1,null,3);
+        List<Integer> output3= new ArrayList(Arrays.asList(1,3));
+
+        //
+        //Example 4:
+
+        BinaryTree  root4 =  new BinaryTree();
+        List<Integer> output4= new ArrayList();
+
+        List<Integer> ans1 = rightSideViewBruteForce(root1.getRoot());
+        List<Integer> ans2 = rightSideViewBruteForce(root2.getRoot());
+        List<Integer> ans3 = rightSideViewBruteForce(root3.getRoot());
+        List<Integer> ans4 = rightSideViewBruteForce(root4.getRoot());
+
 		if(output1.equals( ans1)) {
 			System.out.println("Case 1 Passed");
 		}else {
@@ -178,10 +169,10 @@ public class BinaryTreeRightSideView_199 {
 		
 		System.out.println("Optimize Approch :");
 		
-		ans1 = rightSideViewBruteForce(root1);
-		ans2 = rightSideViewBruteForce(root2);
-		ans3 =  rightSideViewBruteForce(root3);
-		ans4 =  rightSideViewBruteForce(root4);
+		ans1 = rightSideViewBruteForce(root1.getRoot());
+		ans2 = rightSideViewBruteForce(root2.getRoot());
+		ans3 =  rightSideViewBruteForce(root3.getRoot());
+		ans4 =  rightSideViewBruteForce(root4.getRoot());
 		
 
 		if(output1.equals( ans1)) {
