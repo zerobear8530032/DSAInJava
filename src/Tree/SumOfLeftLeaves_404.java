@@ -29,6 +29,7 @@
 
 package Tree;
 
+import TreeUtil.BinaryTree;
 import TreeUtil.TreeNode;
 
 public class SumOfLeftLeaves_404 {
@@ -58,33 +59,24 @@ public class SumOfLeftLeaves_404 {
 		
 		
 		//Example 1:
-		
-		TreeNode root1 =new TreeNode(3);
-		root1.left= new  TreeNode(9);
-		root1.right= new  TreeNode(20);
-		root1.right.left= new  TreeNode(15);
-		root1.right.right= new  TreeNode(7);
-		
+
+        BinaryTree root1 = new BinaryTree(3,9,20,null,null,15,7);
 		int output1= 24;
 		
 		//Example 2:
 
-		TreeNode root2 =new TreeNode(1);
+        BinaryTree root2 =new BinaryTree(1);
 		int output2= 0;
 		
 		//Example 3:
-		
-		TreeNode root3 =new TreeNode(1);
-		root3.left= new  TreeNode(2);
-		root3.right= new  TreeNode(3);
-		root3.left.left= new  TreeNode(4);
-		root3.left.right= new  TreeNode(5);
+
+        BinaryTree root3 =new BinaryTree(1,2,3,4,5);
 		int output3=4;
 		
 		
-		int ans1 = sumOfLeftLeaves(root1);
-		int ans2 = sumOfLeftLeaves(root2);
-		int ans3 = sumOfLeftLeaves(root3);
+		int ans1 = sumOfLeftLeaves(root1.getRoot());
+		int ans2 = sumOfLeftLeaves(root2.getRoot());
+		int ans3 = sumOfLeftLeaves(root3.getRoot());
 		
 		if(ans1==output1) {
 			System.out.println("Case 1 Passed");
