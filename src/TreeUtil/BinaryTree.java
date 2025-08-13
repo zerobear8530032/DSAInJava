@@ -24,6 +24,30 @@ public class BinaryTree {
     public TreeNode getNode(int val){
         return getNode(root,val);
     }
+
+    @Override
+    public String toString() {
+        if(root==null){return "[]";}
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(this.root);
+        StringBuilder res= new StringBuilder("[");
+        while(!queue.isEmpty()){
+            int levelSize= queue.size();
+            for(int i =0;i<levelSize;i++){
+            TreeNode poped = queue.poll();
+            res.append(poped.val+",");
+                if(poped.left!=null){
+                    queue.add(poped.left);
+                }
+                if(poped.right!=null){
+                    queue.add(poped.right);
+                }
+            }
+        }
+        res.setCharAt(res.length()-1,']');
+        return res.toString();
+    }
+
     private TreeNode getNode(TreeNode node, int val){
         if(node==null){return null;}
         if(node.val==val){return node;}
