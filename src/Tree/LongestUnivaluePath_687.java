@@ -36,7 +36,8 @@ import TreeUtil.BinaryTree;
 import TreeUtil.TreeNode;
 
 public class LongestUnivaluePath_687 {
-
+// here we use  apporch using  bottom up dfs where we build answer and retuning a pair of nextnodeval , current longest count as
+//    output from recursion and a global res which will have max answer across the entire recursionc alss
     static  int res;
     public static int longestUnivaluePath(TreeNode root) {
         res=0;
@@ -57,15 +58,15 @@ public class LongestUnivaluePath_687 {
         int  right_node_val = right[0];
         int  right_longest= right[1];
         if(left_node_val==root.val && right_node_val==root.val){
-            res= Math.max(res,2+left_longest+right_longest);
+            res= Math.max(res,2+left_longest+right_longest);// 2+ because we are taking edges  so left , right makes 2 edges
             return new int [] {root.val,Math.max(left_longest,right_longest)+1};
         }
         else if(left_node_val==root.val){
-            res= Math.max(res,1+left_longest);
+            res= Math.max(res,1+left_longest);// here single edge will included
             return new int []{root.val,1+left_longest};
         }
         else if(right_node_val==root.val){
-            res= Math.max(res,1+right_longest);
+            res= Math.max(res,1+right_longest);// same here only single edge included
             return new int []{root.val,1+right_longest};
         }else{
             return new int [] {root.val,0};
