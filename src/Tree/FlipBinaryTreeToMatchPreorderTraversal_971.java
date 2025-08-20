@@ -56,6 +56,7 @@ public class FlipBinaryTreeToMatchPreorderTraversal_971 {
 //    approch : check root node if its equal check left and right node if all are equal we can get going if not we can add the root to res
 //  time complexity :O(n)
 //  space complexity :O(n)
+//    2458. Height of Binary Tree After Subtree Removal Queries
     static int i = 0;
     static List<Integer> res = new ArrayList<>();
 
