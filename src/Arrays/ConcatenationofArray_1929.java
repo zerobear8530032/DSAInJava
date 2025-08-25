@@ -72,12 +72,6 @@ public class ConcatenationofArray_1929 {
 			}
 		}
 		
-		for(int i =0;i<arr1.length;i++) {
-			if(arr1[i]!=arr2[i]) {
-				return false;
-			}
-		}
-		
 		return true;
 	}
 	public static void main(String[] args) {
