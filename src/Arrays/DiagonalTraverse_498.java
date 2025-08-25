@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class Solution {
+class DiagonalTraverse_498 {
 // approch :
 // just choose to put a single diagonal traversal and put all in a list of list then just reverse the odd index list and append entire list as a answer array
 //    example :
