@@ -124,7 +124,6 @@ public class KidsWiththeGreatestNumberofCandies_1431 {
 			System.out.println("Excepted Output : "+(output2));
 			System.out.println("Your Output : "+ (ans2));
 		}
-		
 
 		
 	}
