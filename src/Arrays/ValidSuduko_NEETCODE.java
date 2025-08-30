@@ -240,6 +240,9 @@ class ValidSuduko_NEETCODE {
                 return true;
             }
 
+
+
+
     public static void main(String[] args) {
     	char [][] board1=
     			{{'1','2','.','.','3','.','.','.','.'},
