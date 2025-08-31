@@ -106,6 +106,62 @@ public class SudokuSolver_37 {
 
 	        return true;
 	    }
+
+// here we cna use map of row,col,box
+//    and check number present in O(1)
+//    time reducing validation time from O(n)
+//    to O(1)
+
+    static boolean [][] row ;
+    static boolean [][] col ;
+    static boolean [][] box;
+
+    public static void solveSudokuBetter(char[][] board) {
+        row= new boolean [9][10];
+        col= new boolean [9][10];
+        box= new boolean [9][10];
+
+        for(int r =0;r<board.length;r++){
+            for(int c=0;c<board[0].length;c++){
+                if(board[r][c]!='.'){
+                    int num = board[r][c]-'0';
+                    row[r][num]=true;
+                    col[c][num]=true;
+                    box[ (r / 3) * 3 + (c / 3)][num]=true;
+                }
+            }
+        }
+        solve(board);
+    }
+    public static boolean solve(char [][] board){
+        for(int r =0;r<board.length;r++){
+            for(int c=0;c<board[r].length;c++){
+                if(board[r][c]=='.'){
+                    for(int i=1;i<=9;i++){
+                        if(valid(r,c,i)){
+                            int boxIndex = (r / 3) * 3 + (c / 3);
+                            board[r][c] = (char)('0' + i);
+                            // updating map
+                            row[r][i] = col[c][i] = box[boxIndex][i] = true;
+
+                            if(solve(board)){
+                                return true;
+                            }
+                            board[r][c]='.';
+                            row[r][i] = col[c][i] = box[boxIndex][i] = false;
+                        }
+                    }
+                    return false;
+                }
+
+            }
+        }
+        return true;
+    }
+
+    public static boolean valid(int r, int c, int num){
+        return !row[r][num] && !col[c][num] && !box[ (r / 3) * 3 + (c / 3)][num];
+    }
 	public static void main(String[] args) {
 		char [][] board1= {
 				{ '5' , '3' , '.' , '.' , '7' , '.', '.' , '.' , '.' },
@@ -121,7 +177,6 @@ public class SudokuSolver_37 {
 		char [][] board2= new  char [9][9];
 		for(int i =0;i<9;i++) {
 			Arrays.fill(board2[i], '.');
-			
 			}
 		
 		solveSudoku(board1);
@@ -132,8 +187,33 @@ public class SudokuSolver_37 {
 		}
 		for(char [] arr:board2) {
 			System.out.println(Arrays.toString(arr));
-		}
+        }
 
-	}
+        board1= new char [][]{
+                { '5' , '3' , '.' , '.' , '7' , '.', '.' , '.' , '.' },
+                { '6' , '.' , '.' , '1' , '9' , '5' , '.' , '.' , '.' },
+                { '.' , '9' , '8' ,'.' , '.' , '.' , '.' , '6' , '.' },
+                { '8' , '.' , '.' ,'.' , '6' , '.' , '.' , '.' , '3' },
+                { '4' , '.' , '.' ,'8' , '.' , '3' , '.' , '.' , '1' },
+                { '7' , '.' , '.' ,'.' , '2' , '.' , '.' , '.' , '6' },
+                { '.' , '6' , '.' ,'.' , '.' , '.' , '2' , '8' , '.' },
+                { '.' , '.' , '.' ,'4' , '1' , '9' , '.' , '.' , '5' },
+                { '.' , '.' , '.' ,'.' , '8' , '.' , '.' , '7' , '9'}};
+        board2= new  char [9][9];
+        for(int i =0;i<9;i++) {
+            Arrays.fill(board2[i], '.');
+        }
+
+        solveSudokuBetter(board1);
+        solveSudokuBetter(board2);
+
+        for(char [] arr:board1) {
+            System.out.println(Arrays.toString(arr));
+        }
+        for(char [] arr:board2) {
+            System.out.println(Arrays.toString(arr));
+        }
+
+    }
 
 }

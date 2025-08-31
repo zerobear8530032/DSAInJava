@@ -117,7 +117,9 @@ public class SudukoSolver {
 		
 		return true;
 	}
-	
+
+
+
 	public static void main(String[] args) {
 		
 		int [][] board1= {
@@ -131,6 +133,9 @@ public class SudukoSolver {
 				{ 0 , 0 , 0 , 4 , 1 , 9 , 0 , 0 , 5 },
 				{ 0 , 0 , 0 , 0 , 8 , 0 , 0 , 7 , 9}};
 		if(sudokusolver(board1)) {
+			display(board1);
+		}
+        if(sudokusolver(board1)) {
 			display(board1);
 		}
 	}
