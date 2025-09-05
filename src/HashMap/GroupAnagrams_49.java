@@ -159,10 +159,7 @@ public class GroupAnagrams_49 {
             System.out.println("Your Output :"+ans3);
         }
 
-        int [] arr= new int[2];
-        Arrays.sort(arr,new Comparator<>(){
 
-        });
 
 
     }
