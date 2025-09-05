@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class Pascal_sTriangleII_192 {
+class Pascal_sTriangleII_119 {
     public static List<Integer> getRow(int rowIndex) {
         List<Integer> res = new ArrayList();
         int[] arr1 = new int[rowIndex + 1];
