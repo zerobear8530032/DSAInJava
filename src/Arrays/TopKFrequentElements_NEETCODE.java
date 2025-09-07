@@ -79,28 +79,22 @@ public class TopKFrequentElements_NEETCODE {
 //	at last return top k elements;
 //	time complexity :O(n log n)
 //	space complexity :O(n)
-	 public static int[] topKFrequentBetter(int[] nums, int k) {
-		 HashMap<Integer,Integer> map= new HashMap();  
-		 for(int x :nums) {
-			 if(map.containsKey(x)) {
-				 map.put(x, map.get(x)+1);
-			 }else {
-				 map.put(x, 1);
-			 }
-		 }
-//	     sort the use a priority queue to store key value pairs in that:
-		 
-		 PriorityQueue<Map.Entry<Integer, Integer>> maxHeap = new PriorityQueue<>(
-		            (o1, o2) -> Integer.compare(o2.getValue(), o1.getValue())
-		        );
-		        // Add all entries to the minHeap (PriorityQueue)
-		        maxHeap.addAll(map.entrySet());
-		        int [] ans = new int [k];
-		        for(int i =0;i<k;i++) {
-		        	ans[i]=maxHeap.poll().getKey();
-		        }
-		 return ans;
-	 }
+public static int[] topKFrequentBetter(int[] nums, int k) {
+    HashMap<Integer,Integer> freqmap=new HashMap();
+    for(int x:nums){freqmap.put(x,freqmap.getOrDefault(x,0)+1);}
+    PriorityQueue<int[]> heap = new PriorityQueue<>((a,b)-> a[1]-b[1]);
+    for(Map.Entry<Integer,Integer> e: freqmap.entrySet()){
+        heap.add(new int [] {e.getKey(),e.getValue()});
+        if(heap.size()>k){
+            heap.poll();
+        }
+    }
+    int [] res= new int [k];
+    for(int i=0;i<k;i++){
+        res[i]=heap.poll()[0];
+    }
+    return res;
+}
 //	Best Approch : 
 //	 use bucket sort 
 //	 where we create a list of same length of input array and at each index it store 
@@ -173,6 +167,8 @@ public class TopKFrequentElements_NEETCODE {
 		 }
 		 return true;
 	 }
+
+
 
 	public static void main(String[] args) {
 		
