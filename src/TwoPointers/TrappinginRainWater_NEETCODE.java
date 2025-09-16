@@ -96,7 +96,31 @@ class TrappinginRainWater_NEETCODE {
 		return res;// ans
 		
 	}
-   
+//   best approch :
+//    here we knows we only need to keep track
+//    of left most and right most max and min  values we can use a single pointer to keep track of it
+public static int trapBest(int[] height) {
+    int n=height.length;
+    int l =0;
+    int r= n-1;
+    int lmax= height[l];
+    int rmax= height[r];
+    int totalWater=0;
+    while(l<=r){
+        lmax= Math.max(lmax,height[l]);
+        rmax= Math.max(rmax,height[r]);
+        if(lmax<rmax){
+            int water= lmax-height[l];
+            totalWater+=water;
+            l++;
+        }else{
+            int water= rmax-height[r];
+            totalWater+=water;
+            r--;
+        }
+    }
+    return totalWater;
+}
     public static void main(String[] args) {
     	//Example 1:
     	int [] height1 = {0,2,0,3,1,0,1,3,2,1};
@@ -113,7 +137,8 @@ class TrappinginRainWater_NEETCODE {
 		}
 		
 		
-		System.out.println("Best Approch :");
+
+		System.out.println("Better Approch :");
 		 	
 		ans1= trapBetter(height1);	
 		if(ans1==output1) {
@@ -123,6 +148,16 @@ class TrappinginRainWater_NEETCODE {
 			System.out.println("Expected Ouput :"+ (output1));
 			System.out.println("Your Answer :"+ (ans1));
 		}
-		
+
+        System.out.println("Best Approch :");
+
+        ans1= trapBest(height1);
+		if(ans1==output1) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Expected Ouput :"+ (output1));
+			System.out.println("Your Answer :"+ (ans1));
+		}
 	}
 }
