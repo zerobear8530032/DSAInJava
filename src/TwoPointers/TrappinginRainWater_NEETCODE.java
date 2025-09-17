@@ -18,6 +18,7 @@
 package TwoPointers;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 class TrappinginRainWater_NEETCODE {
 	
@@ -159,5 +160,13 @@ public static int trapBest(int[] height) {
 			System.out.println("Expected Ouput :"+ (output1));
 			System.out.println("Your Answer :"+ (ans1));
 		}
+//        {moussaka=greek, ramen=japanese, kimchi=korean, sushi=japanese, miso=japanese, bulgogi=korean}
+//        {greek=[Dish{name='moussaka', cuisines='greek', rating=15}],
+//        japanese=[Dish{name='ramen', cuisines='japanese', rating=14},
+//        Dish{name='miso', cuisines='japanese', rating=12},
+//        Dish{name='sushi', cuisines='japanese', rating=8}],
+//        korean=[Dish{name='kimchi', cuisines='korean',
+//        rating=9}, Dish{name='bulgogi', cuisines='korean', rating=7}]}
 	}
+
 }
