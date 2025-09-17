@@ -36,7 +36,7 @@ import java.util.List;
 public class Permutations_46 {
 //    logic is just take one element and skip one element
 //    time complexity O(N*N!)
-//    space complexity : O(n) : with extra space of used array
+//    space complexity : O(n!) : with extra space of used array
 
         public static List<List<Integer>> permute(int[] nums) {
             List<List<Integer>> output = new ArrayList();
@@ -61,7 +61,7 @@ public class Permutations_46 {
         }
 
     //    time complexity O(N*N!)
-    //    space complexity : O(n) : np extra spaec other then callstack
+    //    space complexity : O(n!) : np extra spaec other then callstack
     public static List<List<Integer>> permuteBetter(int[] nums) {
         List<List<Integer>> output= new ArrayList();
         backtrack(nums,0,output);
