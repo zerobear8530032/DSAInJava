@@ -36,6 +36,8 @@ package slidingwindow;
 import java.util.HashMap;
 
 public class LongestSubstringWithoutRepeatingCharacters_3 {
+
+
     public static int lengthOfLongestSubstring(String s) {
         HashMap<Character,Integer> map = new HashMap();
         int l=0;
