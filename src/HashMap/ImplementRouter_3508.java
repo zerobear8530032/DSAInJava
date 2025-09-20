@@ -131,7 +131,6 @@ import java.util.*;
 //    }
 //}
 
-class Router {
 //3️⃣ Algorithm / Approach
 //Add Packet
 //
@@ -176,9 +175,9 @@ class Router {
 //| `forwardPacket` | O(1) for queue, set, startMap → **O(1)**                                                              |
 //| `getCount`      | Binary search on timestamps → O(log n) per query, where n = number of timestamps for that destination |
 //| Overall memory  | O(capacity) for queue + O(capacity) for timestamps + O(capacity) for set → **O(capacity)**            |
-
+class Router {
     ArrayDeque<int []> queue;
-    List<Integer,List<Integer>> destinationMap;
+    HashMap<Integer,List<Integer>> destinationMap;
     HashMap<Integer,Integer> startMap;
     HashSet<String> seen;
     int capacity;
