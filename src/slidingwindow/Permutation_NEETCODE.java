@@ -28,7 +28,7 @@ import java.util.Arrays;
 public class Permutation_NEETCODE {
 // we can take a frequency map of the  s1 and with sliding window if any freq of character in window exceed the freq
 //    we can reduce the size of the window
-// 
+//
 //time complexity : O(26*n)
 //space complexity : O(1)
     public static boolean checkInclusion(String s1, String s2) {
