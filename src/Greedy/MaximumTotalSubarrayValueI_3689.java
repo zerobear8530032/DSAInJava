@@ -63,7 +63,7 @@ public class MaximumTotalSubarrayValueI_3689 {
 //    making it similar to taking it k times
 //     time complexity : O(n)
 //     space complexity : O(1)
-    public long maxTotalValue(int[] nums, int k) {
+    public static long maxTotalValue(int[] nums, int k) {
         long max =Integer.MIN_VALUE;
         long min =Integer.MAX_VALUE;
         for(int x:nums){
@@ -80,15 +80,32 @@ public class MaximumTotalSubarrayValueI_3689 {
 
         int [] nums1 = {1,3,2};
         int k1 = 2;
-        int output1= 4;
+        long output1= 4;
 
         //Example 2:
 
         int [] nums2 = {4,2,5,1};
         int k2 = 3;
-        int output2= 12;
+        long output2= 12;
 
-        int ans1 =
+        long ans1 = maxTotalValue(nums1,k1);
+        long ans2 = maxTotalValue(nums2,k2);
+
+
+        if(output1==ans1) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Actual Output :"+output1 );
+            System.out.println("Your Output :"+ans1);
+        }
+        if(output2==ans2) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Actual Output :"+output2 );
+            System.out.println("Your Output :"+ans2);
+        }
 
     }
 }

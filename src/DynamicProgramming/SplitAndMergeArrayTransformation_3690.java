@@ -44,5 +44,94 @@
 
 package DynamicProgramming;
 
+import java.util.*;
+
 public class SplitAndMergeArrayTransformation_3690 {
+//    use bfs to try every single possible merge and split to get the answer
+//    bfs will always get the fastest answer so we does not need to compare it with other routes
+//    time complexity : O(n!⋅n3)
+//    space complexity : O(n!⋅n3)
+    public static int minSplitMerge(int[] nums1, int[] nums2) {
+        Queue<List<Integer>> queue = new LinkedList<>();
+        List<Integer> nums1list = new ArrayList<>();
+        List<Integer> target = new ArrayList<>();
+        HashSet<String> seen = new HashSet<>();
+        for (int x : nums1) {
+            nums1list.add(x);
+        }
+        for (int x : nums2) {
+            target.add(x);
+        }
+        if(target.equals(nums1list)){
+            return 0;
+        }
+        queue.add(nums1list);
+        int count =1;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for(int iteration =0;iteration<size;iteration++){
+                List<Integer> poped = queue.remove();
+                String combstr = poped.toString();
+                if (seen.contains(combstr)) {
+                    continue;
+                } else {
+                    seen.add(combstr);
+                }
+                for (int i = 0; i < poped.size(); i++) {
+                    for (int j = i + 1; j < poped.size() + 1; j++) {
+                        List<Integer> sublist = copyRange(poped, i, j);
+                        List<Integer> deleted = deleteRange(poped, i, j);
+                        for (int index = 0; index <= deleted.size(); index++) {
+                            List<Integer> combination = new ArrayList<>(deleted);
+                            combination.addAll(index, sublist);
+                            queue.add(combination);
+                            if (combination.equals(target)) {
+                                return count;
+                            }
+                        }
+                    }
+                }
+            }
+            count++;
+        }
+        return -1;
+    }
+    public static List<Integer> copyRange(List<Integer> list, int s, int e){
+        if(s<0 || e<0 || s>list.size() || e>list.size()){
+            throw new IndexOutOfBoundsException("list size :"+list.size()+" but index were given s:"+s+" e:"+e);
+        }
+        List<Integer> copyList= new ArrayList<>();
+        for(int i=s;i<e;i++){
+            copyList.add(list.get(i));
+        }
+        return copyList;
+    }
+
+    public static List<Integer> deleteRange(List<Integer> list, int s, int e){
+        if(s<0 || e<0 || s>list.size() || e>list.size()) {
+            throw new IndexOutOfBoundsException("list size :" + list.size() + " but index were given s:" + s + " e:" + e);
+        }
+        List<Integer> output= new ArrayList<>();
+        for(int i =0;i<list.size();i++){
+            if(i>=s && i<e){
+                continue;
+            }
+            output.add(list.get(i));
+        }
+        return output;
+    }
+    public static void main(String[] args) {
+        //Example 1:
+
+        int [] nums11 = {3,1,2}, nums12 = {1,2,3};
+        int output1=1;
+
+        //Example 2:
+
+        int [] nums21 = {1,1,2,3,4,5}, nums22 = {5,4,3,2,1,1};
+        int output2=3;
+
+        System.out.println(minSplitMerge(nums11,nums12));
+        System.out.println(minSplitMerge(nums21,nums22));
+    }
 }
