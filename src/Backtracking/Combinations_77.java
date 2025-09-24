@@ -40,7 +40,7 @@ public class Combinations_77 {
 //    the length k we can add the combination to the  final res
 //    other wise we can get the next element
 //    time complexity : O(k⋅C(n,k))
-//    space complexity : O(k⋅C(n,k))
+//    space complexit
 
     public static List<List<Integer>> combine(int n, int k) {
         // helper
