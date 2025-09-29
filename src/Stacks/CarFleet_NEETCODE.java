@@ -65,6 +65,10 @@ class Car implements Comparable<Car>{
     }
 
 }
+// approch we will sort the entire array of cars on the basics of there position in decrasing order and then create a monotnic stack
+//where we push a car only if the current top car is slower then the current car we we will push it in stack other wise we will just keep going
+// Time complexity : O(n log n +n)
+// space complexity : O(n)
 public class CarFleet_NEETCODE {
 
         public static int carFleet(int target, int[] position, int[] speed) {
