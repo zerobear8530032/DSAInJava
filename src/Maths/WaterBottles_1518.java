@@ -73,11 +73,40 @@ public class WaterBottles_1518 {
         System.out.println("Brute Force Approch :");
         int ans1= numWaterBottlesBruteForce(numBottles1,numExchange1);
         int ans2= numWaterBottlesBruteForce(numBottles2,numExchange2);
+        if(output1==(ans1)) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Actual Output :"+output1 );
+            System.out.println("Your Output :"+ans1);
+        }
+        if(output2==(ans2)) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Actual Output :"+output2 );
+            System.out.println("Your Output :"+ans2);
+        }
+
 
         System.out.println("Better Approch :");
 
         ans1= numWaterBottlesBruteForce(numBottles1,numExchange1);
         ans2= numWaterBottlesBruteForce(numBottles2,numExchange2);
+        if(output1==(ans1)) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Actual Output :"+output1 );
+            System.out.println("Your Output :"+ans1);
+        }
+        if(output2==(ans2)) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Actual Output :"+output2 );
+            System.out.println("Your Output :"+ans2);
+        }
 
     }
 
