@@ -45,7 +45,7 @@ public class MaxAreaRectangleInBinaryMatrix {
         for(int i =0;i<matrix[0].length;i++){
             currrow[i]= matrix[0][i]-'0';
         }
-        // lets copy each any eevery row :
+        // lets copy each any every row :
         int maxArea= MAH(currrow);
         for(int row=1;row<matrix.length;row++){
             for(int col=0;col<matrix[row].length;col++){
