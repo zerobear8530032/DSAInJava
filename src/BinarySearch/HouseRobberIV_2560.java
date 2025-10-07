@@ -39,6 +39,9 @@
 //1 <= k <= (nums.length + 1)/2
 package BinarySearch;
 
+import java.util.HashMap;
+import java.util.TreeSet;
+
 public class HouseRobberIV_2560 {
 	
 //	we can use binary search :
@@ -117,6 +120,50 @@ public class HouseRobberIV_2560 {
 			System.out.println("Actual Output :"+output2 );
 			System.out.println("Your Output :"+ans2);
 		}
+
+
+        TreeSet<Integer> set= new TreeSet<>();
+        set.add(12);class Solution {
+            public int[] avoidFlood(int[] rains) {
+                HashMap<Integer,Integer> rainyDays = new HashMap<Integer,Integer>();
+                TreeSet<Integer> dryDays = new TreeSet<Integer>();
+                int [] output= new int [rains.length];
+                for(int i =0;i<rains.length;i++){
+                    if(rains[i]!=0){
+                        if(rainyDays.containsKey(rains[i])){
+                            int lastRainedDay = rainyDays.get(rains[i]);
+                            Integer lastDryDay = dryDays.higher(lastRainedDay);
+                            if(lastDryDay==null){
+                                return new int [] {};
+                            }else{
+                                output[lastDryDay]= rains[i];
+                                dryDays.remove(lastDryDay);
+                                rainyDays.put(rains[i],i);
+                                output[i]=-1;
+                            }
+                        }else{
+                            output[i]=-1;
+                            rainyDays.put(rains[i],i);
+                        }
+                    }else{
+                        dryDays.add(i);
+                        output[i]=1;// by default we consider we will dry 1 lake for not
+                    }
+                }
+                return output;
+            }
+        }
+        set.add(1);
+        set.add(2);
+        set.add(15);
+        set.add(11);
+        set.add(143);
+        set.add(11);
+
+        System.out.println(set);
+
+        System.out.println(set.higher(213));
+        System.out.println(set.higher(1));
 
 	}
 

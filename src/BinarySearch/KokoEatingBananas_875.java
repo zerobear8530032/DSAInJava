@@ -93,7 +93,31 @@ public class KokoEatingBananas_875 {
         int h3 = 6;
         int output3= 30;
 
+        int ans1 = minEatingSpeed(piles1,h1);
+        int ans2 = minEatingSpeed(piles1,h2);
+        int ans3 = minEatingSpeed(piles1,h3);
 
-        int ans1 =
+        if(ans1==output1) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Expected Ouput :"+ (output1));
+            System.out.println("Your Answer :"+ (ans1));
+        }
+        if(ans2==output2) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Expected Ouput :"+ (output2));
+            System.out.println("Your Answer :"+ (ans2));
+        }
+        if(ans3==output3) {
+            System.out.println("Case 3 Passed");
+        }else {
+            System.out.println("Case 3 Failed");
+            System.out.println("Expected Ouput :"+ (output3));
+            System.out.println("Your Answer :"+ (ans3));
+        }
+
     }
 }
