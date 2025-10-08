@@ -45,6 +45,13 @@ package BinarySearch;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+// we can sort the entire potions array
+// now we can check for each spell which is the lower potion power which can reach success
+// cause rest of them will automatically be true
+// so we can just get first potion which can get success and get distanc btw that and end
+// is the number of pairs we need
+// time complexity : O( n log n)
+// space complexity : O(1)
 public class SuccessfulPairsOfSpellsAndPotions_2300 {
     public static int[] successfulPairs(int[] spells, int[] potions, long success) {
         Arrays.sort(potions);
