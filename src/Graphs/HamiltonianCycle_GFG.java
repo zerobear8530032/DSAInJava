@@ -113,8 +113,7 @@ public class HamiltonianCycle_GFG {
 		if(output2.size()==0) {
 			System.out.println("No Valid Path Found");
 		}else {
-			System.out.println(output1);			
-			
+			System.out.println(output1);
 		}
 
 	}
