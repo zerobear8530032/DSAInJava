@@ -118,7 +118,8 @@ public class RemoveKBalancedSubstrings {
         return s;
     }
 // better approch :
-
+// time comeplxitu : O(n)
+// space comeplxitu : O(n)
     static class Pair {
         char symbol;
         int size;
