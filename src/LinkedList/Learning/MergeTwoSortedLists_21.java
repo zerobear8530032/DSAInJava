@@ -49,7 +49,15 @@ public class MergeTwoSortedLists_21 {
 //	and incremeent the pointer of that list to next
 //	if the value is same we can move any pointer or both pointer at the same time and adding them to list
 //	after this end maybe some elements left so we will add them to the end of the list 
-//	the list will remain sorted cause 2 list were sorted be default 
+//	the list will remain sorted cause 2 list were sorted be default
+
+//     approch is simple : this is the same priciple used to implement merge sort 
+//
+//    use 2 pointer one at l1 second at l2
+//    now check which one is smaller if l1 add it to result list and move l1 pointer
+//    other wise if l2 is smaller add l2 current node at result list and move l2 pointer
+//    in the end both list will get used
+//    and we will get sorted list merged together
 //  time complexity : O(n+m) : n, m are l1,l2 length
 //  space complexity : O(n+m) : the final listwill have all teh nodes 
 	public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
