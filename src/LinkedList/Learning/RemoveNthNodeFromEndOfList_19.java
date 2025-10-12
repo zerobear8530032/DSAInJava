@@ -82,8 +82,6 @@ public class RemoveNthNodeFromEndOfList_19 {
 	       }
 	       return head;
 	    }
-
-
 	public static void main(String[] args) {
 		//Example 1:
 
@@ -123,33 +121,12 @@ public class RemoveNthNodeFromEndOfList_19 {
     		System.out.println("Your Answer :"+ ans2);  		
     	}
     	if(output3.equals(ans3)) {
-    		System.out.println("Case 2 Passed");
+    		System.out.println("Case 3 Passed");
     	}else {
-    		System.out.println("Case 2 Failed");
-    		System.out.println("Expected Ouput :"+ output3);
-    		System.out.println("Your Answer :"+ ans3);  		
-    	}
-    	
-//		    System.out.println("Better Approch :");
-//		    ans1=findDisappearedNumbersBest(nums1);
-//		    ans2=findDisappearedNumbersBest(nums2);
-//		    
-//		    if(output1.equals(ans1)) {
-//		    	System.out.println("Case 1 Passed");
-//		    }else {
-//		    	System.out.println("Case 1 Failed");
-//		    	System.out.println("Expected Ouput :"+ output1);
-//		    	System.out.println("Your Answer :"+ ans1);  		
-//		    }
-//		    if(output2.equals(ans2)) {
-//		    	System.out.println("Case 2 Passed");
-//		    }else {
-//		    	System.out.println("Case 2 Failed");
-//		    	System.out.println("Expected Ouput :"+ output2);
-//		    	System.out.println("Your Answer :"+ ans2);  		
-//		    }
-//
-		
+            System.out.println("Case 3 Failed");
+            System.out.println("Expected Ouput :" + output3);
+            System.out.println("Your Answer :" + ans3);
+        }
 
 	}
 

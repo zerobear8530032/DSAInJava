@@ -40,7 +40,7 @@ public class LinkedListCycleDetection_NEETCODE {
 //    fast move 2 ahead
 //    both starting at head
 //    if both of them meet at a point means it have cycle
-//    other wise it does not 
+//    other wise it does not
 //    time complexity : O(n)
 //    space complexity : O(1)
     public static boolean hasCycle(ListNode head) {

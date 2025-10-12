@@ -79,67 +79,57 @@ public class ReorderList_143 {
 //	best approch :
 //	the approch is simple we will get the length of the list : [1,2,3,4,5] : here the list length =5 
 //	now we take mid = 5/2 =2 in integer
-//	now we will reverse the list frppm index 2 till end of list
+//	now we will reverse the list from index 2 till end of list
 //	so the list will be in 2 parts :
 //	[1,2] , [3,4,5]-> rev second part = [5,4,3]
-//	now we can iterate and add the list elements 
+//	now we can iterate and add the list elements alternatively
 //	 1,5,2,4,3
 //	 we can add alternative elements to the original list 
+public static void reorderListBest(ListNode head) {
+    // in place reorder
+    ListNode mid=getMidNode(head);
+    ListNode secondHalf= mid.next;
+    mid.next=null;
+    ListNode reversed= reverse(secondHalf);
+    // insert the values in the linked list :
+    ListNode left= head;
+    ListNode right= reversed;
+    while(left!=null && right!=null){
+        ListNode leftnext = left.next;
+        ListNode rightnext = right.next;
+        left.next=right;
+        right.next=leftnext;
+        left=leftnext;
+        right=rightnext;
+    }
+}
 
-	    public static void reorderListBest(ListNode head) {
-	        if(head==null){
-	            return ;
-	        }
-	        if(head.next==null){
-	            return ;
-	        }
-	        int length =getLength(head);// get length
-	        int midIndex= length/2;// miid idx
-	        ListNode revList = reverseFromIndex( head, midIndex);// reverse the list and get the head
-	        ListNode curr= head;// get curr list head
-	        while(curr!=null && curr.next!=null){// here we add alternative nodes
-	            ListNode next = curr.next;// next ptr
-	            ListNode revnext= revList.next;// reverselist ptr
-	            curr.next=revList;// connect current node to revfirst node
-	            revList.next=next;// connect rest of list to the revfirst node
-	            curr=next;// get to the next node
-	            revList=revnext;// get the next node of rev
-	        }
-	        curr.next=revList;// here if the node is null we can just add the rest of the rev list to the end 
-	    
-	    }
-	    public static int getLength(ListNode head){
-	        int  count=0;
-	        while(head!=null){
-	            head=head.next;
-	            count++;
-	        }
-	        return count;
-	    }
-	    public static ListNode reverseFromIndex(ListNode head,int idx){
-	        ListNode ptr=head;
-	        // reach the reverse index
-	        for(int i =0;i<idx-1;i++){// here we get the index -1 node why 
-	        // because we have to break the connection btw the rev and prev node
-	            ptr=ptr.next;
-	        }
-	        // this next currently store the head of list which will  reverse  
-	        ListNode next= ptr.next;
-	        ptr.next=null;// and ptr will break connection from rest of the list 
-	        ptr=next;// now ptr will be the head 
-	        // start reverse :
-	        ListNode prev=null;
-	        while(ptr!=null){
-	            next = ptr.next;
-	            ptr.next=prev;
-	            prev=ptr;
-	            ptr=next;
-	        }
-	        // at the endd the list will be reverse and curr will be null 
-	        // and the prev will have the head of the reverse list 
-	        return prev;
-	    }
-	    
+
+    public static ListNode reverse(ListNode head){
+        ListNode prev=null;
+        ListNode curr=head;
+        while(curr!=null){
+            ListNode next = curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+
+    public static ListNode getMidNode(ListNode head){
+        if(head==null){return head;}
+        ListNode slow=head;
+        ListNode fast=head.next;
+        while(fast!=null){
+            fast=fast.next;
+            if(fast==null){break;}
+            fast=fast.next;
+            slow=slow.next;
+        }
+        return slow;
+    }
+
 	    
 	public static void main(String[] args) {
 		
