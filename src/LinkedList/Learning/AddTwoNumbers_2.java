@@ -101,7 +101,35 @@ public class AddTwoNumbers_2 {
 	        return resHead;
 	    }
 
-	public static void main(String[] args) {
+
+//        clear code of above approch :
+//    we need to know 2 thing before it
+//    first we can get the place value of sum of 2 number by n1+n2+carry %10 // this will give value of first number
+//    second we can get the carray over value of the sum of 2 number by n1+n2+carry /10 // this wil; remove the first number
+//    above works for 2 digits number only and sum of two single digits  number cannot exceed 2 digits
+//    now if we can find of above things we can just iterate over both linkedlist and compute every thing as a single list
+//    one last thing to make sure the sum should be reversed so we can add the elements ahead of a dummy node as result
+//    this will automatically reverse it for us
+//    time complexity : O(n)
+//    space complexity : O(n)
+public ListNode addTwoNumbersClean(ListNode l1, ListNode l2) {
+    int carry=0;
+    ListNode res= new ListNode();
+    ListNode ptr=res;
+    while(l1!=null || l2!=null || carry!=0){
+        int n1= l1==null ? 0:l1.val;
+        int n2= l2==null ? 0:l2.val;
+        int sum = n1+n2+carry;
+        int placeval= sum%10;
+        carry= sum/10;
+        ptr.next= new ListNode(placeval);
+        ptr=ptr.next;
+        if(l1!=null){l1=l1.next; }
+        if(l2!=null){l2=l2.next; }
+    }
+    return res.next;}
+
+    public static void main(String[] args) {
 		//Example 1:
 
 		MyList l11 = new MyList(2,4,3), l12 = new MyList(5,6,4);
