@@ -36,6 +36,7 @@
 package LinkedList.Learning;
 
 import java.util.Arrays;
+import java.util.List;
 
 import LinkedList.Utils.ListNode;
 import LinkedList.Utils.MyList;
@@ -144,6 +145,50 @@ public class ReverseNodesInkGroup_25 {
 	        head.next = curr;
 	        return head;
 	    }
+
+// approcj :
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        if(k==1){return head;}
+        int len= length(head);
+        int groups =len/k;
+        ListNode res= new ListNode();
+        ListNode ptr= res;
+        for(int i =0;i<groups;i++){
+            ListNode [] reverse= reverseK(head,k);
+            ListNode reversedTail= reverse[0];
+            ListNode reversedHead= reverse[1];
+            head= reverse[2];
+            ptr.next=reversedHead;
+            ptr=reversedTail;
+            ptr.next=head;
+        }
+        return res.next;
+    }
+//    this reverseK give 3 thing as array
+//    first is the tail of reverse group
+//    second the head of reverse group
+//    third is the remaining list
+    private static ListNode[] reverseK(ListNode head,int k){
+        ListNode prev=null;
+        ListNode curr=head;
+        int n =0;
+        while (n<k) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            n++;
+        }
+        return new ListNode [] {head,prev,curr};
+    }
+    private static int length(ListNode head){
+        int count=0;
+        while(head!=null){
+            head=head.next;
+            count++;
+        }
+        return count;
+    }
 	
 
 	public static void main(String[] args) {
@@ -154,35 +199,35 @@ public class ReverseNodesInkGroup_25 {
 		MyList output1 =  new MyList(2,1,4,3,5);
 
 
-		//Example 2:
-		
-		MyList head2 =  new MyList(1,2,3,4,5);
-		int k2 = 3;
-		MyList output2 =  new MyList(3,2,1,4,5);
-		
-		System.out.println("Brute Force Approch :");
-		
-		ListNode ans1 = reverseKGroupBruteForce(head1.getHead(),k1);
-		ListNode ans2 = reverseKGroupBruteForce(head2.getHead(),k2);
-		
-		
-		if(output1.equals(ans1)) {
-			System.out.println("Case 1 Passed");
-		}else {
-			System.out.println("Case 1 Failed");
-			System.out.println("Actual Output :"+output1);
-			System.out.println("Your Output :"+ans1);
-		}
-		if(output2.equals(ans2)) {
-			System.out.println("Case 2 Passed");
-		}else {
-			System.out.println("Case 2 Failed");
-			System.out.println("Actual Output :"+output2);
-			System.out.println("Your Output :"+ans2);
-		}		
-		
-		System.out.println("Best Approch ");
-		head1 =  new MyList(1,2,3,4,5);
+        //Example 2:
+
+        MyList head2 = new MyList(1, 2, 3, 4, 5);
+        int k2 = 3;
+        MyList output2 = new MyList(3, 2, 1, 4, 5);
+
+        System.out.println("Brute Force Approch :");
+
+        ListNode ans1 = reverseKGroupBruteForce(head1.getHead(), k1);
+        ListNode ans2 = reverseKGroupBruteForce(head2.getHead(), k2);
+
+
+        if (output1.equals(ans1)) {
+            System.out.println("Case 1 Passed");
+        } else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Actual Output :" + output1);
+            System.out.println("Your Output :" + ans1);
+        }
+        if (output2.equals(ans2)) {
+            System.out.println("Case 2 Passed");
+        } else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Actual Output :" + output2);
+            System.out.println("Your Output :" + ans2);
+        }
+
+        System.out.println("Best Approch ");
+        head1 = new MyList(1,2,3,4,5);
 		head2 =  new MyList(1,2,3,4,5);
 		
 		ans1 = reverseKGroupBetter(head1.getHead(),k1);
@@ -202,7 +247,30 @@ public class ReverseNodesInkGroup_25 {
 			System.out.println("Case 2 Failed");
 			System.out.println("Actual Output :"+output2);
 			System.out.println("Your Output :"+ans2);
-		}		
+		}
+
+		System.out.println("Best Approch ");
+		head1 =  new MyList(1,2,3,4,5);
+		head2 =  new MyList(1,2,3,4,5);
+
+		ans1 = reverseKGroup(head1.getHead(),k1);
+		ans2 = reverseKGroup(head2.getHead(),k2);
+
+
+		if(output1.equals(ans1)) {
+			System.out.println("Case 1 Passed");
+		}else {
+			System.out.println("Case 1 Failed");
+			System.out.println("Actual Output :"+output1);
+			System.out.println("Your Output :"+ans1);
+		}
+		if(output2.equals(ans2)) {
+			System.out.println("Case 2 Passed");
+		}else {
+			System.out.println("Case 2 Failed");
+			System.out.println("Actual Output :"+output2);
+			System.out.println("Your Output :"+ans2);
+		}
 	}
 
 }
