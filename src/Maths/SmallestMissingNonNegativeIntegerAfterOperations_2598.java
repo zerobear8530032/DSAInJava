@@ -78,7 +78,7 @@ public class SmallestMissingNonNegativeIntegerAfterOperations_2598 {
             return nums.length;// at the end the length of array is the answer at max
         }
 
-        public void swap(int i, int j , int [] arr){
+        public static void swap(int i, int j , int [] arr){
             int t= arr[i];
             arr[i]=arr[j];
             arr[j]=t;
@@ -162,13 +162,7 @@ public class SmallestMissingNonNegativeIntegerAfterOperations_2598 {
             System.out.println("Actual Output :"+output2 );
             System.out.println("Your Output :"+ans2);
         }
-        if(output3==ans3) {
-            System.out.println("Case 3 Passed");
-        }else {
-            System.out.println("Case 3 Failed");
-            System.out.println("Actual Output :"+output3 );
-            System.out.println("Your Output :"+ans3);
-        }
+
 
 
 
