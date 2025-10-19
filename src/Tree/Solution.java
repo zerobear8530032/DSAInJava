@@ -52,5 +52,9 @@ class Solution {
 
         TreeNode ans1 = lowestCommonAncestor(root1.getRoot(),p1,q1);
         TreeNode ans2 = lowestCommonAncestor(root2.getRoot(),p2,q2);
+        char [] chars= {'a','a'};
+        String s="".join("");
+        System.out.println(s);
+
     }
 }
