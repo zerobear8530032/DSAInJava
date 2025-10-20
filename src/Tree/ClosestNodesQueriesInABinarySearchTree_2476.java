@@ -212,7 +212,6 @@ public class ClosestNodesQueriesInABinarySearchTree_2476 {
             System.out.println("Your Output :"+ans2);
         }
 
-        System.out.println("Better Approch :");
 
 
     }
