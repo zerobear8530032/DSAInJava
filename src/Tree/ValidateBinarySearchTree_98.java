@@ -159,6 +159,7 @@ public class ValidateBinarySearchTree_98 {
         boolean rightside= helper(node.right,node.val,high);
         return leftside && rightside;
     }
+
 	public static void main(String[] args) {
 		
 		//Example 1:
