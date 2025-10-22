@@ -90,7 +90,7 @@ public class BinaryTreeMaximumPathSum_124 {
         int output2= 42;
 
         int ans1 = maxPathSum(root1.getRoot());
-        int ans2 = maxPathSum(root1.getRoot());
+        int ans2 = maxPathSum(root2.getRoot());
         if((output1==ans1)) {
             System.out.println("Case 1 Passed");
         }else {
