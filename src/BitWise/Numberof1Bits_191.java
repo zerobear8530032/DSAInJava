@@ -50,7 +50,11 @@
 
 package BitWise;
 
-public class Numberof1Bits_191 {
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class Numberof1Bits_191{
+
 
 //	we  can use right shift operation repeatedly untill the number is not zero
 //	and use n&1 to check current lsb is a set bit or not
@@ -152,7 +156,6 @@ public class Numberof1Bits_191 {
 			System.out.println("Expected Ouput :"+ (output3));
 			System.out.println("Your Answer :"+ (ans3));
 		}
-
 	}
 
 }
