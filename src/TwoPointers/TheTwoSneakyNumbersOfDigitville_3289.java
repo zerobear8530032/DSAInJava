@@ -72,8 +72,35 @@ public class TheTwoSneakyNumbersOfDigitville_3289 {
         }
         return res;
     }
+    //    approch:
+    //    here we can map each number to a index of map array and compute their frequency
+    //    if the frequency of any number is 2 we can add it to answer
+    //    time complexity : O(n)
+    //    space complexity : O(1)
+    public static int[] getSneakyNumbersBetter(int[] nums) {
+            int [] res= new int [2];
+            int idx=0;
+            for(int i =0;i<nums.length;i++){
+                while(nums[i]!=-1 && nums[i]!=i){
+                    if(idx==2){break;}
+                    int x1= nums[i];
+                    int x2= nums[nums[i]==-1? nums[i+1] :nums[i]];
+                    if(x1==x2){
+                        nums[i]=-1;
+                        res[idx]=x1;
+                        idx++;
+                        break;
+                    }
+                    nums[i]=x2;
+                    nums[x1]=x1;
+                }
+            }
+            return res;
+        }
 
-    
+
+
+
     public static void main(String[] args) {
         //Example 1:
 
@@ -123,7 +150,6 @@ public class TheTwoSneakyNumbersOfDigitville_3289 {
         ans1 =getSneakyNumbersBetter(nums1);
         ans2 =getSneakyNumbersBetter(nums2);
         ans3 =getSneakyNumbersBetter(nums3);
-        ans3 =getSneakyNumbersBetter(new int [] {0,0,1,1});
 
 
         Arrays.sort(ans1);
