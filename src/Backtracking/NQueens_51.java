@@ -32,7 +32,9 @@ package Backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.function.Function;
 
 public class NQueens_51 {
 	
@@ -136,10 +138,18 @@ public class NQueens_51 {
     	if(output2.equals(ans2)) {
     		System.out.println("Case 2 Passed");
     	}else {
-    		System.out.println("Case 2 Failed");
-    		System.out.println("Expected Ouput :"+ output2);
-    		System.out.println("Your Answer :"+ ans2);  		
-    	}
-	}
+            System.out.println("Case 2 Failed");
+            System.out.println("Expected Ouput :" + output2);
+            System.out.println("Your Answer :" + ans2);
+        }
+
+        HashMap<Integer,Integer> map = new HashMap<>();
+        map.computeIfAbsent(6, new Function<Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer) {
+                return 0;
+            }
+        });
+ 	}
 
 }
