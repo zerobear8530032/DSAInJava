@@ -1,5 +1,26 @@
 package Graphs;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class Node {
+    public int val;
+    public List<Node> neighbors;
+    public Node() {
+        val = 0;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val) {
+        val = _val;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}
 public class CloneGraph_133 {
     /*
 Definition for a Node.
@@ -20,12 +41,13 @@ class Node {
     }
 }
 */
+
 // approch :
 //    create a hashmap mapping each original node to the copynode
 //    then just go through each entry set and fill neighbours with hashmap
 //    time complexity : O(E+V)
 //    space complexity : O(N) // n is the number of nodes
-    public Node cloneGraph(Node node) {
+    public static Node cloneGraph(Node node) {
         HashMap<Node,Node> copyMap= new HashMap();
         copyNodeWithMapping(node,copyMap);
         for(Map.Entry<Node,Node> entry:copyMap.entrySet()){
@@ -36,12 +58,11 @@ class Node {
             for(Node neighbour: originalNeighbor){
                 copyNeighbor.add(copyMap.get(neighbour));
             }
-            }
         }
         return copyMap.getOrDefault(node,null);
     }
 
-    public void copyNodeWithMapping(Node node,HashMap<Node,Node> copyMap) {
+    public static void copyNodeWithMapping(Node node,HashMap<Node,Node> copyMap) {
         if (node == null) {
             return;
         }
