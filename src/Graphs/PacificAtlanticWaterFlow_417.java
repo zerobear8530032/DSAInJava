@@ -47,11 +47,9 @@
 //n == heights[r].length
 //1 <= m, n <= 200
 //0 <= heights[r][c] <= 105
-package Recursion;
+package Graphs;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class PacificAtlanticWaterFlow_417 {
 //    approch :
@@ -173,6 +171,113 @@ public class PacificAtlanticWaterFlow_417 {
         dfsAtlanticBetter(heights,r,c+1,pathMap,heights[r][c]);
    }
 
+//    here we just use bfs to implement same logic:
+    public static List<List<Integer>> pacificAtlanticBFS(int[][] heights) {
+        List<List<Integer>> res = new ArrayList<>();
+        String [][] oceanMap = new String[heights.length][heights[0].length];
+        bfs(heights,oceanMap,"P");
+        bfs(heights,oceanMap,"A");
+        for(int i =0;i<oceanMap.length;i++){
+            for(int j =0;j<oceanMap[0].length;j++){
+                if(oceanMap[i][j]!=null && oceanMap[i][j].equals("PA")){
+                    res.add(new ArrayList<>(Arrays.asList(i,j)));
+                }
+            }
+        }
+
+        return res;
+    }
+
+    public static void bfs(int [][] heights, String [][] oceanMap,String ocean){
+        Queue<int [] > queue = new LinkedList<>();
+        if(ocean.equals("P")){
+            for(int col=0;col<heights[0].length;col++){
+                queue.add(new int [] {0,col});
+                if(oceanMap[0][col]==null){
+                    oceanMap[0][col]="P";
+                }else if(oceanMap[0][col].equals("A")){
+                    oceanMap[0][col]="PA";
+                }
+            }
+            for(int row=0;row<heights.length;row++){
+                queue.add(new int [] {row,0});
+                if(oceanMap[row][0]==null){
+                    oceanMap[row][0]="P";
+                } else if (oceanMap[row][0].equals("A")) {
+                    oceanMap[row][0]="PA";
+                }
+            }
+
+            // BFS:
+            while(!queue.isEmpty()){
+                int [] poped= queue.remove();
+                int row = poped[0];
+                int col = poped[1];
+                if(oceanMap[row][col]==null){
+                    oceanMap[row][col]="P";
+                }else if(oceanMap[row][col].equals("A")){
+                    oceanMap[row][col]="PA";
+                }
+                if(row-1>=0 && heights[row][col]<=heights[row-1][col]  &&  (oceanMap[row-1][col]==null ||  oceanMap[row-1][col].equals("A"))){
+                    queue.add(new int []{row-1,col});
+                }
+                if(row+1<heights.length && heights[row][col]<=heights[row+1][col]  &&  (oceanMap[row+1][col]==null ||  oceanMap[row+1][col].equals("A"))){
+                    queue.add(new int []{row+1,col});
+                }
+
+                if(col-1>=0 && heights[row][col]<=heights[row][col-1]  &&  (oceanMap[row][col-1]==null ||  oceanMap[row][col-1].equals("A"))){
+                    queue.add(new int []{row,col-1});
+                }
+                if(col+1<heights[0].length && heights[row][col]<=heights[row][col+1]  &&  (oceanMap[row][col+1]==null ||  oceanMap[row][col+1].equals("A"))){
+                    queue.add(new int []{row,col+1});
+                }
+            }
+        }
+        if(ocean.equals("A")){
+            for(int col=0;col<heights[0].length;col++){
+                queue.add(new int [] {heights.length-1,col});
+                if(oceanMap[heights.length-1][col]==null){
+                    oceanMap[heights.length-1][col]="A";
+                }else if(oceanMap[heights.length-1][col].equals("P")){
+                    oceanMap[heights.length-1][col]="PA";
+                }
+            }
+            for(int row=0;row<heights.length;row++){
+                queue.add(new int [] {row,heights[0].length-1});
+                if(oceanMap[row][heights[0].length-1]==null){
+                    oceanMap[row][heights[0].length-1]="A";
+                }else if(oceanMap[row][heights[0].length-1].equals("P")){
+                    oceanMap[row][heights[0].length-1]="PA";
+                }
+            }
+
+            // BFS:
+            while(!queue.isEmpty()){
+                int [] poped= queue.remove();
+                int row = poped[0];
+                int col = poped[1];
+                if(oceanMap[row][col]==null){
+                    oceanMap[row][col]="A";
+                }else if(oceanMap[row][col].equals("P")){
+                    oceanMap[row][col]="PA";
+                }
+                if(row-1>=0 && heights[row][col]<=heights[row-1][col]  &&  (oceanMap[row-1][col]==null ||  oceanMap[row-1][col].equals("P"))){
+                    queue.add(new int []{row-1,col});
+                }
+                if(row+1<heights.length && heights[row][col]<=heights[row+1][col]  &&  (oceanMap[row+1][col]==null ||  oceanMap[row+1][col].equals("P"))){
+                    queue.add(new int []{row+1,col});
+                }
+
+                if(col-1>=0 && heights[row][col]<=heights[row][col-1]  &&  (oceanMap[row][col-1]==null ||  oceanMap[row][col-1].equals("P"))){
+                    queue.add(new int []{row,col-1});
+                }
+                if(col+1<heights[0].length && heights[row][col]<=heights[row][col+1]  &&  (oceanMap[row][col+1]==null ||  oceanMap[row][col+1].equals("P"))){
+                    queue.add(new int []{row,col+1});
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         //Example 1:
 
@@ -217,6 +322,25 @@ public class PacificAtlanticWaterFlow_417 {
         ans1 = pacificAtlanticBetter(heights1);
         ans2 = pacificAtlanticBetter(heights2);
         System.out.println("Better Approch :");
+        if(output1.equals(ans1)) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Expected Ouput :"+ output1);
+            System.out.println("Your Answer :"+ ans1);
+        }
+
+        if(output2.equals(ans2)) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Expected Ouput :"+ output2);
+            System.out.println("Your Answer :"+ ans2);
+        }
+
+        ans1 = pacificAtlanticBFS(heights1);
+        ans2 = pacificAtlanticBFS(heights2);
+        System.out.println("Breadth First Search Approch :");
         if(output1.equals(ans1)) {
             System.out.println("Case 1 Passed");
         }else {
