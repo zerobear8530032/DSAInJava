@@ -54,7 +54,7 @@
 //
 //1 <= n == nums.length <= 100
 //1 <= nums[i] <= n
-package Backtracking;
+package Arrays;
 
 import java.util.ArrayList;
 import java.util.HashMap;
