@@ -39,46 +39,35 @@
 package Arrays;
 
 public class IncrementSubmatricesByOne_2536 {
-//  use difference array technique;
+//  use difference array technique:
+//    approch : for every from r1 to r2 we can apply difference array technique in 2 d array
+//    and take the prefix sum at the end we have our answer;
+//    time complexity : O(q + (n*m))
+//    space complexity : O((n*m))
     public static int[][] rangeAddQueries(int n, int[][] queries) {
-        int [][] res= new int [n][n];
-        for(int [] query:queries) {
-            int r1 = query[0];
-            int c1 = query[1];
-            int r2 = query[2];
-            int c2 = query[3];
-            int row = r1;
-            int col = c1;
-            while (row <= r2 && col <= c2) {
-                res[row][col] += 1;
-                if (r2 + 1 < n) {
-                    res[r2 + 1][col] += -1;
-                }
-                if (c2 + 1 < n) {
-                    res[row][c2 + 1] += -1;
-                }
-                row++;
-                col++;
+    int [][] res= new int [n][n];
+    for(int [] query:queries) {
+        int r1 = query[0];
+        int c1 = query[1];
+        int r2 = query[2];
+        int c2 = query[3];
+        for(int r=r1;r<=r2;r++){
+            res[r][c1]+=1;
+            if(c2+1<n){
+                res[r][c2+1]+= -1;
             }
         }
-        int row=0;
-        int col=0;
-        while(row<n && col<n){
-            int rowSum=0;
-            for(int r=row;r<n;r++){
-                rowSum+= res[r][col];
-                res[r][col]=rowSum;
-            }
-            int colSum=0;
-            for(int c=col;c<n;c++){
-                colSum+= res[row][c];
-                res[row][c]=colSum;
-            }
-            row++;
-            col++;
-        }
-        return res;
     }
+    for(int i=0;i<n;i++){
+        int sum =0;
+        for(int j=0;j<n;j++){
+            sum+= res[i][j];
+            res[i][j]=sum;
+        }
+    }
+
+    return res;
+}
     public static void main(String[] args) {
         //Example 1:
 
