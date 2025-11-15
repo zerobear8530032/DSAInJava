@@ -38,6 +38,8 @@
 //0 <= col1i <= col2i < n
 package Arrays;
 
+import java.util.Arrays;
+
 public class IncrementSubmatricesByOne_2536 {
 //  use difference array technique:
 //    approch : for every from r1 to r2 we can apply difference array technique in 2 d array
@@ -68,11 +70,31 @@ public class IncrementSubmatricesByOne_2536 {
 
     return res;
 }
+    public static boolean check(int [][] m1,int [][] m2){
+        if(m1.length!=m2.length){return false;}
+        for(int i=0;i<m1.length;i++){
+            if(!Arrays.equals(m1[i],m2[i])){
+                return  false;
+            }
+        }
+        return true;
+    }
+
+    public static String printImage(int [][]img) {
+
+        StringBuilder str = new StringBuilder("[");
+        for(int i =0;i<img.length;i++) {
+            str.append(Arrays.toString(img[i]));
+        }
+        str.append("]");
+        return str.toString();
+    }
+
     public static void main(String[] args) {
         //Example 1:
 
         int n1 = 3;
-        int [][] queries1 = {{1,1,2,2},{0,0,1,1},{0,0,1,2}};
+        int [][] queries1 = {{1,1,2,2},{0,0,1,1}};
         int [][] output1= {{1,1,0},{1,2,1},{0,1,1}};
 
         //Example 2:
@@ -83,6 +105,25 @@ public class IncrementSubmatricesByOne_2536 {
 
         int [][] ans1=rangeAddQueries(n1,queries1);
         int [][] ans2=rangeAddQueries(n2,queries2);
+
+
+        if(check(output1, ans1)) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Expected Ouput :"+ printImage(output1));
+            System.out.println("Your Answer :"+ printImage(ans1));
+        }
+        if(check(output2, ans2)) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Expected Ouput :"+ printImage(output2));
+            System.out.println("Your Answer :"+printImage(ans2) );
+        }
+
+
+
 
     }
 }
