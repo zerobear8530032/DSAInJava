@@ -51,7 +51,6 @@ public class knapsackProblem {
 
     public static int findMaxValueDP(int[] weights, int[] values, int capacity) {
         int n = values.length;
-
         int[][] dp = new int[n + 1][capacity + 1];
 
         // dp[n][c] = 0 already by default (no items left)
