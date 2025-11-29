@@ -1,7 +1,6 @@
 package DynamicProgramming;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class knapsackProblem {
 //   0/1 knap sack :
@@ -25,9 +24,9 @@ public class knapsackProblem {
 
 
     public static int findMaxValueMemo(int [] weights,int [] value,int capacity){
-        return helper(0,weights,value,capacity, new HashMap<String,Integer> ());
+        return helpermemo(0,weights,value,capacity, new HashMap<String,Integer> ());
     }
-    public  static int helper(int idx, int [] weights, int [] values, int capacity, HashMap<String,Integer> memo){
+    public  static int helpermemo(int idx, int [] weights, int [] values, int capacity, HashMap<String,Integer> memo){
         String key = idx+","+capacity;
         if(memo.containsKey(key)){
             return memo.get(key);
@@ -49,28 +48,63 @@ public class knapsackProblem {
 
     }
 
-    public static int findMaxValueDP(int[] weights, int[] values, int capacity) {
-        int n = values.length;
-        int[][] dp = new int[n + 1][capacity + 1];
 
-        // dp[n][c] = 0 already by default (no items left)
+    public static int findMaxValueReverse(int[] weights, int[] values, int capacity) {
+        return helperRev(weights,values,capacity,weights.length);
+    }
 
-        for (int idx = n - 1; idx >= 0; idx--) {
-            for (int cap = 0; cap <= capacity; cap++) {
+    public static int helperRev(int [] weights, int [] values , int capacity, int idx){
+        if(capacity==0 || idx==0) {
+            return 0;
+        }
+        int weight= weights[idx-1];
+        int res=0;
+        if(weight<=capacity){
+            int take = values[idx-1]+helperRev(weights,values,capacity-weight,idx-1);
+            int notTake = helperRev(weights,values,capacity,idx-1);
+            return Math.max(take,notTake);
+        }
+        return helperRev(weights,values,capacity,idx-1);
+    }
+    public static int findMaxValueMemoReverse(int[] weights, int[] values, int capacity) {
+        int [][] memo = new int [weights.length+1][capacity+1];
+        return helperMemoRev(weights,values,capacity,weights.length,memo);
+    }
 
-                int skip = dp[idx + 1][cap];
-                int take = 0;
+    public static int helperMemoRev(int [] weights, int [] values , int capacity, int idx, int [][] memo){
+        if(capacity==0 || idx==0) {
+            return 0;
+        }
+        int weight= weights[idx-1];
+        int res=0;
+        if(weight<=capacity){
+            int take = values[idx-1]+helperMemoRev(weights,values,capacity-weight,idx-1,memo);
+            int notTake = helperMemoRev(weights,values,capacity,idx-1,memo);
+            memo[idx][capacity]= Math.max(notTake,take);
+            return memo[idx][capacity];
+        }
+        memo[idx][capacity]= helperMemoRev(weights,values,capacity,idx-1,memo);
+        return memo[idx][capacity];
+    }
 
-                // If weight fits
-                if (weights[idx] <= cap) {
-                    take = values[idx] + dp[idx + 1][cap - weights[idx]];
+    public static int findMaxValueReveseTopDown(int[] weights, int[] values, int capacity) {
+        int [][] table = new int [weights.length+1][capacity+1];
+        for(int i =0;i<table.length;i++){
+            for(int c=0;c<table[0].length;c++){
+                if(i==0 || c==0){// initalize base cases
+                    table[i][c]=0;
+                }else{
+                    if(i-1>=0 && weights[i-1]<=c){
+                        int take =  values[i-1]+table[i-1][c-weights[i-1]];
+                        int notTake =  table[i-1][c];
+                        table[i][c]= Math.max(take,notTake);
+                    }else{
+                        table[i][c]= table[i-1][c];
+                    }
                 }
-
-                dp[idx][cap] = Math.max(skip, take);
             }
         }
-
-        return dp[0][capacity]; // starting at first item with full capacity
+        return table[weights.length][capacity];
     }
 
 
@@ -151,10 +185,64 @@ public class knapsackProblem {
             System.out.println("Your Answer :"+ (ans3));
         }
 
-        System.out.println("DP Approch :");
-        ans1 = findMaxValueDP(weights1,values1,capacity1);
-        ans2 = findMaxValueDP(weights2,values2,capacity2);
-        ans3 = findMaxValueDP(weights3,values3,capacity3);
+        System.out.println("Reverse Brute Force  Approch :");
+        ans1 = findMaxValueReverse(weights1,values1,capacity1);
+        ans2 = findMaxValueReverse(weights2,values2,capacity2);
+        ans3 = findMaxValueReverse(weights3,values3,capacity3);
+
+        if(ans1==output1) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Expected Ouput :"+ (output1));
+            System.out.println("Your Answer :"+ (ans1));
+        }
+        if(ans2==output2) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Expected Ouput :"+ (output2));
+            System.out.println("Your Answer :"+ (ans2));
+        }
+        if(ans3==output3) {
+            System.out.println("Case 3 Passed");
+        }else {
+            System.out.println("Case 3 Failed");
+            System.out.println("Expected Ouput :"+ (output3));
+            System.out.println("Your Answer :"+ (ans3));
+        }
+
+        System.out.println("Reverse Memo  Approch :");
+        ans1 = findMaxValueMemoReverse(weights1,values1,capacity1);
+        ans2 = findMaxValueMemoReverse(weights2,values2,capacity2);
+        ans3 = findMaxValueMemoReverse(weights3,values3,capacity3);
+
+        if(ans1==output1) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Expected Ouput :"+ (output1));
+            System.out.println("Your Answer :"+ (ans1));
+        }
+        if(ans2==output2) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Expected Ouput :"+ (output2));
+            System.out.println("Your Answer :"+ (ans2));
+        }
+        if(ans3==output3) {
+            System.out.println("Case 3 Passed");
+        }else {
+            System.out.println("Case 3 Failed");
+            System.out.println("Expected Ouput :"+ (output3));
+            System.out.println("Your Answer :"+ (ans3));
+        }
+
+        System.out.println("Top Down DP Approch :");
+        ans1 = findMaxValueReveseTopDown(weights1,values1,capacity1);
+        ans2 = findMaxValueReveseTopDown(weights2,values2,capacity2);
+        ans3 = findMaxValueReveseTopDown(weights3,values3,capacity3);
 
         if(ans1==output1) {
             System.out.println("Case 1 Passed");
