@@ -126,7 +126,9 @@ public class CountSubSetSumEqualsK {
             System.out.println("Case 3 Failed");
             System.out.println("Expected Ouput :"+ (output3));
             System.out.println("Your Answer :"+ (ans3));
-        }System.out.println("Memorize DP");
+        }
+
+        System.out.println("Memorize DP");
 
         ans1= countSubsetMemo(nums1,target1);
         ans2= countSubsetMemo(nums2,target2);

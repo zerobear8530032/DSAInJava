@@ -40,7 +40,6 @@ public class PartitionEqualSubsetSum_416 {
         Boolean [][] memo = new Boolean [nums.length+1][target+1];
         return findSubSetEqualsTarget(0,target,nums, memo);
     }
-
     public static boolean findSubSetEqualsTarget(int idx, int target, int[] nums,Boolean [][]memo) {
 
         if(memo[idx][target]!=null){
