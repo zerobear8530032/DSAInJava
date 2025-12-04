@@ -140,9 +140,9 @@ public class CountCollisionsOnARoad_2211 {
 
         System.out.println("Brute Force ");
         int ans1 = countCollisionsBruteForce(directions1);
-        int ans2 = countCollisionsBruteForce(directions1);
-        int ans3 = countCollisionsBruteForce(directions1);
-        int ans4 = countCollisionsBruteForce(directions1);
+        int ans2 = countCollisionsBruteForce(directions2);
+        int ans3 = countCollisionsBruteForce(directions3);
+        int ans4 = countCollisionsBruteForce(directions4);
         if(ans1==output1) {
             System.out.println("Case 1 Passed");
         }else {
@@ -173,9 +173,9 @@ public class CountCollisionsOnARoad_2211 {
         }
         System.out.println("Better Force ");
         ans1 = countCollisionsBetter(directions1);
-        ans2 = countCollisionsBetter(directions1);
-        ans3 = countCollisionsBetter(directions1);
-        ans4 = countCollisionsBetter(directions1);
+        ans2 = countCollisionsBetter(directions2);
+        ans3 = countCollisionsBetter(directions3);
+        ans4 = countCollisionsBetter(directions4);
         if(ans1==output1) {
             System.out.println("Case 1 Passed");
         }else {
