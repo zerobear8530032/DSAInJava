@@ -62,20 +62,16 @@ package slidingwindow;
 
 class TotalScoreOfDungeonRuns_3771 {
     public static long totalScore(int hp, int[] damage, int[] requirement) {
-        long res =0;
-        int l = 0;
-        int [] damagetaken = new int [damage.length];
-        for(int r =0;r<damage.length;r++){
-              hp-=damage[r];
-            if(hp>=requirement[r]){
-                res++;
-            }
-            while(l<damage.length && hp<requirement[r]){
-                hp+= damage[l];
-                if(l+1<damage.length && hp-damage[l+1]>=requirement[l+1]){
+        long res=0;
+        for(int start=0;start<damage.length;start++){
+            int health = hp;
+            for(int j=start;j<damage.length;j++){
+                health -= damage[j];
+                if(health>=requirement[j]){
                     res++;
+                }else if(health<=0){
+                    break;
                 }
-                l++;
             }
         }
         return res;
@@ -95,7 +91,23 @@ class TotalScoreOfDungeonRuns_3771 {
         int output2= 1;
 
         long ans1 = totalScore(hp1,damage1,requirement1);
-        long ans2 = totalScore(hp1,damage1,requirement1);
+        long ans2 = totalScore(hp2,damage2,requirement2);
+
+        if(output1==ans1) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Actual Output :"+output1 );
+            System.out.println("Your Output :"+ans1);
+        }
+        if(output2==ans2) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Actual Output :"+output2 );
+            System.out.println("Your Output :"+ans2);
+        }
+
 
     }
 }
