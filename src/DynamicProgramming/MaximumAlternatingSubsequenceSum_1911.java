@@ -64,6 +64,17 @@ public class MaximumAlternatingSubsequenceSum_1911 {
         memo[idx][row]=res;
         return res;
     }
+
+    public static long maxAlternatingSumBottomUp(int[] nums) {
+        long [][] table = new long [nums.length+1][2];
+        for(int i=1;i<table.length;i++){
+            // EVEN sub sequence:
+            table[i][0]= Math.max(table[i-1][1]-nums[i-1],table[i-1][0]);
+            // odd sub sequence:
+            table[i][1]= Math.max(table[i-1][0]+nums[i-1],table[i-1][1]);
+        }
+        return Math.max(table[nums.length][0],table[nums.length][1]);
+    }
     public static void main(String[] args) {
         //Example 1:
 
@@ -80,5 +91,59 @@ public class MaximumAlternatingSubsequenceSum_1911 {
         int [] nums3 = {6,2,1,2,4,5};
         int output3= 10;
 
+
+        System.out.println("Top Down DP");
+
+        long ans1= maxAlternatingSum(nums1);
+        long ans2= maxAlternatingSum(nums2);
+        long ans3= maxAlternatingSum(nums3);
+        if(output1==(ans1)) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Actual Output :"+output1 );
+            System.out.println("Your Output :"+ans1);
+        }
+        if(output2==(ans2)) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Actual Output :"+output2 );
+            System.out.println("Your Output :"+ans2);
+        }
+        if(output3==(ans3)) {
+            System.out.println("Case 3 Passed");
+        }else {
+            System.out.println("Case 3 Failed");
+            System.out.println("Actual Output :"+output3 );
+            System.out.println("Your Output :"+ans3);
+        }
+
+        System.out.println("Bottom UP DP");
+
+        ans1= maxAlternatingSumBottomUp(nums1);
+        ans2= maxAlternatingSumBottomUp(nums2);
+        ans3= maxAlternatingSumBottomUp(nums3);
+        if(output1==(ans1)) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Actual Output :"+output1 );
+            System.out.println("Your Output :"+ans1);
+        }
+        if(output2==(ans2)) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Actual Output :"+output2 );
+            System.out.println("Your Output :"+ans2);
+        }
+        if(output3==(ans3)) {
+            System.out.println("Case 3 Passed");
+        }else {
+            System.out.println("Case 3 Failed");
+            System.out.println("Actual Output :"+output3 );
+            System.out.println("Your Output :"+ans3);
+        }
     }
 }
