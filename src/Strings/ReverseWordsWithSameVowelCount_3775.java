@@ -130,10 +130,8 @@ public class ReverseWordsWithSameVowelCount_3775 {
             System.out.println("Case 3 Passed");
         }else {
             System.out.println("Case 3 Failed");
-            System.out.println("Actual Output :"+output3);
-            System.out.println("Your Output :"+ans3);
+            System.out.println("Actual Output :" + output3);
+            System.out.println("Your Output :" + ans3);
         }
-
-
     }
 }
