@@ -74,5 +74,24 @@ public class MaximumLengthOfPairChain_646 {
         int [][] pairs2 = {{1,2},{7,8},{4,5}};
         int output2=3;
 
+        int ans1 = findLongestChain(pairs1);
+        int ans2 = findLongestChain(pairs2);
+        if(ans1==output1) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Expected Ouput :"+ (output1));
+            System.out.println("Your Answer :"+ (ans1));
+        }
+        if(ans2== output2) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Expected Ouput :"+ (output2));
+            System.out.println("Your Answer :"+ (ans2));
+        }
+
+
+
     }
 }
