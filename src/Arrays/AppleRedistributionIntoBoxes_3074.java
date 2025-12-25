@@ -39,7 +39,10 @@ package Arrays;
 import java.util.Arrays;
 
 public class AppleRedistributionIntoBoxes_3074 {
-
+// approch: sort the capacity array
+//    and then sum all apples
+//    then we can choose largest capacity boxes and deduct the capacity from totalApples
+//    we will keep track of boxes used and
     public static int minimumBoxes(int[] apple, int[] capacity) {
         Arrays.sort(capacity);
         int totalApple =0;
