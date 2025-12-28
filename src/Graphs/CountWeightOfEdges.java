@@ -12,21 +12,7 @@ public class CountWeightOfEdges {
 //    and at the end we can find the largest weight node
 //    time complexity : O(n)
 //    space complexity : O(n)
-    public static int findNearestMeetingCell(int []edges, int n1, int n2) {
-        HashMap<Integer,Integer> nodemap= new HashMap<>();
-        for(int i=0;i<edges.length;i++){
-            nodemap.put(i,edges[i]);
-        }
 
-    }
-    public void DFS(HashMap<Integer,Integer> edges , int node,int depth, HashSet<Integer> visited, int [] reach){
-        if(!edges.containsKey(node) || visited.contains(node)){
-            return ;
-        }
-        reach[node]= Math.min(depth,reach[node]);
-        
-        DFS(edges,)
-    }
     public static void main(String[] args) {
         // Example 1: The exact sample from your screenshot
         // N=23, edges[i] provided in the image, C1=9, C2=2
@@ -61,14 +47,14 @@ public class CountWeightOfEdges {
         int[] expectedOutputs = {expected1, expected2, expected3, expected4, expected5};
 
         for (int i = 0; i < testEdges.length; i++) {
-            int actual = findNearestMeetingCell(testEdges[i], testNodes[i][0], testNodes[i][1]);
-            if (actual == expectedOutputs[i]) {
-                System.out.println("Case " + (i + 1) + " Passed");
-            } else {
-                System.out.println("Case " + (i + 1) + " Failed");
-                System.out.println("   Expected: " + expectedOutputs[i]);
-                System.out.println("   Actual: " + actual);
-            }
+//            int actual = findNearestMeetingCell(testEdges[i], testNodes[i][0], testNodes[i][1]);
+//            if (actual == expectedOutputs[i]) {
+//                System.out.println("Case " + (i + 1) + " Passed");
+//            } else {
+//                System.out.println("Case " + (i + 1) + " Failed");
+//                System.out.println("   Expected: " + expectedOutputs[i]);
+//                System.out.println("   Actual: " + actual);
+//            }
         }
     }
 }

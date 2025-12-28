@@ -99,6 +99,36 @@ public class MinimumPenaltyForAShop_2483 {
         // System.out.println(Arrays.toString(suffixY));
         return minhrs;
     }
+//    best approch :
+//    we can use 2 variable instead of 2 arrays to keep the prefix and suffix sum at the same time
+//    time complexity : O(n)
+//    space complexity : O(1)
+    public static int bestClosingTimeBest(String customers) {
+        int n = customers.length();
+        int nsum=0;
+        int ysum=0;
+        for(int i =n-1;i>=0;i--){
+            char ch =customers.charAt(i);
+            if(ch=='Y'){
+                ysum++;
+            }
+        }
+        int minPenalty= Integer.MAX_VALUE;
+        int minhrs=Integer.MAX_VALUE;
+        for(int i  =0;i<n+1;i++){
+            int penalty = nsum+ysum;
+            if(i<n && customers.charAt(i)=='N'){
+                nsum++;
+            }else{
+                ysum--;
+            }
+            if(penalty<minPenalty){
+                minPenalty=penalty;
+                minhrs=i;
+            }
+        }
+        return minhrs;
+    }
 
     public static void main(String[] args) {
         //Example 1:
@@ -116,9 +146,37 @@ public class MinimumPenaltyForAShop_2483 {
         String  customers3 = "YYYY";
         int output3= 4;
 
+        System.out.println("Better Way:");
         int ans1 = bestClosingTime(customers1);
         int ans2 = bestClosingTime(customers2);
         int ans3 = bestClosingTime(customers3);
+
+        if(output1==(ans1)) {
+            System.out.println("Case 1 Passed");
+        }else {
+            System.out.println("Case 1 Failed");
+            System.out.println("Actual Output :"+output1 );
+            System.out.println("Your Output :"+ans1);
+        }
+        if(output2==(ans2)) {
+            System.out.println("Case 2 Passed");
+        }else {
+            System.out.println("Case 2 Failed");
+            System.out.println("Actual Output :"+output2 );
+            System.out.println("Your Output :"+ans2);
+        }
+        if(output3==(ans3)) {
+            System.out.println("Case 3 Passed");
+        }else {
+            System.out.println("Case 3 Failed");
+            System.out.println("Actual Output :"+output3 );
+            System.out.println("Your Output :"+ans3);
+        }
+
+        System.out.println("Best Way:");
+        ans1 = bestClosingTimeBest(customers1);
+        ans2 = bestClosingTimeBest(customers2);
+        ans3 = bestClosingTimeBest(customers3);
 
         if(output1==(ans1)) {
             System.out.println("Case 1 Passed");
