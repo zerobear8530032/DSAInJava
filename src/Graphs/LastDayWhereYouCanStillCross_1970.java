@@ -53,7 +53,10 @@ import java.util.Queue;
 
 class LastDayWhereYouCanStillCross_1970 {
 //     approch :
-//     here we use multi source BFS from first where the  cell is not flooded
+//     we know each incresing day will remove one cell and s it goes one one day will come when
+//    we cannot cross  so we can use binary search here by creting a grid from 0 to mid every time
+//    we can check can we cross today if yes we can search is future days other wise past days
+//    to check can we cross  here we use multi source BFS from first where the  cell that are  not flooded
 //     Time Complexity: O((row * col) * log(row * col))
 //     Space Complexity: O(row * col)
 
