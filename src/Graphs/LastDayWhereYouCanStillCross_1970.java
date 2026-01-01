@@ -48,6 +48,7 @@
 //All the values of cells are unique.
 package Graphs;
 
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -176,8 +177,8 @@ class LastDayWhereYouCanStillCross_1970 {
             System.out.println("Case 3 Passed");
         }else {
             System.out.println("Case 3 Failed");
-            System.out.println("Actual Output :"+output3 );
-            System.out.println("Your Output :"+ans3);
+            System.out.println("Actual Output :" + output3);
+            System.out.println("Your Output :" + ans3);
         }
     }
 }
