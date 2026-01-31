@@ -47,7 +47,7 @@ public class WordSearch_79 {
 //	can make a assumption word exists or not
 //	like if the frequency of character in word is greater then in board we can exist eary
 //	this can be done by traversing each word , array one time 
-//	time complexity remains same but this allow us to search in recursive call when we 
+//	time complexity remains same but this allow us to search in recursive call when we
 //	are sure word will exits so the time complexity will not change
 //	time complexity : O(M∗N∗4^L)
 //	space complexity : O(L)
