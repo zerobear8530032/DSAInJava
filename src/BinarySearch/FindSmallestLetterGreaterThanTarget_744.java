@@ -38,6 +38,9 @@
 package BinarySearch;
 
 public class FindSmallestLetterGreaterThanTarget_744 {
+//    approch : we can simply use binry serach to find the next greater element
+//    time complexity : O(log n)
+//    space complexity : O(1)
     public static char nextGreatestLetter(char[] letters, char target) {
         int s=0;
         int e=letters.length-1;
