@@ -1,0 +1,19 @@
+6
+Seattle
+500
+Cafe Juanita
+Seattle
+1000
+Cafe Juanita
+Denver
+50
+Palladium Social
+Pune
+10000
+
+Seattle
+1
+Cafe Juanita
+Seattle
+600
+Cafe Juanita
