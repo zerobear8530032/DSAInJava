@@ -61,6 +61,11 @@ package Greedy;
 import java.util.Arrays;
 
 public class MinimumInitialEnergyToFinishTasks_1665 {
+//    approch if we sort the task in descending order of different btw required and minium we can use binary search btw summition of
+//    all minimum required as upper bound nd lower bound as enery consumed by task
+//    by checking every mid its possible to complete all tasks we can figure out min of all mids nd return as results where the tasks are completed
+//    time complexity : N log N;
+//    space complexity : O(1);
     public static int minimumEffort(int[][] tasks) {
         Arrays.sort(tasks,(t1, t2)-> (t2[1]-t2[0])-(t1[1]-t1[0]));
         int s=0;
