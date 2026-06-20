@@ -44,7 +44,7 @@
 
 package Tree;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 import java.util.HashMap;
 import java.util.TreeMap;

@@ -37,8 +37,8 @@
 //1 <= queries[i] <= 106
 package Tree;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;

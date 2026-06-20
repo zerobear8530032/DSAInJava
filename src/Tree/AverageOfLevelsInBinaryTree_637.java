@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 public class AverageOfLevelsInBinaryTree_637 {
 	

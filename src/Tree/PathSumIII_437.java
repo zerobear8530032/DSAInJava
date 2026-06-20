@@ -29,8 +29,8 @@
 
 package Tree;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 public class PathSumIII_437 {
     // approch : go through every node and check from there wheather the path sum of to target Sum

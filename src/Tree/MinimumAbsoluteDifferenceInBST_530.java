@@ -29,7 +29,7 @@
 //Note: This question is the same as 783: https://leetcode.com/problems/minimum-distance-between-bst-nodes/
 package Tree;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class MinimumAbsoluteDifferenceInBST_530 {
 	

@@ -36,7 +36,7 @@ package Tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class ValidateBinarySearchTree_98 {
 	

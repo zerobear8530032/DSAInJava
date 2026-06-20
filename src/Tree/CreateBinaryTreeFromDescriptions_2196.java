@@ -40,9 +40,8 @@
 //The binary tree described by descriptions is valid.
 package Tree;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.Tree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 import java.util.HashMap;
 import java.util.HashSet;

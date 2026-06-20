@@ -42,8 +42,8 @@
 //The recursive approach is fine. You may assume implicit stack space does not count as extra space for this problem.
 package Tree;
 
-import TreeUtil.CustomeTree;
-import TreeUtil.Node;
+import Tree.TreeUtil.CustomeTree;
+import Tree.TreeUtil.Node;
 
 public class PopulatingNextRightPointersInEachNode_116 {
 	

@@ -33,7 +33,7 @@ package Tree;
 
 import java.util.List;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class SameTree_100 {
 //	approch :

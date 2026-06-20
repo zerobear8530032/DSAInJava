@@ -27,16 +27,15 @@
 //
 //The number of nodes in the tree is in the range [0, 2000].
 //-100 <= Node.val <= 100
-
 package Tree;
+
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import java.util.Arrays;
 
 public class BinaryTreeZigzagLevelOrderTraversal_103 {
 //	approch :
@@ -50,11 +49,11 @@ public class BinaryTreeZigzagLevelOrderTraversal_103 {
 //	space complexity :O(n)
 	
 	public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res= new ArrayList();
+        List<List<Integer>> res= new ArrayList<>();
         if(root==null){
             return res;
         }
-        ArrayDeque<TreeNode> queue= new ArrayDeque();
+        ArrayDeque<TreeNode> queue= new ArrayDeque<>();
         queue.add(root);
         boolean reverse =false;
         while(!queue.isEmpty()){
@@ -98,7 +97,7 @@ public class BinaryTreeZigzagLevelOrderTraversal_103 {
 		
 		//Example 3:
 
-		BinaryTree root3 = new  BinaryTree();
+		BinaryTree root3 = new BinaryTree();
 		List<List<Integer>> output3= new ArrayList();
 		
 		

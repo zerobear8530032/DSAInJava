@@ -28,7 +28,7 @@
 
 package Tree;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class BalancedBinaryTree_110 {
 	

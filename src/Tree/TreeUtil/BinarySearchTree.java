@@ -1,10 +1,8 @@
-package TreeUtil;
+package Tree.TreeUtil;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-
-import TreeUtil.AVL.Node;
 
 public class BinarySearchTree {
 	BSTNode root;

@@ -32,8 +32,8 @@
 
 package Tree;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 public class LongestUnivaluePath_687 {
 // here we use  apporch using  bottom up dfs where we build answer and retuning a pair of nextnodeval , current longest count as

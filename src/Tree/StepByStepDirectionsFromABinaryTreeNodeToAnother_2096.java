@@ -39,8 +39,8 @@
 //        startValue != destValue
 
 package Tree;
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 import java.util.*;
 public class StepByStepDirectionsFromABinaryTreeNodeToAnother_2096 {

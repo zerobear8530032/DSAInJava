@@ -38,8 +38,8 @@
 //The depth of the tree will not exceed 10.
 package Tree;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 public class SumRootToLeafNumbers_129 {
 //     approch : here we know the path sum if from root to leaf node so we can

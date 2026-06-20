@@ -30,7 +30,7 @@
 //nums is sorted in a strictly increasing order.
 package Tree;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class ConvertSortedArrayToBinarySearchTree_108 {
 	

@@ -38,8 +38,8 @@
 //0 <= Node.val <= 1000
 package Tree;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 public class CountNodesEqualToAverageOfSubtree_2265 {
     static int res;

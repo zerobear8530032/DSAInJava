@@ -3,7 +3,7 @@ package Tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class FindSucessor {
 	

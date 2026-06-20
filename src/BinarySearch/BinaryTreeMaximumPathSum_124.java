@@ -32,8 +32,8 @@
 //-1000 <= Node.val <= 1000
 package BinarySearch;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 import java.util.Arrays;
 

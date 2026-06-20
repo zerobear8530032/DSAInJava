@@ -50,7 +50,7 @@
 
 package Tree;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 import  java.util.*;
 public class BinaryTreePreorderTraversal_144 {
 //	approch : just follow sequence process the root  then left then right

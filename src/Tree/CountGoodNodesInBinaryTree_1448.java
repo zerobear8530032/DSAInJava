@@ -42,8 +42,8 @@
 //Each node's value is between [-10^4, 10^4].
 package Tree;
 
-import TreeUtil.BinaryTree;
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.BinaryTree;
+import Tree.TreeUtil.TreeNode;
 
 public class CountGoodNodesInBinaryTree_1448 {
 //    approch :

@@ -1,4 +1,4 @@
-package TreeUtil;
+package Tree.TreeUtil;
 
 public class SegmentTree {
 	

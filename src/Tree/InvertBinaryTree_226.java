@@ -30,7 +30,7 @@
 //-100 <= Node.val <= 100
 package Tree;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class InvertBinaryTree_226 {
 	

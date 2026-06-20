@@ -36,7 +36,7 @@
 
 package Tree;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 import java.util.*;
 
 public class FindModeInBinarySearchTree_501 {

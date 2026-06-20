@@ -31,7 +31,7 @@
 
 package Tree;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class DiameterOfBinaryTree_543 {
 //	approch :

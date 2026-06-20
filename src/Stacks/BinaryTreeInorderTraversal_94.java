@@ -55,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class BinaryTreeInorderTraversal_94 {
 	/**

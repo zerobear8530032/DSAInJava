@@ -57,7 +57,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import TreeUtil.TreeNode;
+import Tree.TreeUtil.TreeNode;
 
 public class BinaryTreePostorderTraversal_145 {
 //	approch :
