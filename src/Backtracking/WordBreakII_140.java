@@ -93,7 +93,32 @@ public class WordBreakII_140 {
 	    	
 	    	return true;
 	    }
-	
+
+//        we can try every the prefix from current dict if its prefix is same as word we kep it
+//    and find the rest
+//    time complexity : m* 2^n
+//    space complexity : m
+    public static List<String> wordBreakRecusionBackTracking(String s, List<String> wordDict) {
+        List<String> res= new ArrayList<>();
+        helper(0,s,wordDict,res,"");
+        return res;
+    }
+
+    public static void helper(int idx, String s, List<String> wordDict, List<String> res,String curr){
+        if(idx==s.length()){
+            res.add(curr.trim());
+            return ;
+        }
+        for(String word:wordDict){
+            if(s.startsWith(word,idx)){
+                if(curr.length()==0){
+                    helper(idx+word.length(),s,wordDict,res,word);
+                }else{
+                    helper(idx+word.length(),s,wordDict,res,curr+" "+word);
+                }
+            }
+        }
+    }
 	public static void main(String[] args) {
 		
 		
@@ -143,6 +168,35 @@ public class WordBreakII_140 {
     		System.out.println("Case 3 Failed");
     		System.out.println("Expected Ouput :"+ output3);
     		System.out.println("Your Answer :"+ ans3);  		
+    	}
+
+        System.out.println("Recusive back tracking approch :");
+        ans1 = wordBreakRecusionBackTracking(s1, wordDict1);
+        ans2 = wordBreakRecusionBackTracking(s2, wordDict2);
+        ans3 = wordBreakRecusionBackTracking(s3, wordDict3);
+
+
+    	if(check(output1,ans1)) {
+    		System.out.println("Case 1 Passed");
+    	}else {
+    		System.out.println("Case 1 Failed");
+    		System.out.println("Expected Ouput :"+ output1);
+    		System.out.println("Your Answer :"+ ans1);
+    	}
+
+    	if(check(output2,ans2)) {
+    		System.out.println("Case 2 Passed");
+    	}else {
+    		System.out.println("Case 2 Failed");
+    		System.out.println("Expected Ouput :"+ output2);
+    		System.out.println("Your Answer :"+ ans2);
+    	}
+    	if(check(output3,ans3)) {
+    		System.out.println("Case 3 Passed");
+    	}else {
+    		System.out.println("Case 3 Failed");
+    		System.out.println("Expected Ouput :"+ output3);
+    		System.out.println("Your Answer :"+ ans3);
     	}
 
 	}
