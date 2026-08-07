@@ -32,6 +32,121 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+
+
+//1. Every node starts in its own set.
+//
+//2. find(x)
+//   -> Returns the representative (root) of x's component.
+//
+//        3. union(x, y)
+//   -> Merge two components.
+//   -> If roots are already same => cycle.
+//
+//4. Optimizations
+//   -> Path Compression (during find)
+//   -> Union by Rank / Size (during union)
+class DSU {
+
+    // parent[i] = representative(parent) of node i.
+    // Initially every node is its own parent.
+    int[] graph;
+
+    // Rank is an estimate of the tree height.
+    // Only meaningful for ROOT nodes.
+    // Used to keep trees shallow during union.
+    int[] rank;
+
+    // Optional for this problem.
+    // Becomes true if we try to union two nodes
+    // already belonging to the same component.
+    boolean isCycle;
+
+    // Number of connected components.
+    // Initially every node is its own component.
+    int components;
+
+    public DSU(int size) {
+        graph = new int[size];
+        rank = new int[size];
+
+        // Make Set:
+        // Every node starts as an independent component.
+        for (int i = 0; i < size; i++) {
+            graph[i] = i;
+        }
+
+        components = size;
+        isCycle = false;
+    }
+
+    public int find(int x) {
+
+        // Path Compression:
+        // Recursively find the root and make every node
+        // on the path point directly to that root.
+        //
+        // Before:
+        // 4 -> 3 -> 2 -> 1 -> 0
+        //
+        // After find(4):
+        // 4
+        // |
+        // 0
+        // 3
+        // |
+        // 0
+        // 2
+        // |
+        // 0
+        // 1
+        // |
+        // 0
+        //
+        // Future finds become almost O(1).
+        if (x != graph[x]) {
+            graph[x] = find(graph[x]);
+        }
+
+        return graph[x];
+    }
+
+    public void union(int x, int y) {
+
+        // Always work with ROOTS.
+        int left = find(x);
+        int right = find(y);
+
+        // Same root => already connected.
+        // Adding another edge creates a cycle.
+        if (left == right) {
+            isCycle = true;
+            return;
+        }
+
+        // Union by Rank:
+        // Attach the shorter tree under the taller tree.
+        // If both heights are equal, choose either root
+        // and increase its rank by one because
+        // the overall height increases.
+
+        if (rank[left] < rank[right]) {
+            graph[left] = right;
+        } else if (rank[left] > rank[right]) {
+            graph[right] = left;
+        } else {
+            graph[right] = left;
+            rank[left]++;
+        }
+
+        // Two components became one.
+        components--;
+    }
+
+    public int getComponentCount() {
+        return components;
+    }
+}
 public class GraphValidTree_NEETCODE {
 //    approch :
 //    the tree is a graph which is having no cycle
@@ -75,6 +190,23 @@ public class GraphValidTree_NEETCODE {
             }
         }
         return false;
+    }
+    //approch : use dsu it allow us to efficiently check cycle in the components
+//    and also figure out the number of component much faster
+//    time complexity : O(n)* amortized O(α(n)),
+//
+    public static boolean validTreeOptimize(int n, int[][] edges) {
+        DSU dsu= new DSU(n);
+        for(int [] edge: edges){
+            dsu.union(edge[0],edge[1]);
+            if(dsu.isCycle){
+                return false;
+            }
+        }
+        int comp =dsu.getComponentCount();
+        System.out.println(comp);
+        return comp==1;
+
     }
     public static void main(String[] args) {
         //Example 1:
