@@ -176,4 +176,5 @@ public class RemovingMinimumAndMaximumFromArray_2091 {
             System.out.println("Your Output   : " + ans3);
         }
     }
+
 }
