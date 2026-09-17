@@ -42,32 +42,23 @@ import Tree.TreeUtil.BinaryTree;
 import Tree.TreeUtil.TreeNode;
 
 public class CountNodesEqualToAverageOfSubtree_2265 {
-    static int res;
+    static int count;
     public static int averageOfSubtree(TreeNode root) {
-        res=0;
+        count=0;
         helper(root);
-        return res;
+        return count;
     }
-    public static int [] helper(TreeNode root ){
-        if(root.left==null && root.right==null){
-            res++;
-            return new int []{root.val,1};
+    public static int [] helper(TreeNode root){
+        if(root==null){
+            return new int []{0,0};
         }
-        int [] pair = {root.val,1};
-        if(root.left!=null){
-            int []left = helper(root.left);
-            pair[0]+=left[0];
-            pair[1]+=left[1];
+        int [] left = helper(root.left);
+        int [] right = helper(root.right);
+        int [] res= {left[0]+right[0]+root.val,left[1]+right[1]+1};
+        if(res[0]/res[1]==root.val){
+            count++;
         }
-        if(root.right!=null){
-            int [] right=helper(root.right);
-            pair[0]+=right[0];
-            pair[1]+=right[1];
-        }
-        if(pair[0]/pair[1]==root.val){
-            res++;
-        }
-        return pair;
+        return res;
     }
     public static void main(String[] args) {
         //Example 1:
