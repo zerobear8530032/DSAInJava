@@ -43,6 +43,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InsertInterval_57 {
+//    approch :
+//    here first we insert the interval in a list of sorted interval in a sorted manner
+//    then we can call merge intervals function on it
+//    time complexity : O(n)
+//    space complexity : O(n)
     public static int[][] insert(int[][] intervals, int[] newInterval) {
         List<int[]> listIntervals = new ArrayList<>();
         boolean inserted= false;
@@ -104,7 +109,7 @@ public class InsertInterval_57 {
         return true;
     }
     public static void main(String[] args) {
-        
+
         //Example 1:
 
         int [][] intervals1 = {{1,3},{6,9}};
