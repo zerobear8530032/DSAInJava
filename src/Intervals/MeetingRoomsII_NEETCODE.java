@@ -40,6 +40,12 @@ class Interval{
     }
 }
 public class MeetingRoomsII_NEETCODE {
+    // approch : here we use a priority queue as min heap
+//    sort the intervals by start time and add check if current queue is empty we assign the it to queue
+//    if queue top is smaller then or equal to current interval start time we pop top and insert the curr interval end time
+//    at the end we will have size of queue as our answer
+    //    time complexity : O(N log N)
+    //    space complexity : O(N)
     public static int minMeetingRooms(List<Interval> intervals) {
         PriorityQueue<Integer> queue = new PriorityQueue<>();
         Collections.sort(intervals,(i1, i2)-> i1.start-i2.start);
