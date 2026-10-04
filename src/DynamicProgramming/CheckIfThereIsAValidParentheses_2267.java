@@ -98,6 +98,6 @@ public class CheckIfThereIsAValidParentheses_2267 {
             System.out.println("Actual Output :"+output2 );
             System.out.println("Your Output :"+ans2);
         }
-        
+
     }
 }
