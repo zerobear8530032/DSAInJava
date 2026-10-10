@@ -34,7 +34,7 @@
 //0 <= arr[i] <= 1,000,000,000
 package Greedy;
 
-class Solution {
+class LongestTurbulentSubarray_978 {
 //    approch :
 //    we can maintin 2 different count one checks from increas -> decrease -> increase
 //    other decrease -> increase -> decrease
