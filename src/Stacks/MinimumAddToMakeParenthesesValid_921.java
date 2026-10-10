@@ -37,26 +37,30 @@ import java.util.Arrays;
 import java.util.Stack;
 
 public class MinimumAddToMakeParenthesesValid_921 {
-	    public static int minAddToMakeValid(String s) {
-	        Stack<Character> stack = new Stack();
-	        int counter=0;
-	        for(int i =0;i<s.length();i++){
-	            char ch = s.charAt(i);
-	            if(ch=='('){
-	                stack.push(ch);
-	            }else {
-	                if(stack.isEmpty()){
-	                    counter++;
-	                }else{
-	                    stack.pop();
-	                }
-	            }
-	        }       
-	        counter+=stack.size();
-	        return counter;
-	   }
-	
-	public static void main(String[] args) {
+//   approch :
+//   we can use similar way how we validate the valid parenthesis string the only difference
+//     is when we encounter invalid we increse res by 1 and keep going
+//    time complexity : O(N)
+//    space complexity : O(N)
+public static int minAddToMakeValid(String s) {
+    Stack<Character> stk = new Stack<>();
+    int res=0;
+    for(int i =0;i<s.length();i++){
+        char ch = s.charAt(i);
+        if(ch=='('){
+            stk.push(ch);
+        }else{
+            if( !stk.isEmpty() && stk.peek()=='('){
+                stk.pop();
+            }else{
+                res++;
+            }
+        }
+    }
+    return stk.size()+res;
+}
+
+    public static void main(String[] args) {
 		
 		//Example 1:
 
