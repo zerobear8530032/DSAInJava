@@ -78,19 +78,7 @@ class PlusOne_66 {
         return ans;// old array output
     }
     
-    
-    public static boolean check(int [] arr1, int [] arr2) {
-		if(arr1.length!=arr2.length) {
-			return false;
-		}
-		for(int i =0;i<arr1.length;i++) {
-			if(arr1[i]!=arr2[i]) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
+
 
     
     public static void main(String[] args) {
@@ -116,14 +104,14 @@ class PlusOne_66 {
         int[] ans3=plusOne(digits3);
         
         
-        if(check(ans1,output1)) {
+        if(Arrays.equals(ans1,output1)) {
 			System.out.println("Case 1 Passed ");
 		}else {
 			System.out.println("Case 1 Failed");
 			System.out.println("Excepted Output : "+ Arrays.toString(output1));
 			System.out.println("Your Output : "+ Arrays.toString(ans1));
 		}
-		if(check(ans2,output2)) {
+		if(Arrays.equals(ans2,output2)) {
 			System.out.println("Case 2 Passed ");
 		}else {
 			System.out.println("Case 2 Failed");
@@ -131,7 +119,7 @@ class PlusOne_66 {
 			System.out.println("Your Output : "+ Arrays.toString(ans2));
 		}
 		
-		if(check(ans3,output3)) {
+		if(Arrays.equals(ans3,output3)) {
 			System.out.println("Case 3 Passed ");
 		}else {
 			System.out.println("Case 3 Failed");

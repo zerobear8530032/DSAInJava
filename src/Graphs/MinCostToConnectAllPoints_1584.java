@@ -37,7 +37,7 @@ package Graphs;
 
 import java.util.*;
 
-class Solution {
+public class MinCostToConnectAllPoints_1584 {
 
 //    Approch : we cna use prims algo to find minimum spanning tree of all graoh
 //    which was created where each node connected to every other node
